@@ -1,0 +1,99 @@
+\section{Advanced First-Order Logic and Optimization Techniques}
+
+\subsection{Universal and Existential Quantification}
+\begin{itemize}
+    \item \textbf{Universal Quantification:} $\forall x \, P(x)$ — "for all $x$, $P(x)$ is true".
+    \item \textbf{Existential Quantification:} $\exists x \, P(x)$ — "there exists an $x$ such that $P(x)$ is true".
+    \item These quantifiers are fundamental in First-Order Logic (FOL) for expressing general statements about objects.
+\end{itemize}
+
+\subsection{First-Order Logic (FOL) Formulas}
+\begin{itemize}
+    \item \textbf{Arity:} Number of arguments a predicate or function takes.
+    \item \textbf{Predicates with functions:} Allow expressing relationships between objects and their properties.
+    \item \textbf{Interpretations:} Map constants, functions, and predicates to values or truth assignments.  
+        Example: $F = c_1 + c_3 > c_2$, domain $\{1,2,3,4\}$  
+        Relations are sets of tuples where the interpretation is true.
+\end{itemize}
+
+\subsection{Key FOL Techniques}
+\begin{itemize}
+    \item \textbf{Skolemization:} Remove existential quantifiers by introducing Skolem constants or functions.
+    \item \textbf{Unification:} Process of finding substitutions for variables to make terms or predicates match.
+    \item \textbf{Resolution in FOL:} Extends propositional resolution to FOL using unification to derive new clauses.
+\end{itemize}
+
+\subsection{Soundness and Completeness in FOL}
+\begin{itemize}
+    \item \textbf{Soundness:} Every derived formula is logically true.
+    \item \textbf{Completeness:} Every logically entailed formula can be derived using the inference system.
+\end{itemize}
+
+\subsection{Limitations of First-Order Logic}
+\begin{itemize}
+    \item Incompleteness in some domains
+    \item Scalability challenges with large knowledge bases
+    \item Difficult to represent spatial and temporal reasoning
+    \item Handling uncertainty is non-trivial
+\end{itemize}
+
+\subsection{Tautology}
+\begin{itemize}
+    \item A formula that is true under every possible interpretation.
+    \item Important in both propositional logic and FOL.
+\end{itemize}
+
+\section{Optimization Concepts}
+
+\subsection{Definition and Objective}
+\begin{itemize}
+    \item Optimization: Selecting the best option from a set of alternatives.
+    \item Formalization:
+    \begin{itemize}
+        \item Variables with associated domains
+        \item Objective function mapping assignments to real numbers
+        \item Optimality criterion: find assignment minimizing or maximizing the objective function
+    \end{itemize}
+    \item Example: Minimizing loss associated with a variable assignment.
+\end{itemize}
+
+\subsection{Local Search Algorithms}
+\begin{itemize}
+    \item Maintain a single current state and explore neighboring states to improve the objective.
+    \item \textbf{Example:} Placing houses and hospitals in 2D space to minimize total distance.
+    \item \textbf{State space landscape:} Visualizes global/local maxima and minima, flat regions, and shoulders.
+\end{itemize}
+
+\subsection{Hill Climbing Variants}
+\begin{itemize}
+    \item \textbf{Steepest-Ascent Hill Climbing:} Move to the neighbor with the highest improvement.
+        \begin{itemize}
+            \item Issues: Local maxima, plateaus, ridges
+        \end{itemize}
+    \item \textbf{Stochastic Hill Climbing:} Randomly select among improving neighbors.
+    \item \textbf{First-Choice Hill Climbing:} Randomly evaluate neighbors and move to first improvement found.
+    \item \textbf{Random-Restart Hill Climbing:} Restart from random initial states to escape local maxima.
+    \item \textbf{Local Beam Search:} Maintain $k$ states in parallel, keep best successors at each step.
+\end{itemize}
+
+\subsection{Iterative Improvement Techniques}
+\begin{itemize}
+    \item \textbf{Simulated Annealing:} Accept worse neighbors with decreasing probability over time to escape local optima.
+    \item \textbf{Gradient Descent:} For continuous domains, adjust variables proportionally to reduce the objective function.
+\end{itemize}
+
+\subsection{Genetic Algorithms}
+\begin{itemize}
+    \item Maintain a population of candidate solutions.
+    \item Randomly select pairs and perform crossover to produce offspring.
+    \item Apply mutation to introduce variability.
+    \item Iterate until an acceptable solution is found.
+\end{itemize}
+
+\subsection{Key Considerations}
+\begin{itemize}
+    \item Local search is fast but can get stuck in local optima.
+    \item Random restarts, stochastic methods, and population-based methods improve robustness.
+    \item Continuous vs discrete domains may require specialized algorithms (e.g., gradient descent for continuous).
+\end{itemize}
+

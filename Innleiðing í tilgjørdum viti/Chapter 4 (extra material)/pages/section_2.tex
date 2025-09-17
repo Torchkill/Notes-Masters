@@ -1,0 +1,102 @@
+\section{Logic and Inference: Advanced Concepts}
+
+\subsection{Complexity of Model Checking}
+\begin{itemize}
+    \item Determining whether $KB \models Q$ (entailment) can be computationally expensive.
+    \item Naive approach: test all possible interpretations $\rightarrow$ exponential in number of propositions.
+    \item Efficient methods rely on syntactic manipulation rather than enumerating all models.
+\end{itemize}
+
+\subsection{Deductive Systems}
+\begin{itemize}
+    \item \textbf{Soundness:} If $KB \vdash Q$ then $KB \models Q$ (only derives truths).  
+    \item \textbf{Completeness:} If $KB \models Q$ then $KB \vdash Q$ (can derive everything entailed).  
+    \item Deduction theorem connects semantic entailment with syntactic derivation.
+\end{itemize}
+
+\subsection{Inference Rules}
+\begin{itemize}
+    \item \textbf{Modus Ponens:} If $\alpha \rightarrow \beta$ and $\alpha$ are true, then $\beta$ is true.
+    \item \textbf{Conjunction Elimination:} If $\alpha \land \beta$ is true, then $\alpha$ is true.
+    \item \textbf{Double Negation Elimination:} $\neg \neg \alpha \equiv \alpha$.
+    \item \textbf{Implication Elimination:} $\alpha \rightarrow \beta \equiv \neg \alpha \lor \beta$.
+    \item \textbf{Biconditional Elimination:} $\alpha \leftrightarrow \beta \equiv (\alpha \rightarrow \beta) \land (\beta \rightarrow \alpha)$.
+    \item \textbf{De Morgan's Laws:} $\neg (\alpha \land \beta) \equiv \neg \alpha \lor \neg \beta$, $\neg (\alpha \lor \beta) \equiv \neg \alpha \land \neg \beta$.
+    \item \textbf{Distributive Laws:} $\alpha \land (\beta \lor \gamma) \equiv (\alpha \land \beta) \lor (\alpha \land \gamma)$, etc.
+\end{itemize}
+
+\subsection{Search Problem Analogy for Theorem Proving}
+\begin{itemize}
+    \item \textbf{Initial State:} Knowledge Base (KB)
+    \item \textbf{Actions:} Inference rules applied to current KB
+    \item \textbf{Transition Model:} New KB after inference
+    \item \textbf{Goal Test:} Statement $Q$ to prove
+    \item \textbf{Path Cost:} Number of steps or inferences used
+\end{itemize}
+
+\subsection{Resolution Method}
+\begin{itemize}
+    \item \textbf{Principle:} Combine clauses to derive new information until goal or contradiction.
+    \item Example of resolving literals:
+    \[
+    P \lor Q, \quad \neg P \Rightarrow Q
+    \]
+    \[
+    P \lor Q, \quad \neg P \lor R \Rightarrow Q \lor R
+    \]
+    \item \textbf{Clause:} A disjunction of literals, e.g., $P \lor Q \lor R$.
+    \item \textbf{Conjunctive Normal Form (CNF):} Conjunction of clauses, e.g., $(A \lor B \lor C) \land (D \lor \neg E)$.
+    \item Conversion to CNF:
+    \begin{itemize}
+        \item Eliminate biconditionals and implications
+        \item Move NOT inwards using De Morgan’s laws
+        \item Apply distributive laws
+    \end{itemize}
+\end{itemize}
+
+\subsection{Proof by Contradiction}
+\begin{itemize}
+    \item Assume $\neg Q$ and derive a contradiction from KB.
+    \item Ensures KB consistency.
+\end{itemize}
+
+\subsection{Horn Clauses and Definite Clauses}
+\begin{itemize}
+    \item Horn Clause: CNF with at most one positive literal.  
+      Form: $\neg P \lor Q \equiv P \rightarrow Q$
+    \item Definite Clause: Exactly one positive literal (the "head"), possibly many negative literals (the "body").
+    \item Basis for efficient logic programming and automated reasoning.
+\end{itemize}
+
+\subsection{Forward and Backward Chaining}
+\begin{itemize}
+    \item \textbf{Forward Chaining:} Start from known facts, apply inference rules to derive new facts until goal.
+    \item \textbf{Backward Chaining:} Start from query $Q$, work backwards applying rules until known facts are reached.
+    \item Linear resolution strategies (e.g., SLD resolution) reduce search space using sub-goals.
+\end{itemize}
+
+\subsection{Limitations of Propositional Logic}
+\begin{itemize}
+    \item Cannot represent objects, relations, or quantifiers.
+    \item Limited expressiveness for complex domains.
+\end{itemize}
+
+\subsection{First-Order Logic (FOL)}
+\begin{itemize}
+    \item Extends propositional logic with:
+    \begin{itemize}
+        \item Constants: specific objects
+        \item Variables: placeholders
+        \item Predicates: properties/relations over objects
+        \item Functions: map objects to objects
+    \end{itemize}
+    \item Terms: constants, variables, or functions applied to terms
+    \item Atomic formulas: predicates applied to terms
+    \item Quantifiers:
+    \begin{itemize}
+        \item Universal: $\forall x \, P(x)$
+        \item Existential: $\exists x \, P(x)$
+    \end{itemize}
+\end{itemize}
+
+
