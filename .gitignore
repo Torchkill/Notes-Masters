@@ -214,3 +214,6 @@ __marimo__/
 *.log
 *.toc
 *.synctex.gz
+
+#macOS
+*.DS_Store
