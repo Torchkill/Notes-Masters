@@ -1,0 +1,205 @@
+
+\section{Uncertainty}
+
+Uncertainty arises when an agent lacks complete information about the world. It reflects the agent’s \textbf{degree of belief} in various propositions.
+
+\begin{itemize}
+    \item Uninformed agents must make decisions with incomplete information.
+    \item Probability is used to quantify uncertainty.
+    \item \textbf{Example:} Betting on a dice roll involves assigning probabilities to each possible face of the die.
+\end{itemize}
+
+\section{Probability}
+
+Probability represents a \textbf{subjective measure of belief}. It helps agents reason under uncertainty.
+
+\subsection*{Random Variables}
+
+A random variable can take different values due to randomness.
+
+\begin{itemize}
+    \item Dice: domain$(X) = \{1, 2, 3, 4, 5, 6\}$
+    \item Weather: domain(Weather) = \{sun, cloud, rain, wind, snow\}
+    \item Traffic: \{none, light, heavy\}
+    \item Flight status: \{on time, delayed, cancelled\}
+\end{itemize}
+
+\textbf{Possible Worlds:} A complete assignment of values to all variables. Denoted by \( \omega \), with \( P(\omega) \) representing the probability of that world.
+
+\section{Axioms of Probability}
+
+\begin{enumerate}
+    \item Non-negativity: \( 0 \leq P(a) \)
+    \item Normalization: \( P(\text{true}) = 1 \)
+    \item Additivity (Mutual exclusivity): \( P(a \vee b) = P(a) + P(b) \) if \( a \wedge b = \text{false} \)
+\end{enumerate}
+
+\section{Types of Probability}
+
+\subsection*{Unconditional (Prior) Probability}
+
+Belief in a proposition before seeing any evidence.  
+\textbf{Example:} \( P(\text{Rain}) = 0.3 \)
+
+\subsection*{Conditional Probability}
+
+Belief in a proposition given some evidence.  
+Notation: \( P(a \mid b) \)  
+\textbf{Example:} \( P(\text{Traffic = heavy} \mid \text{Rain}) \)
+
+\subsection*{Conditioning and Evidence}
+
+Evidence \( e \) eliminates possible worlds where \( e \) is false.  
+We update our beliefs using:
+
+\[
+\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}
+\]
+
+\begin{itemize}
+    \item \textbf{Prior}: Belief before evidence
+    \item \textbf{Likelihood}: Probability of evidence given a hypothesis
+    \item \textbf{Posterior}: Updated belief
+\end{itemize}
+
+\section{Probability Distribution}
+
+\textbf{Definition:} A function assigning probabilities to each value in a random variable’s domain.
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Flight Status} & \textbf{Probability} \\
+\hline
+On Time & 0.6 \\
+Delayed & 0.3 \\
+Cancelled & 0.1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Independence}
+
+Two events are independent if knowledge of one does not affect the other.
+
+\[
+P(a \wedge b) = P(a) \cdot P(b)
+\]
+
+\textbf{Example:} Rolling two dice.
+
+\section{Bayes’ Rule}
+
+\[
+P(a \mid b) = \frac{P(b \mid a) \cdot P(a)}{P(b)}
+\]
+
+\subsection*{Example: Medical Diagnosis}
+\begin{itemize}
+    \item \( P(\text{Disease}) = 0.01 \)
+    \item \( P(\text{Positive Test} \mid \text{Disease}) = 0.99 \)
+    \item \( P(\text{Positive Test}) = 0.05 \)
+\end{itemize}
+
+\[
+P(\text{Disease} \mid \text{Positive}) = \frac{0.99 \cdot 0.01}{0.05} = 0.198
+\]
+
+\section{Causal vs. Evidential Reasoning}
+
+\subsection*{Causal Reasoning}
+
+Inferring effects from causes.  
+\textbf{Example:} \( P(\text{Wet} \mid \text{Rain}) \)
+
+\subsection*{Evidential Reasoning}
+
+Inferring causes from effects.  
+\textbf{Example:} \( P(\text{Rain} \mid \text{Wet}) \)
+
+\section{Rules of Probability}
+
+\begin{itemize}
+    \item Negation: \( P(\neg a) = 1 - P(a) \)
+    \item Inclusion-Exclusion: \( P(a \vee b) = P(a) + P(b) - P(a \wedge b) \)
+    \item Marginalisation: \( P(a) = P(a \wedge b) + P(a \wedge \neg b) \)
+    \item Law of Total Probability: \( P(a) = P(a \mid b)P(b) + P(a \mid \neg b)P(\neg b) \)
+\end{itemize}
+
+\section{Conditional Independence}
+
+Variables \( A \) and \( B \) are conditionally independent given \( C \) if:
+
+\[
+P(A \mid B, C) = P(A \mid C)
+\]
+
+\textbf{Example:} Given a disease \( C \), symptoms \( A \) and \( B \) may be conditionally independent.
+
+\section{Bayesian Networks}
+
+A Bayesian network is a \textbf{Directed Acyclic Graph (DAG)} representing dependencies between variables.
+
+\begin{itemize}
+    \item Nodes: Random variables
+    \item Arrows: Causal/statistical dependencies
+    \item Each node has a conditional probability table (CPT)
+\end{itemize}
+
+\subsection*{Structure:}
+
+For each node \( X \):
+
+\[
+P(X \mid \text{Parents}(X))
+\]
+
+\subsection*{Example Network:}
+
+\[
+\text{Rain} \rightarrow \text{Maintenance} \rightarrow \text{Train} \rightarrow \text{Appointment}
+\]
+
+\textbf{Parents:}
+\begin{itemize}
+    \item Train: Rain, Maintenance
+    \item Appointment: Train
+\end{itemize}
+
+\subsection*{CPTs:}
+\begin{itemize}
+    \item \( P(\text{Rain}) \)
+    \item \( P(\text{Maintenance} \mid \text{Rain}) \)
+    \item \( P(\text{Train} \mid \text{Rain}, \text{Maintenance}) \)
+    \item \( P(\text{Appointment} \mid \text{Train}) \)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[->, thick, node distance=2cm]
+  \node[draw, circle] (rain) {Rain};
+  \node[draw, circle, right of=rain] (maintenance) {Maint.};
+  \node[draw, circle, below right=1cm and 1cm of rain] (train) {Train};
+  \node[draw, circle, right of=train] (appt) {Appt.};
+
+  \draw (rain) -- (train);
+  \draw (maintenance) -- (train);
+  \draw (train) -- (appt);
+  \draw (rain) -- (maintenance);
+\end{tikzpicture}
+\end{center}
+
+
+
+\section{Joint Probability using Chain Rule}
+
+\[
+P(X_1, X_2, \ldots, X_n) = \prod_{i=1}^n P(X_i \mid \text{Parents}(X_i))
+\]
+
+\subsection*{Example with Previous Network:}
+
+\[
+P(\text{Rain}, \text{Maintenance}, \text{Train}, \text{Appointment}) = P(\text{Rain}) \cdot P(\text{Maintenance} \mid \text{Rain}) \cdot P(\text{Train} \mid \text{Rain}, \text{Maintenance}) \cdot P(\text{Appointment} \mid \text{Train})
+\]
+
+
