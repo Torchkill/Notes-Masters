@@ -1,0 +1,235 @@
+
+\section{Introduction to AI Learning}
+
+Artificial Intelligence (AI) learning refers to the process by which an AI system improves its performance over time based on data, experience, or feedback. This process can:
+
+\begin{itemize}
+    \item Expand the range of behaviors.
+    \item Improve accuracy on tasks.
+    \item Increase speed of task completion.
+\end{itemize}
+
+\section{Core Components of Learning}
+
+\begin{itemize}
+    \item \textbf{Task:} The specific behavior or function being improved.
+    \item \textbf{Data:} The experiences (examples, feedback, etc.) used to improve performance.
+    \item \textbf{Measure of Improvement:} The metric used to quantify learning progress.
+\end{itemize}
+
+\section{Large Data Requirements}
+
+AI systems often require large datasets to generalize effectively. The learner operates as a black box that takes:
+
+\begin{itemize}
+    \item Experiences
+    \item Problem description
+    \item Background knowledge or bias
+    \item And produces answers or decisions
+\end{itemize}
+
+\textbf{Learner} $\rightarrow$ \textbf{Models} $\rightarrow$ \textbf{Reasoner}
+
+\section{Common Learning Paradigms}
+
+\begin{itemize}
+    \item Supervised Classification
+    \item Unsupervised Learning
+    \item Reinforcement Learning
+    \item Analytic Learning
+    \item Inductive Logic Programming
+    \item Statistical Relational Learning
+\end{itemize}
+
+\section{Feedback and Bias}
+
+\textbf{Feedback:} Determines how success is measured.
+
+\begin{itemize}
+    \item $P$: Assumes only observed negative examples are negative.
+    \item $N$: Assumes only observed positive examples are positive.
+\end{itemize}
+
+\textbf{Bias:} Different assumptions about the distribution of examples, influencing the hypothesis space.
+
+Example: A linear model or a polynomial fit may result from differing biases over the same data.
+
+\section{Learning as Search}
+
+Learning can be viewed as searching through a space of hypotheses or models.
+
+\begin{itemize}
+    \item The search space is often very large.
+    \item Techniques like gradient descent and stochastic simulation are used.
+\end{itemize}
+
+\textbf{Learning algorithm} = Search Space + Evaluation Function + Search Method
+
+\section{Challenges in Learning}
+
+\textbf{Data Issues:}
+
+\begin{itemize}
+    \item Inadequate features
+    \item Missing or noisy data
+    \item Incorrectly labeled features
+\end{itemize}
+
+\textbf{Types of Error:}
+
+\begin{itemize}
+    \item Limited representation (representation bias)
+    \item Limited search (search bias)
+    \item Limited data (variance)
+    \item Noisy features (noise)
+\end{itemize}
+
+\section{Model Representation and Bias-Variance Tradeoff}
+
+\begin{itemize}
+    \item Richer representations enable better problem-solving.
+    \item But they are harder to learn and more prone to overfitting.
+    \item Tradeoff exists between bias (underfitting) and variance (overfitting).
+\end{itemize}
+
+\section{Supervised Learning}
+
+Given a dataset of input-output pairs, the goal is to learn a function $f$ that maps inputs to outputs.
+
+\subsection{Terminology}
+
+\begin{itemize}
+    \item Input Features
+    \item Target Features
+    \item Training Examples
+\end{itemize}
+
+\subsection{Classification}
+
+Learning a function to map input to a discrete category (e.g., spam or not spam). Target features $Y_i$ are discrete.
+
+\textbf{Nearest Neighbour Classification:} Choose the class of the nearest training example.
+
+\textbf{K-Nearest Neighbour Classification:} Choose class by majority vote among $k$ nearest examples.
+
+\subsection{Linear Classification}
+
+A linear decision boundary:
+
+\[
+x_1 = \text{humidity},\quad x_2 = \text{pressure}
+\]
+\[
+h(x_1, x_2) =
+\begin{cases}
+\text{rain} & \text{if } w_0 + w_1x_1 + w_2x_2 \geq 0 \\
+\text{no rain} & \text{otherwise}
+\end{cases}
+\]
+
+\[
+\text{Input Vector: } x = (1, x_1, x_2),\quad \text{Weight Vector: } w = (w_0, w_1, w_2)
+\]
+\[
+h_w(x) =
+\begin{cases}
+1 & \text{if } w \cdot x \geq 0 \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\textbf{Perceptron Learning Rule:}
+
+\[
+w_i \leftarrow w_i + \alpha (y - h_w(x)) x_i
+\]
+
+\subsection{Activation Functions}
+
+\begin{itemize}
+    \item \textbf{Step function:} Hard threshold.
+    \item \textbf{Sigmoid function:} Soft threshold.
+    \[
+    f(x) = \frac{1}{1 + e^{-x}}
+    \]
+\end{itemize}
+
+\textbf{Logistic Regression:} Minimize the error of the logistic function by adjusting weights.
+
+\subsection{Support Vector Machines}
+
+\begin{itemize}
+    \item Adjusts the decision boundary to maximize the margin.
+    \item \textbf{Linearly Separable:} Exists a hyperplane where classes are separable.
+    \item Projects data into higher-dimensional space if necessary.
+\end{itemize}
+
+\section{Regression}
+
+Supervised learning task to predict continuous values.
+
+\[
+\text{Goal: predict target } Y \text{ from inputs } X_1, X_2, \ldots, X_n
+\]
+
+\textbf{Linear Regression:}
+
+\[
+\text{Minimize Sum of Squared Errors (SSE):}
+\quad SSE(E, w) = \sum_{e \in E} (o_e - p_e)^2
+\]
+
+\textbf{Stochastic Gradient Descent:} Update weights incrementally after each example.
+
+\section{Evaluating Hypotheses}
+
+\begin{itemize}
+    \item $o_e$: Observed value
+    \item $p_e$: Predicted value
+    \item Error: $|o_e - p_e|$
+\end{itemize}
+
+\subsection{Loss Functions}
+
+\begin{itemize}
+    \item \textbf{0-1 Loss:}
+    \[
+    L(o, p) =
+    \begin{cases}
+    0 & \text{if } o = p \\
+    1 & \text{otherwise}
+    \end{cases}
+    \]
+    \item \textbf{$L_1$ Loss:} Absolute error
+    \item \textbf{$L_2$ Loss:} Squared error
+    \[
+    L = (o - p)^2
+    \]
+    \item \textbf{$L_\infty$ Loss:} Max error
+\end{itemize}
+
+\section{Overfitting and Regularisation}
+
+\textbf{Overfitting:} Model captures noise in training data, failing to generalize.
+
+\textbf{Regularisation:}
+
+\[
+\text{Cost}(h) = \text{Loss}(h) + \lambda \cdot \text{Complexity}(h)
+\]
+
+\begin{itemize}
+    \item Encourages simpler models.
+    \item Feature selection: Removing irrelevant features.
+\end{itemize}
+
+\section{Model Evaluation Techniques}
+
+\begin{itemize}
+    \item Holdout Validation: Train/test split.
+    \item K-Fold Cross Validation: Split into $k$ parts and test on each part iteratively.
+\end{itemize}
+
+\section{Practical Tools}
+
+\textbf{Scikit-learn:} Python machine learning library offering tools for classification, regression, clustering, and evaluation.
