@@ -1,0 +1,212 @@
+\section{Linear Algebra}
+% Short description of chapter
+
+\subsection{Matrix}
+A matrix is usually written as $\mathbf{A} \in \mathbb{R}^{m \times n}$ where $m$ means the amount of rows and $n$ is the amount of columns. An example of a matrix:
+$$
+\mathbf{A} =
+\begin{bmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix},
+\quad a_{ij} \in \mathbb{R}
+$$
+
+\subsection{Matrix addition}
+\begin{center}
+\begin{tabular}{|l|c|}
+    \hline
+    \textbf{Property} & \textbf{Description} \\ \hline
+    Associative & \((A + B) + C = A + (B + C)\) \\ \hline
+    Commutative & \(A + B = B + A\) \\ \hline
+    Identity & \(A + O = O + A = A\), where \(O\) is the zero matrix \\ \hline
+    Inverse & \(A + (-A) = O\), where \(-A\) is the additive inverse \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Example}
+\begin{align*}
+\end{align*}
+
+\subsection{Matrix multiplication}
+\begin{center}
+\begin{tabular}{|l|c|}
+    \hline
+    \textbf{Property} & \textbf{Description} \\ \hline
+    Associative & \((AB)C = A(BC)\) \\ \hline
+    Distributive over Addition & \(A(B + C) = AB + AC\) \\
+                               & \((A + B)C = AC + BC\) \\ \hline
+    Identity & \(AI = IA = A\), where \(I\) is the identity matrix \\ \hline
+    Non-commutative & \(AB \neq BA\) (in general) \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Example}
+\begin{align*}
+A =& \begin{bmatrix}
+1 & 2 & 3 \\
+3 & 2 & 1
+\end{bmatrix} \in \mathbb{R}^{2 \times 3},\\
+  B =& \begin{bmatrix}
+0 & 2 \\
+1 & -1 \\
+0 & 1
+\end{bmatrix} \in \mathbb{R}^{3 \times 2},\\
+  AB =& \begin{bmatrix}
+1 & 2 & 3 \\
+3 & 2 & 1
+\end{bmatrix}
+\begin{bmatrix}
+0 & 2 \\
+1 & -1 \\
+0 & 1
+\end{bmatrix}
+= \begin{bmatrix}
+2 & 3 \\
+2 & 5
+\end{bmatrix} \in \mathbb{R}^{2 \times 2},\\
+BA =& \begin{bmatrix}
+0 & 2 \\
+1 & -1 \\
+0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 & 3 \\
+3 & 2 & 1
+\end{bmatrix}
+= \begin{bmatrix}
+6 & 4 & 2 \\
+-2 & 0 & 2 \\
+3 & 2 & 1
+\end{bmatrix} \in \mathbb{R}^{3 \times 3}.
+\end{align*}
+
+\subsection{Inverse and determinant}
+A matrix only has a inverse if its determinant is not 0 so always calculate it before finding the inverse. If it exists the following holds:
+$$
+\mathbf{AB} = \mathbf{BA} = \mathbf{I}_n
+$$
+\noindent
+The determinant is easy to find for a $2 \times 2$ matrix:
+$$
+Det(\mathbf{A}) =
+\begin{bmatrix}
+  a_{11} & a_{12}\\
+  a_{21} & a_{22}
+\end{bmatrix}
+= a_{11}a_{22} - a_{21}a{12}
+$$
+
+After checking that the determinant is not zero proceed to find the inverse.
+If you're working with a $2 \times 2$ matrix the following setup gives the inverse, fig. \ref{2x2_matrix_inverse}
+
+%\begin{align*}
+%
+%\end{align*}
+
+
+\noindent
+For a $3 \times 3$ matrix Sarrus's rule can be used.\\
+For matrices $3 \times 3$ and larger one can use Laplace expansion.
+
+
+\subsection{Transposed matrix}
+To find the transpose 
+$$
+  \mathbf{A} = \begin{bmatrix}
+a & b & c \\
+d & e & f
+\end{bmatrix}
+$$
+then
+$$
+  \mathbf{A}^T =
+  \begin{bmatrix}
+a & d \\
+b & e \\
+c & f
+\end{bmatrix}
+$$
+
+%\subsection{Multiplication with scalar}
+
+\subsection{Particular and general solution}
+
+\subsection{Gauss elimination}
+When doing gaussian elimination you are allowed to do the following operations:
+\begin{itemize}
+  \item Exchange of two equations (rows in the matrix representing the system of equations)
+  \item Multiplication of an equation (row) with a constant $\lambda \in \mathbb{R}\{0\}$
+  \item Addition of two equations (rows)
+\end{itemize}
+\noindent
+\textbf{Definition 2.6} (Row-Echelon Form). A matrix is in row-echelon form if:
+\begin{itemize}
+  \item All rows that contain only zeros are at the bottom of the matrix; correspondingly, all rows that contain at least one nonzero element are on top of rows that contain only zeros.
+  \item Looking at nonzero rows only, the first nonzero number from the left (also called the pivot or the leading coefficient) is always strictly to the right of the pivot of the row above it.
+\end{itemize}
+
+\noindent
+\textbf{Remark (Reduced Row Echelon Form).}
+An equation system is in \textit{reduced row-echelon form} (also: \textit{row-reduced echelon form} or \textit{row canonical form}) if
+\begin{itemize}
+    \item It is in row-echelon form.
+    \item Every pivot is 1.
+    \item The pivot is the only nonzero entry in its column.
+\end{itemize}
+
+\textbf{Minus-1 trick}
+
+\subsection{Groups}
+\textbf{Definition 2.7 (Group).}
+Consider a set \( G \) and an operation \( \otimes: G \times G \to G \) defined on \( G \).
+Then \( G := (G, \otimes) \) is called a \textit{group} if the following hold:
+
+\begin{enumerate}
+    \item \textbf{Closure} of \( G \) under \( \otimes \): \( \forall x, y \in G: x \otimes y \in G \)
+
+    \item \textbf{Associativity}: \( \forall x, y, z \in G: (x \otimes y) \otimes z = x \otimes (y \otimes z) \)
+
+    \item \textbf{Neutral element}: \( \exists e \in G \, \forall x \in G: x \otimes e = x \) and \( e \otimes x = x \)
+
+    \item \textbf{Inverse element}: \( \forall x \in G \, \exists y \in G: x \otimes y = e \) and \( y \otimes x = e \), where \( e \) is the neutral element. We often write \( x^{-1} \) to denote the inverse element of \( x \).
+\end{enumerate}
+
+\textit{Remark} The inverse element is defined with respect to the operation \( \otimes \) and does not necessarily mean \( \frac{1}{x} \). \(\diamondsuit$
+
+\subsection{Vector spaces}
+\begin{definition}[Vector Space]
+A real-valued \emph{vector space} \( V = (\mathcal{V}, +, \cdot) \) is a set \(\mathcal{V}\) with two operations
+\[
++ : \mathcal{V} \times \mathcal{V} \to \mathcal{V}
+\tag{2.62}
+\]
+\[
+\cdot : \mathbb{R} \times \mathcal{V} \to \mathcal{V}
+\tag{2.63}
+\]
+where
+\begin{enumerate}
+    \item \((\mathcal{V}, +)\) is an Abelian group.
+    \item Distributivity:
+    \begin{enumerate}
+        \item \(\forall \lambda \in \mathbb{R},\ x,y \in \mathcal{V}: 
+        \lambda \cdot (x + y) = \lambda \cdot x + \lambda \cdot y\).
+        \item \(\forall \lambda, \psi \in \mathbb{R},\ x \in \mathcal{V}:
+        (\lambda + \psi) \cdot x = \lambda \cdot x + \psi \cdot x\).
+    \end{enumerate}
+    \item Associativity (outer operation): 
+    \(\forall \lambda, \psi \in \mathbb{R},\ x \in \mathcal{V}:
+    \lambda \cdot (\psi \cdot x) = (\lambda \psi) \cdot x\).
+    \item Neutral element with respect to the outer operation:
+    \(\forall x \in \mathcal{V}:\ 1 \cdot x = x\).
+\end{enumerate}
+\end{definition}
+
+\subsection{Basis and rank}
+
+\subsection{Linear mappings}
+
+\subsection{Affine spaces}
