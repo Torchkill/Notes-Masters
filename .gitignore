@@ -216,5 +216,6 @@ __marimo__/
 *.synctex.gz
 *.out
 
+
 #macOS
 *.DS_Store
