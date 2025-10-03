@@ -1,11 +1,674 @@
 \section{Vector Calculus}
 % Short description of chapter
 
-\subsection{Differentiation of univariate functions}
-\subsection{Partial differentiation and gradients}
-\subsection{Gradients of vector valued functions}
-\subsection{Gradients of matrices}
-\subsection{Useful identities for computing gradients}
-\subsection{Backpropagation and automatic differentiation}
-\subsection{Higher order derivatives}
-\subsection{Linearization and multivariate taylor series}
+\subsection{Differentiation of Univariate Functions}
+
+Consider a scalar function \( f: \mathbb{R} \to \mathbb{R} \), where \( x \in \mathbb{R} \).
+
+---
+
+\textbf{Derivative:}
+
+The derivative of \( f \) at \( x \) is defined as
+
+\[
+f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+\]
+
+if the limit exists.
+
+---
+
+\textbf{Basic differentiation rules:}
+
+\begin{itemize}
+    \item \textbf{Constant rule:} \(\frac{d}{dx} c = 0\)
+    \item \textbf{Power rule:} \(\frac{d}{dx} x^n = n x^{n-1}\)
+    \item \textbf{Sum rule:} \(\frac{d}{dx} [f(x) + g(x)] = f'(x) + g'(x)\)
+    \item \textbf{Product rule:} \(\frac{d}{dx} [f(x) g(x)] = f'(x) g(x) + f(x) g'(x)\)
+    \item \textbf{Quotient rule:} \(\frac{d}{dx} \left[\frac{f(x)}{g(x)}\right] = \frac{f'(x) g(x) - f(x) g'(x)}{[g(x)]^2}\)
+    \item \textbf{Chain rule:} \(\frac{d}{dx} f(g(x)) = f'(g(x)) \cdot g'(x)\)
+\end{itemize}
+
+---
+
+\textbf{Higher-order derivatives:}
+
+Derivatives can be extended to higher orders:
+
+\[
+f^{(n)}(x) = \frac{d^n}{dx^n} f(x)
+\]
+
+---
+
+\textbf{Taylor series expansion:}
+
+If \( f \) is infinitely differentiable at \( x = a \), it can be approximated near \( a \) by its Taylor series:
+
+\[
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x - a)^n = f(a) + f'(a)(x - a) + \frac{f''(a)}{2!}(x - a)^2 + \cdots
+\]
+
+---
+
+\textbf{Remainder term:}
+
+The error of truncating the series at order \( N \) is given by the remainder \( R_N(x) \), which often can be bounded or expressed via Lagrange’s form:
+
+\[
+R_N(x) = \frac{f^{(N+1)}(\xi)}{(N+1)!} (x - a)^{N+1} \quad \text{for some } \xi \text{ between } a \text{ and } x
+\]
+
+---
+
+\textbf{Example:}
+
+For \( f(x) = e^x \) expanded at \( a = 0 \):
+
+\[
+e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots
+\]
+
+---
+
+\textbf{Interpretation:}
+
+- \( f'(x) \) measures the instantaneous rate of change of \( f \) at \( x \).
+- Taylor series expresses \( f \) as an infinite polynomial centered at \( a \).
+- Linearization is the first-order truncation of the Taylor series.
+
+---
+
+\textbf{Final Result (Boxed):}
+
+\[
+\boxed{
+f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!} (x - a)^n
+}
+\]
+
+
+
+
+
+
+\subsection{Partial Differentiation and Gradients}
+
+\textbf{Partial differentiation} is used when dealing with functions of multiple variables, such as \( f(x, y) \) or \( f(x, y, z) \).
+
+We differentiate with respect to one variable at a time, treating the others as constants.
+
+---
+
+\textbf{Notation:}
+
+\[
+\frac{\partial f}{\partial x}, \quad \frac{\partial f}{\partial y}, \quad \frac{\partial f}{\partial z}, \quad \text{etc.}
+\]
+
+---
+
+\textbf{Example:}
+
+Let:
+\[
+f(x, y) = x^2y + 3xy^2
+\]
+
+\textbf{Partial derivative w.r.t. \(x\):}
+\[
+\frac{\partial f}{\partial x} = \frac{\partial}{\partial x}(x^2y + 3xy^2) = 2xy + 3y^2
+\]
+
+\textbf{Partial derivative w.r.t. \(y\):}
+\[
+\frac{\partial f}{\partial y} = \frac{\partial}{\partial y}(x^2y + 3xy^2) = x^2 + 6xy
+\]
+
+---
+
+\textbf{Gradient Vector:}
+
+The \textbf{gradient} of a scalar function \( f(x, y, \dots) \) is a vector of its partial derivatives:
+
+\[
+\nabla f = 
+\begin{bmatrix}
+\frac{\partial f}{\partial x} \\
+\frac{\partial f}{\partial y} \\
+\vdots \\
+\frac{\partial f}{\partial z}
+\end{bmatrix}
+\]
+
+So for the above function:
+\[
+\nabla f(x, y) = 
+\begin{bmatrix}
+2xy + 3y^2 \\
+x^2 + 6xy
+\end{bmatrix}
+\]
+
+---
+
+\textbf{Interpretation:}
+\begin{itemize}
+    \item The gradient points in the direction of \textbf{steepest ascent}.
+    \item Its magnitude gives the rate of increase in that direction.
+    \item When \( \nabla f = \vec{0} \), you may be at a maximum, minimum, or saddle point (check with second derivatives).
+\end{itemize}
+
+---
+
+\textbf{Final Result (Boxed):}
+
+\[
+\boxed{
+\nabla f(x, y) = 
+\begin{bmatrix}
+2xy + 3y^2 \\
+x^2 + 6xy
+\end{bmatrix}
+}
+\]
+
+
+\subsection{Gradients of Vector-Valued Functions}
+
+\textbf{Vector-valued functions} are functions where the output is a vector rather than a scalar. That is:
+
+\[
+\mathbf{f}(\mathbf{x}) = 
+\begin{bmatrix}
+f_1(\mathbf{x}) \\
+f_2(\mathbf{x}) \\
+\vdots \\
+f_m(\mathbf{x})
+\end{bmatrix}
+\quad \text{where } \mathbf{x} \in \mathbb{R}^n, \quad \mathbf{f}(\mathbf{x}) \in \mathbb{R}^m
+\]
+
+---
+
+\textbf{Gradient generalization: The Jacobian matrix}
+
+The gradient of a vector-valued function is expressed using the \textbf{Jacobian matrix}, defined as:
+
+\[
+\mathbf{J}_{\mathbf{f}}(\mathbf{x}) =
+\begin{bmatrix}
+\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \cdots & \frac{\partial f_1}{\partial x_n} \\
+\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \cdots & \frac{\partial f_2}{\partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \cdots & \frac{\partial f_m}{\partial x_n}
+\end{bmatrix}
+\in \mathbb{R}^{m \times n}
+\]
+
+- Each row: gradient of a scalar function \( f_i(\mathbf{x}) \)
+- Each column: partials w.r.t. a variable \( x_j \)
+
+---
+
+\textbf{Example:}
+
+Let:
+
+\[
+\mathbf{f}(x, y) = 
+\begin{bmatrix}
+f_1(x, y) \\
+f_2(x, y)
+\end{bmatrix}
+=
+\begin{bmatrix}
+x^2 + y \\
+xy
+\end{bmatrix}
+\]
+
+Then the Jacobian is:
+
+\[
+\mathbf{J}_{\mathbf{f}}(x, y) =
+\begin{bmatrix}
+\frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\
+\frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y}
+\end{bmatrix}
+=
+\begin{bmatrix}
+2x & 1 \\
+y & x
+\end{bmatrix}
+\]
+
+---
+
+\textbf{Interpretation:}
+\begin{itemize}
+    \item The Jacobian maps small changes in inputs (\(d\mathbf{x}\)) to changes in outputs (\(d\mathbf{f}\)).
+    \item In machine learning, it's used for backpropagation in neural networks.
+    \item When \( m = 1 \), the Jacobian reduces to the gradient row vector.
+\end{itemize}
+
+---
+
+\textbf{Final Result (Boxed):}
+
+\[
+\boxed{
+\mathbf{J}_{\mathbf{f}}(x, y) =
+\begin{bmatrix}
+2x & 1 \\
+y & x
+\end{bmatrix}
+}
+\]
+
+\subsection{Gradients of Matrices}
+
+When dealing with functions whose inputs and/or outputs are matrices, the concept of gradient extends naturally but requires careful notation.
+
+---
+
+\textbf{Function of a matrix:}
+
+Consider a scalar-valued function \( f: \mathbb{R}^{m \times n} \to \mathbb{R} \), where the input is a matrix \( \mathbf{X} \in \mathbb{R}^{m \times n} \).
+
+The \textbf{gradient of \( f \) with respect to \( \mathbf{X} \)} is the matrix of partial derivatives:
+
+\[
+\nabla_{\mathbf{X}} f =
+\begin{bmatrix}
+\frac{\partial f}{\partial x_{11}} & \frac{\partial f}{\partial x_{12}} & \cdots & \frac{\partial f}{\partial x_{1n}} \\
+\frac{\partial f}{\partial x_{21}} & \frac{\partial f}{\partial x_{22}} & \cdots & \frac{\partial f}{\partial x_{2n}} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial f}{\partial x_{m1}} & \frac{\partial f}{\partial x_{m2}} & \cdots & \frac{\partial f}{\partial x_{mn}} \\
+\end{bmatrix}
+\in \mathbb{R}^{m \times n}
+\]
+
+---
+
+\textbf{Interpretation:}
+\begin{itemize}
+    \item Each element \(\frac{\partial f}{\partial x_{ij}}\) measures how \(f\) changes when the element \( x_{ij} \) changes, keeping all other elements fixed.
+    \item The gradient points in the direction of steepest ascent of \( f \) in the space of matrices.
+\end{itemize}
+
+---
+
+\textbf{Example:}
+
+Let
+
+\[
+f(\mathbf{X}) = \mathrm{trace}(\mathbf{X}^T \mathbf{A} \mathbf{X}) = \sum_{i=1}^m \sum_{j=1}^n \sum_{k=1}^m x_{ki} a_{ij} x_{kj}
+\]
+
+where \( \mathbf{A} \in \mathbb{R}^{n \times n} \) is a constant matrix and \( \mathbf{X} \in \mathbb{R}^{m \times n} \).
+
+---
+
+\underline{Gradient of \( f \) w.r.t. \( \mathbf{X} \):}
+
+\[
+\nabla_{\mathbf{X}} f = \mathbf{X} (\mathbf{A} + \mathbf{A}^T)
+\]
+
+If \( \mathbf{A} \) is symmetric, this simplifies to
+
+\[
+\nabla_{\mathbf{X}} f = 2 \mathbf{X} \mathbf{A}
+\]
+
+---
+
+\textbf{Final Result (Boxed):}
+
+\[
+\boxed{
+\nabla_{\mathbf{X}} \mathrm{trace}(\mathbf{X}^T \mathbf{A} \mathbf{X}) = \mathbf{X} (\mathbf{A} + \mathbf{A}^T)
+}
+\]
+
+---
+
+\textbf{Note:} For matrix functions producing matrix outputs (e.g., \( \mathbf{F}(\mathbf{X}) \in \mathbb{R}^{p \times q} \)), the gradient generalizes to a \textit{tensor} or a collection of Jacobians, which is more advanced.
+
+
+\subsection{Useful Identities for Computing Gradients}
+
+In matrix calculus and multivariate analysis, several standard identities simplify the computation of gradients.
+
+Below are some commonly used results for scalar-valued functions \( f(\mathbf{x}) \) or \( f(\mathbf{X}) \):
+
+---
+
+\textbf{Vector and matrix variables:}
+
+Let \( \mathbf{x} \in \mathbb{R}^n \) be a vector, \( \mathbf{X} \in \mathbb{R}^{m \times n} \) a matrix, and \( \mathbf{A}, \mathbf{B} \) constant matrices of appropriate dimensions.
+
+---
+
+\textbf{Identities:}
+
+\begin{align*}
+1.\quad & \nabla_{\mathbf{x}} (\mathbf{a}^T \mathbf{x}) = \mathbf{a} \quad \text{where } \mathbf{a} \in \mathbb{R}^n \\
+2.\quad & \nabla_{\mathbf{x}} (\mathbf{x}^T \mathbf{A} \mathbf{x}) = (\mathbf{A} + \mathbf{A}^T) \mathbf{x} \\
+3.\quad & \nabla_{\mathbf{X}} \mathrm{trace}(\mathbf{A}^T \mathbf{X}) = \mathbf{A} \\
+4.\quad & \nabla_{\mathbf{X}} \mathrm{trace}(\mathbf{X}^T \mathbf{A} \mathbf{X}) = \mathbf{A} \mathbf{X} + \mathbf{A}^T \mathbf{X} \\
+5.\quad & \nabla_{\mathbf{X}} \| \mathbf{X} \|_F^2 = 2 \mathbf{X} \\
+6.\quad & \nabla_{\mathbf{x}} \| \mathbf{x} \|_2 = \frac{\mathbf{x}}{\|\mathbf{x}\|_2} \quad \text{for } \mathbf{x} \neq \mathbf{0} \\
+7.\quad & \nabla_{\mathbf{x}} (\mathbf{b}^T \mathbf{x} + c) = \mathbf{b} \quad \text{where } \mathbf{b} \in \mathbb{R}^n, c \in \mathbb{R}
+\end{align*}
+
+---
+
+\textbf{Remarks:}
+\begin{itemize}
+    \item In identity 2, if \( \mathbf{A} \) is symmetric, then \( \nabla_{\mathbf{x}} (\mathbf{x}^T \mathbf{A} \mathbf{x}) = 2 \mathbf{A} \mathbf{x} \).
+    \item The Frobenius norm is defined as \( \| \mathbf{X} \|_F = \sqrt{\mathrm{trace}(\mathbf{X}^T \mathbf{X})} \).
+    \item These identities are widely used in optimization, statistics, and machine learning.
+\end{itemize}
+
+---
+
+\textbf{Final Summary (Boxed):}
+
+\[
+\boxed{
+\begin{aligned}
+\nabla_{\mathbf{x}} (\mathbf{a}^T \mathbf{x}) &= \mathbf{a} \\
+\nabla_{\mathbf{x}} (\mathbf{x}^T \mathbf{A} \mathbf{x}) &= (\mathbf{A} + \mathbf{A}^T) \mathbf{x} \\
+\nabla_{\mathbf{X}} \mathrm{trace}(\mathbf{A}^T \mathbf{X}) &= \mathbf{A} \\
+\nabla_{\mathbf{X}} \mathrm{trace}(\mathbf{X}^T \mathbf{A} \mathbf{X}) &= \mathbf{A} \mathbf{X} + \mathbf{A}^T \mathbf{X} \\
+\nabla_{\mathbf{X}} \| \mathbf{X} \|_F^2 &= 2 \mathbf{X}
+\end{aligned}
+}
+\]
+
+
+\subsection{Backpropagation and Automatic Differentiation}
+
+\textbf{Backpropagation} is an efficient algorithm for computing gradients of functions defined by computational graphs, commonly used in training neural networks.
+
+\textbf{Automatic Differentiation (AD)} systematically applies the chain rule to compute derivatives of complex functions programmatically.
+
+---
+
+\textbf{Key idea:}
+
+Given a function \( y = f(\mathbf{x}) \) composed of intermediate variables \( \{v_i\} \), the chain rule allows gradients to be propagated backward from output to inputs:
+
+\[
+\frac{\partial y}{\partial x_j} = \sum_i \frac{\partial y}{\partial v_i} \cdot \frac{\partial v_i}{\partial x_j}
+\]
+
+Backpropagation exploits this by storing intermediate derivatives and reusing them efficiently.
+
+---
+
+\textbf{Computational graph example:}
+
+Consider
+
+\[
+z = f(x, y) = (x + y) \cdot (x y)
+\]
+
+We can decompose it into operations:
+
+\[
+\begin{cases}
+a = x + y \\
+b = x y \\
+z = a \cdot b
+\end{cases}
+\]
+
+---
+
+\textbf{Forward pass:} compute \( a, b, z \).
+
+\textbf{Backward pass:} compute gradients using chain rule:
+
+\[
+\frac{\partial z}{\partial a} = b, \quad \frac{\partial z}{\partial b} = a
+\]
+
+\[
+\frac{\partial z}{\partial x} = \frac{\partial z}{\partial a} \frac{\partial a}{\partial x} + \frac{\partial z}{\partial b} \frac{\partial b}{\partial x} = b \cdot 1 + a \cdot y = b + a y
+\]
+
+\[
+\frac{\partial z}{\partial y} = \frac{\partial z}{\partial a} \frac{\partial a}{\partial y} + \frac{\partial z}{\partial b} \frac{\partial b}{\partial y} = b \cdot 1 + a \cdot x = b + a x
+\]
+
+---
+
+\textbf{Automatic Differentiation:}
+
+- AD breaks computations into elementary operations.
+- Each operation’s derivative is known.
+- AD combines these derivatives using the chain rule to compute gradients accurately and efficiently.
+- It can be implemented in two modes: \textit{forward mode} and \textit{reverse mode} (backpropagation is reverse mode AD).
+
+---
+
+\textbf{Summary:}
+
+\[
+\boxed{
+\begin{aligned}
+&\text{Backpropagation efficiently computes } \nabla_{\mathbf{x}} f(\mathbf{x}) \text{ via chain rule.} \\
+&\text{Automatic Differentiation automates this process for complex functions.}
+\end{aligned}
+}
+\]
+
+
+\subsection{Higher Order Derivatives}
+
+Higher order derivatives extend the concept of differentiation to derivatives of derivatives.
+
+---
+
+\textbf{Second-order derivatives:}
+
+For a scalar-valued function \( f(x) \), the second derivative is:
+
+\[
+\frac{d^2 f}{dx^2} = \frac{d}{dx} \left( \frac{df}{dx} \right)
+\]
+
+For multivariate functions \( f(\mathbf{x}) \) where \( \mathbf{x} = (x_1, x_2, \dots, x_n) \), second-order derivatives are partial derivatives of partial derivatives:
+
+\[
+\frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial}{\partial x_i} \left( \frac{\partial f}{\partial x_j} \right)
+\]
+
+---
+
+\textbf{Hessian matrix:}
+
+The collection of all second-order partial derivatives forms the Hessian matrix \( \mathbf{H} \in \mathbb{R}^{n \times n} \):
+
+\[
+\mathbf{H}(f) =
+\begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+\end{bmatrix}
+\]
+
+If \( f \) is twice continuously differentiable, Clairaut's theorem states:
+
+\[
+\frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial^2 f}{\partial x_j \partial x_i}
+\]
+
+making the Hessian symmetric.
+
+---
+
+\textbf{Example:}
+
+Consider
+
+\[
+f(x, y) = 3x^2 y + 2 y^3
+\]
+
+First-order partial derivatives:
+
+\[
+\frac{\partial f}{\partial x} = 6 x y, \quad \frac{\partial f}{\partial y} = 3 x^2 + 6 y^2
+\]
+
+Second-order partial derivatives:
+
+\[
+\frac{\partial^2 f}{\partial x^2} = 6 y, \quad \frac{\partial^2 f}{\partial y^2} = 12 y, \quad \frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x} = 6 x
+\]
+
+Hessian matrix:
+
+\[
+\mathbf{H}(f) =
+\begin{bmatrix}
+6 y & 6 x \\
+6 x & 12 y
+\end{bmatrix}
+\]
+
+---
+
+\textbf{Interpretation:}
+\begin{itemize}
+    \item The Hessian provides information about the curvature of \( f \).
+    \item It is used in optimization to classify critical points (minima, maxima, saddle points).
+\end{itemize}
+
+---
+
+\textbf{Final Result (Boxed):}
+
+\[
+\boxed{
+\mathbf{H}(f) =
+\begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+\end{bmatrix}
+}
+\]
+
+
+\subsection{Linearization and Multivariate Taylor Series}
+
+\textbf{Linearization} approximates a multivariate function near a point by its first-order Taylor expansion.
+
+---
+
+\textbf{Linear approximation:}
+
+Given a differentiable function \( f : \mathbb{R}^n \to \mathbb{R} \), the linearization of \( f \) around a point \( \mathbf{a} \in \mathbb{R}^n \) is:
+
+\[
+f(\mathbf{x}) \approx f(\mathbf{a}) + \nabla f(\mathbf{a})^T (\mathbf{x} - \mathbf{a})
+\]
+
+where \( \nabla f(\mathbf{a}) \) is the gradient of \( f \) at \( \mathbf{a} \).
+
+---
+
+\textbf{Multivariate Taylor series:}
+
+If \( f \) is \( k \)-times differentiable, the Taylor series expansion of \( f \) around \( \mathbf{a} \) up to order \( k \) is:
+
+\[
+f(\mathbf{x}) = \sum_{|\alpha| \leq k} \frac{D^\alpha f(\mathbf{a})}{\alpha!} (\mathbf{x} - \mathbf{a})^\alpha + R_k(\mathbf{x})
+\]
+
+where:
+\begin{itemize}
+    \item \( \alpha = (\alpha_1, \alpha_2, \ldots, \alpha_n) \) is a multi-index with \( |\alpha| = \alpha_1 + \alpha_2 + \cdots + \alpha_n \),
+    \item \( D^\alpha f(\mathbf{a}) = \frac{\partial^{|\alpha|} f}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \cdots \partial x_n^{\alpha_n}} \Big|_{\mathbf{x} = \mathbf{a}} \),
+    \item \( \alpha! = \alpha_1! \alpha_2! \cdots \alpha_n! \),
+    \item \( (\mathbf{x} - \mathbf{a})^\alpha = (x_1 - a_1)^{\alpha_1} (x_2 - a_2)^{\alpha_2} \cdots (x_n - a_n)^{\alpha_n} \),
+    \item \( R_k(\mathbf{x}) \) is the remainder term.
+\end{itemize}
+
+---
+
+\textbf{Second-order Taylor expansion:}
+
+Up to second order, the expansion is:
+
+\[
+f(\mathbf{x}) \approx f(\mathbf{a}) + \nabla f(\mathbf{a})^T (\mathbf{x} - \mathbf{a}) + \frac{1}{2} (\mathbf{x} - \mathbf{a})^T \mathbf{H}(f)(\mathbf{a}) (\mathbf{x} - \mathbf{a})
+\]
+
+where \( \mathbf{H}(f)(\mathbf{a}) \) is the Hessian matrix of \( f \) at \( \mathbf{a} \).
+
+---
+
+\textbf{Example:}
+
+Let
+
+\[
+f(x, y) = e^{x y}
+\]
+
+Linearize \( f \) around \( \mathbf{a} = (0, 0) \).
+
+\[
+f(0, 0) = e^0 = 1
+\]
+
+Gradient at \( (0,0) \):
+
+\[
+\nabla f(0,0) =
+\begin{bmatrix}
+\frac{\partial f}{\partial x} \\
+\frac{\partial f}{\partial y}
+\end{bmatrix}_{(0,0)} =
+\begin{bmatrix}
+y e^{x y} \\
+x e^{x y}
+\end{bmatrix}_{(0,0)} =
+\begin{bmatrix}
+0 \\
+0
+\end{bmatrix}
+\]
+
+So the linearization is:
+
+\[
+f(x,y) \approx 1 + [0 \quad 0] \begin{bmatrix} x - 0 \\ y - 0 \end{bmatrix} = 1
+\]
+
+---
+
+\textbf{Interpretation:} The linearization approximates \( f \) near \( \mathbf{a} \) by a plane tangent to the function graph.
+
+---
+
+\textbf{Final Result (Boxed):}
+
+\[
+\boxed{
+f(\mathbf{x}) \approx f(\mathbf{a}) + \nabla f(\mathbf{a})^T (\mathbf{x} - \mathbf{a})
+}
+\]
+
+

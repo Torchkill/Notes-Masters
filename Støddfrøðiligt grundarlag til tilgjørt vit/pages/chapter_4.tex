@@ -1,10 +1,618 @@
 \section{Matrix Decompositions}
 % Short description of chapter
-
 \subsection{Determinant and trace}
+
+\begin{align*}
+    det(\textbf{A}) = \begin{bmatrix}
+    a_{11} && a_{12} \\
+    a_{21} && a_{22}
+    \end{bmatrix}
+    = a_{11} \cdot a_{12} - (a_{21} \cdot a_{22})
+\end{align*}
+
+if $det(\textbf{A}) = 0$ then matrix $A$ is not invertible and the vectors are linearly independent. In other words if $det(\textbf{A}) \neq 0$, then there exists an $A^{-1}$ and the vectors are linearly independent, which also follows that $\textbf{A}$ has a full rank. \\
+
+Sarrus's rule \textit{(ONLY FOR 3X3 matrices)}:
+\begin{align*}
+    det(\textbf{A}) = \begin{bmatrix}
+    a_{11} && a_{12} && a_{13}\\
+    a_{21} && a_{22} && a_{13} \\
+    a_{31} && a_{32} && a_{33}
+    \end{bmatrix}
+    = a_{11} \cdot a_{22} \cdot a_{33} + a_{21} \cdot a_{32} \cdot a_{13} + a_{12} \cdot a_{13} \cdot a_{31} \\
+    - a_{31} \cdot a_{22} \cdot a_{13} - a_{21} \cdot a_{12} \cdot a_{33} + a_{32} \cdot a_{13} \cdot a_{11}
+\end{align*}
+
+Laplace rule \textit{Works for all matrices}
+
+Let:
+\[
+\textbf{A} = 
+\begin{bmatrix}
+\color{blue}{a_{11}} & \color{blue}{a_{12}} & \color{blue}{a_{13}} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{bmatrix}
+\]
+
+We expand along the \textbf{\textit{first row}} (shown in blue):
+
+\begin{align*}
+\det(\textbf{A}) &= 
+\color{blue}{a_{11}} \cdot 
+\begin{vmatrix}
+a_{22} & a_{23} \\
+a_{32} & a_{33}
+\end{vmatrix}
+- \color{blue}{a_{12}} \cdot 
+\begin{vmatrix}
+a_{21} & a_{23} \\
+a_{31} & a_{33}
+\end{vmatrix}
++ \color{blue}{a_{13}} \cdot 
+\begin{vmatrix}
+a_{21} & a_{22} \\
+a_{31} & a_{32}
+\end{vmatrix}
+\end{align*}
+
+Each \( 2 \times 2 \) determinant is called a **minor**, and the sign alternates as \( (+, -, +, \dots) \) across the row or column.
+
+\begin{align*}
+\textbf{A} = 
+\begin{bmatrix}
+\color{blue}{+} && \color{blue}{-} && \color{blue}{+} \\
+- && + && - \\
++ && - && +
+\end{bmatrix}
+\end{align*}\\
+
+The trace of a square matrix $\textbf{A} \in \mathbb{R}^{nxn}$ is defined as 
+
+\begin{align*}
+    tr(A) := \sum_{i=1}^{n}a_{ii}
+\end{align*}
+
+i.e the trace is the sum of the diagonal elements of $\textbf{A}$
+
 \subsection{Eigenvalues and eigenvectors}
+
+\textbf{Eigenvalues and Eigenvectors} \textit{(Only for square matrices)}:
+
+Let:
+\[
+\textbf{A} \cdot \vec{v} = \lambda \cdot \vec{v}
+\]
+
+Where:
+\begin{itemize}
+    \item \(\textbf{A}\) is a square matrix,
+    \item \(\vec{v} \neq \vec{0}\) is an eigenvector,
+    \item \(\lambda\) is the corresponding eigenvalue.
+\end{itemize}
+
+---
+
+To find the eigenvalues:
+\begin{align*}
+\det(\textbf{A} - \lambda \textbf{I}) = 0
+\end{align*}
+
+This is called the \textit{characteristic equation}. Solve for \(\lambda\).
+
+---
+
+To find the eigenvectors:
+\begin{align*}
+(\textbf{A} - \lambda \textbf{I}) \cdot \vec{v} = \vec{0}
+\end{align*}
+
+Solve this homogeneous system for \(\vec{v}\).
+
+---
+
+\textbf{Example:}
+
+Let:
+\[
+\textbf{A} = 
+\begin{bmatrix}
+4 & 2 \\
+1 & 3
+\end{bmatrix}
+\]
+
+\underline{Step 1: Find eigenvalues} \(\lambda\)
+\begin{align*}
+\det(\textbf{A} - \lambda \textbf{I}) &= 
+\det\begin{bmatrix}
+4 - \lambda & 2 \\
+1 & 3 - \lambda
+\end{bmatrix}
+= (4 - \lambda)(3 - \lambda) - 2 \cdot 1 \\
+&= \lambda^2 - 7\lambda + 10 = 0
+\end{align*}
+
+Solve:
+\[
+\lambda = 5, \quad \lambda = 2
+\]
+
+---
+
+\underline{Step 2: Find eigenvectors}
+
+For \(\lambda = 5\):
+\begin{align*}
+(\textbf{A} - 5\textbf{I}) &= 
+\begin{bmatrix}
+-1 & 2 \\
+1 & -2
+\end{bmatrix}
+\Rightarrow
+\begin{bmatrix}
+-1 & 2 \\
+1 & -2
+\end{bmatrix}
+\cdot 
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+= 
+\begin{bmatrix}
+0 \\
+0
+\end{bmatrix}
+\end{align*}
+
+Solve:
+\[
+-1x + 2y = 0 \Rightarrow x = 2y \Rightarrow \vec{v}_1 =
+\begin{bmatrix}
+2 \\
+1
+\end{bmatrix}
+\quad \text{(or any scalar multiple)}
+\]
+
+Repeat similarly for \(\lambda = 2\):
+
+\begin{align*}
+(\textbf{A} - 2\textbf{I}) &= 
+\begin{bmatrix}
+2 & 2 \\
+1 & 1
+\end{bmatrix}
+\Rightarrow
+\vec{v}_2 =
+\begin{bmatrix}
+-1 \\
+1
+\end{bmatrix}
+\end{align*}
+
+---
+
+\textbf{Result:}
+\begin{itemize}
+    \item Eigenvalues: \(\lambda = 5, 2\)
+    \item Eigenvectors: 
+    \[
+    \vec{v}_1 = 
+    \begin{bmatrix}
+    2 \\
+    1
+    \end{bmatrix},
+    \quad
+    \vec{v}_2 = 
+    \begin{bmatrix}
+    -1 \\
+    1
+    \end{bmatrix}
+    \]
+\end{itemize}
+
+
 \subsection{Cholesky decomposition}
+
+\textbf{Cholesky Decomposition} \textit{(Only for real, symmetric, positive definite matrices)}:
+
+Cholesky decomposition expresses a matrix \(\textbf{A}\) as:
+
+\[
+\textbf{A} = \textbf{L} \cdot \textbf{L}^T
+\]
+
+Where:
+\begin{itemize}
+    \item \(\textbf{A}\) is a symmetric, positive definite matrix,
+    \item \(\textbf{L}\) is a lower triangular matrix,
+    \item \(\textbf{L}^T\) is the transpose of \(\textbf{L}\).
+\end{itemize}
+
+---
+
+\textbf{Example:}
+
+Let:
+\[
+\textbf{A} =
+\begin{bmatrix}
+4 & 12 & -16 \\
+12 & 37 & -43 \\
+-16 & -43 & 98
+\end{bmatrix}
+\]
+
+We want to find:
+\[
+\textbf{A} = \textbf{L} \cdot \textbf{L}^T, \quad \text{where } 
+\textbf{L} =
+\begin{bmatrix}
+l_{11} & 0 & 0 \\
+l_{21} & l_{22} & 0 \\
+l_{31} & l_{32} & l_{33}
+\end{bmatrix}
+\]
+
+---
+
+\underline{Step 1: Compute elements of \(\textbf{L}\)}
+
+\begin{align*}
+l_{11} &= \sqrt{4} = 2 \\
+l_{21} &= \frac{12}{l_{11}} = \frac{12}{2} = 6 \\
+l_{31} &= \frac{-16}{l_{11}} = \frac{-16}{2} = -8 \\
+\\
+l_{22} &= \sqrt{37 - l_{21}^2} = \sqrt{37 - 36} = \sqrt{1} = 1 \\
+l_{32} &= \frac{-43 - (l_{31} \cdot l_{21})}{l_{22}} = \frac{-43 - (-8 \cdot 6)}{1} = \frac{-43 + 48}{1} = 5 \\
+\\
+l_{33} &= \sqrt{98 - (l_{31}^2 + l_{32}^2)} = \sqrt{98 - (64 + 25)} = \sqrt{9} = 3
+\end{align*}
+
+---
+
+\textbf{Final result:}
+
+\[
+\textbf{L} =
+\begin{bmatrix}
+2 & 0 & 0 \\
+6 & 1 & 0 \\
+-8 & 5 & 3
+\end{bmatrix},
+\quad
+\textbf{A} = \textbf{L} \cdot \textbf{L}^T
+\]
+
+
 \subsection{Eigendecomposition and diagonalization}
+
+\textbf{Eigendecomposition / Diagonalization} \textit{(For square matrices with enough linearly independent eigenvectors)}:
+
+If a matrix \(\textbf{A}\) has \(n\) linearly independent eigenvectors, then it is \textbf{diagonalizable}, and we can write:
+
+\[
+\textbf{A} = \textbf{P} \cdot \textbf{D} \cdot \textbf{P}^{-1}
+\]
+
+Where:
+\begin{itemize}
+    \item \(\textbf{P}\) is the matrix of eigenvectors (each column is an eigenvector),
+    \item \(\textbf{D}\) is a diagonal matrix with eigenvalues on the diagonal,
+    \item \(\textbf{A}\) must have \(n\) linearly independent eigenvectors (i.e., \(\textbf{P}\) is invertible).
+\end{itemize}
+
+---
+
+\textbf{Example:}
+
+Let:
+\[
+\textbf{A} = 
+\begin{bmatrix}
+4 & 1 \\
+2 & 3
+\end{bmatrix}
+\]
+
+\underline{Step 1: Find eigenvalues}
+
+Solve:
+\[
+\det(\textbf{A} - \lambda \textbf{I}) = 0
+\]
+\begin{align*}
+\det
+\begin{bmatrix}
+4 - \lambda & 1 \\
+2 & 3 - \lambda
+\end{bmatrix}
+&= (4 - \lambda)(3 - \lambda) - 2 \cdot 1 \\
+&= \lambda^2 - 7\lambda + 10 = 0 \Rightarrow \lambda_1 = 5, \quad \lambda_2 = 2
+\end{align*}
+
+---
+
+\underline{Step 2: Find eigenvectors}
+
+For \(\lambda = 5\):
+\begin{align*}
+(\textbf{A} - 5\textbf{I}) &= 
+\begin{bmatrix}
+-1 & 1 \\
+2 & -2
+\end{bmatrix}
+\Rightarrow \vec{v}_1 = 
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}
+\end{align*}
+
+For \(\lambda = 2\):
+\begin{align*}
+(\textbf{A} - 2\textbf{I}) &= 
+\begin{bmatrix}
+2 & 1 \\
+2 & 1
+\end{bmatrix}
+\Rightarrow \vec{v}_2 = 
+\begin{bmatrix}
+-1 \\
+2
+\end{bmatrix}
+\end{align*}
+
+---
+
+\underline{Step 3: Form \(\textbf{P}\) and \(\textbf{D}\)}
+
+\[
+\textbf{P} = 
+\begin{bmatrix}
+1 & -1 \\
+1 & 2
+\end{bmatrix}, \quad
+\textbf{D} = 
+\begin{bmatrix}
+5 & 0 \\
+0 & 2
+\end{bmatrix}
+\]
+
+Then:
+\[
+\textbf{A} = \textbf{P} \cdot \textbf{D} \cdot \textbf{P}^{-1}
+\]
+
+---
+
+\textbf{Check (optional):}
+
+Compute \(\textbf{P}^{-1}\), then verify:
+\[
+\textbf{P} \cdot \textbf{D} \cdot \textbf{P}^{-1} = \textbf{A}
+\]
+
+---
+
+\textbf{Result:}
+
+\begin{itemize}
+    \item Eigenvalues: \(\lambda = 5, 2\)
+    \item Eigenvectors:
+    \[
+    \vec{v}_1 =
+    \begin{bmatrix}
+    1 \\
+    1
+    \end{bmatrix}, \quad
+    \vec{v}_2 =
+    \begin{bmatrix}
+    -1 \\
+    2
+    \end{bmatrix}
+    \]
+    \item \(\textbf{A} = \textbf{P} \cdot \textbf{D} \cdot \textbf{P}^{-1}\)
+\end{itemize}
+
 \subsection{Singular value decomposition}
+
+\textbf{Singular Value Decomposition (SVD)} \textit{(Works for any real \( m \times n \) matrix)}:
+
+Every real matrix \(\textbf{A} \in \mathbb{R}^{m \times n}\) can be decomposed as:
+
+\[
+\textbf{A} = \textbf{U} \cdot \boldsymbol{\Sigma} \cdot \textbf{V}^T
+\]
+
+Where:
+\begin{itemize}
+    \item \(\textbf{U} \in \mathbb{R}^{m \times m}\) is an orthogonal matrix (\(\textbf{U}^T \textbf{U} = \textbf{I}\)),
+    \item \(\textbf{V} \in \mathbb{R}^{n \times n}\) is an orthogonal matrix,
+    \item \(\boldsymbol{\Sigma} \in \mathbb{R}^{m \times n}\) is a diagonal matrix with non-negative \textbf{singular values} on the diagonal,
+    \item The singular values are square roots of eigenvalues of \(\textbf{A}^T\textbf{A}\) (or \(\textbf{A}\textbf{A}^T\)).
+\end{itemize}
+
+---
+
+\textbf{Example:}
+
+Let:
+\[
+\textbf{A} =
+\begin{bmatrix}
+3 & 1 \\
+1 & 3
+\end{bmatrix}
+\quad \text{(a symmetric \(2 \times 2\) matrix)}
+\]
+
+---
+
+\underline{Step 1: Compute} \(\textbf{A}^T\textbf{A}\)
+
+\[
+\textbf{A}^T \textbf{A} = 
+\begin{bmatrix}
+3 & 1 \\
+1 & 3
+\end{bmatrix}
+\begin{bmatrix}
+3 & 1 \\
+1 & 3
+\end{bmatrix}
+=
+\begin{bmatrix}
+10 & 6 \\
+6 & 10
+\end{bmatrix}
+\]
+
+---
+
+\underline{Step 2: Find eigenvalues of \(\textbf{A}^T\textbf{A}\)}
+
+\begin{align*}
+\det(\textbf{A}^T\textbf{A} - \lambda \textbf{I}) &= 
+\det\begin{bmatrix}
+10 - \lambda & 6 \\
+6 & 10 - \lambda
+\end{bmatrix} = (10 - \lambda)^2 - 36 = 0 \\
+\Rightarrow \lambda_1 = 16, \quad \lambda_2 = 4
+\end{align*}
+
+---
+
+\underline{Step 3: Compute singular values} \\
+
+\textbf{Remember!} $\sigma_1 \geq \sigma_2 \geq \sigma_n \geq 0$
+
+\[
+\sigma_1 = \sqrt{16} = 4, \quad \sigma_2 = \sqrt{4} = 2
+\]
+
+So:
+\[
+\boldsymbol{\Sigma} =
+\begin{bmatrix}
+4 & 0 \\
+0 & 2
+\end{bmatrix}
+\]
+
+---
+
+\underline{Step 4: Find right singular vectors (\(\textbf{V}\))}
+
+Eigenvectors of \(\textbf{A}^T\textbf{A}\):
+
+- For \(\lambda = 16\): \(\vec{v}_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\)
+- For \(\lambda = 4\): \(\vec{v}_2 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}\)
+
+Normalize:
+\[
+\textbf{V} =
+\begin{bmatrix}
+\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+\end{bmatrix}
+\]
+
+---
+
+\underline{Step 5: Find left singular vectors (\(\textbf{U}\))}
+
+Use:
+\[
+\textbf{u}_i = \frac{1}{\sigma_i} \textbf{A} \vec{v}_i
+\]
+
+Compute:
+\begin{align*}
+\textbf{u}_1 &= \frac{1}{4} \cdot \textbf{A} \cdot 
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}
+= \frac{1}{4} 
+\begin{bmatrix}
+3 + 1 \\
+1 + 3
+\end{bmatrix}
+= \frac{1}{4}
+\begin{bmatrix}
+4 \\
+4
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\frac{1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}}
+\end{bmatrix}
+\\
+\textbf{u}_2 &= \frac{1}{2} \cdot \textbf{A} \cdot 
+\begin{bmatrix}
+-1 \\
+1
+\end{bmatrix}
+= \frac{1}{2}
+\begin{bmatrix}
+-3 + 1 \\
+-1 + 3
+\end{bmatrix}
+=
+\frac{1}{2}
+\begin{bmatrix}
+-2 \\
+2
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{-1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}}
+\end{bmatrix}
+\end{align*}
+
+So:
+\[
+\textbf{U} =
+\begin{bmatrix}
+\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+\end{bmatrix}
+\]
+
+---
+
+\textbf{Final Result:}
+
+\[
+\textbf{A} = \textbf{U} \cdot \boldsymbol{\Sigma} \cdot \textbf{V}^T
+\]
+
+Where:
+
+\[
+\textbf{U} =
+\begin{bmatrix}
+\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+\end{bmatrix}, \quad
+\boldsymbol{\Sigma} =
+\begin{bmatrix}
+4 & 0 \\
+0 & 2
+\end{bmatrix}, \quad
+\textbf{V} =
+\begin{bmatrix}
+\frac{1}{\sqrt{2}} & \frac{-1}{\sqrt{2}} \\
+\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
+\end{bmatrix}
+\]
+
+
 \subsection{Matrix approximation}
 \subsection{Matrix phylogeny}
