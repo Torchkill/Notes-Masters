@@ -43,6 +43,14 @@ $$
 \end{tabular}
 \end{center}
 
+Make sure to check the dimensions of the matrices, that they are compatible and that the resulting matrix has the correct dimensions.
+On the example below $A \cdot B = C$ notice the dimensions.
+\begin{align*}
+  A \in& \mathbb{R}^{n \times m}\\
+  B \in& \mathbb{R}^{m \times p}\\
+  C \in& \mathbb{R}^{n \times p}\\
+\end{align*}
+
 \textbf{Example}
 \begin{align*}
 A =& \begin{bmatrix}
@@ -206,7 +214,188 @@ where
 \end{definition}
 
 \subsection{Basis and rank}
+To determine a basis take the vectors that span the vector subspace and put them into matrix form:
+
+\[
+  \vb x_1 =
+  \begin{bmatrix}
+    1\\2\\-1\\-1\\-1
+  \end{bmatrix}, \quad
+  \vb x_2 =
+  \begin{bmatrix}
+    2\\-1\\1\\2\\-2
+  \end{bmatrix}, \quad
+  \vb x_3 =
+  \begin{bmatrix}
+    3\\-4\\3\\5\\-3
+  \end{bmatrix}, \quad
+  \vb x_4 =
+  \begin{bmatrix}
+    -1\\8\\-5\\-7\\1
+  \end{bmatrix}
+\]
+
+We check that the following holds:
+\[
+  \sum_{i=1}^4 \lambda_i \vb x_i = \vb 0
+\]
+
+\begin{align*}
+  \left[ \vb x_1, \vb x_2, \vb x_3, \vb x_4\right] =&
+  \begin{bmatrix}
+    1 & 2 & 3 & -1\\
+    2 & -1 & -4 & 8\\
+    -1 & 1 & 3 & -5\\
+    -1 & 2 & 5 & -6\\
+    -1 & -2 & -3 & 1
+  \end{bmatrix}\\
+  \rightsquigarrow&
+  \begin{bmatrix}
+    1 & 2 & 3 & -3\\
+    \cmidrule{0-1}
+    0 & 1 & 2 & -2\\
+    \cmidrule{1-3}
+    0 & 0 & 0 & 1\\
+    \cmidrule{3-4}
+    0 & 0 & 0 & 0\\
+    0 & 0 & 0 & 0
+  \end{bmatrix}
+\end{align*}
+The resulting matrix has three columns with pivots. Those form a basis for the subspace spanned by those four vectors.\\
+%The resulting matrix has three columns with pivots thus it is not full rank, as that would be a pivot on each column.\\
+We see that there are two dependent rows, those that are all zeros and that there is one free variable $\vb x_3$ hence the rank is 3:
+\[
+  rk(A) = 3
+\]
+The column with no pivot, $\vb x_3$, 
+
+A matrix is full rank if the rank equals the largest possible rank for a matrix of the same dimensions.
 
 \subsection{Linear mappings}
+A \textbf{linear mapping} (or linear transformation) \(\Phi: V \to W\) between vector spaces \(V\) and \(W\) over the same field preserves vector addition and scalar multiplication. For all \(\mathbf{x}, \mathbf{y} \in V\) and \(\lambda, \psi \in \mathbb{R}\):
+\[
+\Phi(\mathbf{x} + \mathbf{y}) = \Phi(\mathbf{x}) + \Phi(\mathbf{y}), \quad \Phi(\lambda \mathbf{x}) = \lambda \Phi(\mathbf{x}).
+\]
+This can be summarized as:
+\[
+\Phi(\lambda \mathbf{x} + \psi \mathbf{y}) = \lambda \Phi(\mathbf{x}) + \psi \Phi(\mathbf{y}).
+\]
+
+\subsection{Special Cases of Linear Mappings}
+\begin{itemize}
+    \item \textbf{Isomorphism}: A linear mapping \(\Phi: V \to W\) that is both injective and surjective (bijective). Two vector spaces are isomorphic if and only if \(\dim(V) = \dim(W)\).
+
+    \item \textbf{Endomorphism}: A linear mapping \(\Phi: V \to V\) from a vector space to itself.
+
+    \item \textbf{Automorphism}: An endomorphism that is also bijective.
+
+    \item \textbf{Identity Mapping}: \(\text{id}_V: V \to V, \mathbf{x} \mapsto \mathbf{x}\).
+\end{itemize}
+
+\subsection{Injective, Surjective, and Bijective Mappings}
+\begin{itemize}
+    \item \textbf{Injective (One-to-One)}: \(\Phi(\mathbf{x}) = \Phi(\mathbf{y}) \implies \mathbf{x} = \mathbf{y}\).
+    \item \textbf{Surjective (Onto)}: \(\Phi(V) = W\).
+    \item \textbf{Bijective}: Both injective and surjective. A bijective mapping \(\Phi\) has an inverse \(\Phi^{-1}\).
+\end{itemize}
+
+\subsection{Matrix Representation of Linear Mappings}
+For finite-dimensional vector spaces \(V\) and \(W\) with ordered bases \(B = (\mathbf{b}_1, \ldots, \mathbf{b}_n)\) and \(C = (\mathbf{c}_1, \ldots, \mathbf{c}_m)\), the \textbf{transformation matrix} \(\mathbf{A}_\Phi\) of \(\Phi\) is defined by:
+\[
+\Phi(\mathbf{b}_j) = \sum_{i=1}^m \alpha_{ij} \mathbf{c}_i, \quad \text{where } \mathbf{A}_\Phi(i,j) = \alpha_{ij}.
+\]
+If \(\hat{\mathbf{x}}\) and \(\hat{\mathbf{y}}\) are the coordinate vectors of \(\mathbf{x} \in V\) and \(\Phi(\mathbf{x}) \in W\) with respect to \(B\) and \(C\), then:
+\[
+\hat{\mathbf{y}} = \mathbf{A}_\Phi \hat{\mathbf{x}}.
+\]
+
+\subsection{Example: Transformation Matrix}
+For a linear mapping \(\Phi: V \to W\) with bases \(B = (\mathbf{b}_1, \mathbf{b}_2, \mathbf{b}_3)\) and \(C = (\mathbf{c}_1, \mathbf{c}_2, \mathbf{c}_3, \mathbf{c}_4)\), if:
+\[
+\Phi(\mathbf{b}_1) = \mathbf{c}_1 - \mathbf{c}_2 + 3\mathbf{c}_3 - \mathbf{c}_4, \quad \Phi(\mathbf{b}_2) = 2\mathbf{c}_1 + \mathbf{c}_2 + 7\mathbf{c}_3 + 2\mathbf{c}_4, \quad \Phi(\mathbf{b}_3) = 3\mathbf{c}_2 + \mathbf{c}_3 + 4\mathbf{c}_4,
+\]
+the transformation matrix \(\mathbf{A}_\Phi\) is:
+\[
+\mathbf{A}_\Phi = \begin{bmatrix}
+1 & 2 & 0 \\
+-1 & 1 & 3 \\
+3 & 7 & 1 \\
+-1 & 2 & 4
+\end{bmatrix}.
+\]
+
+\subsection{Basis Change}
+If the bases in \(V\) and \(W\) are changed to \(\tilde{B}\) and \(\tilde{C}\), the new transformation matrix \(\tilde{\mathbf{A}}_\Phi\) is related to the original \(\mathbf{A}_\Phi\) by:
+\[
+\tilde{\mathbf{A}}_\Phi = \mathbf{T}^{-1} \mathbf{A}_\Phi \mathbf{S},
+\]
+where \(\mathbf{S}\) maps coordinates from \(\tilde{B}\) to \(B\), and \(\mathbf{T}\) maps coordinates from \(\tilde{C}\) to \(C\).
+
+\subsection{Example: Basis Change}
+For a linear mapping \(\Phi: \mathbb{R}^3 \to \mathbb{R}^4\) with standard bases \(B\) and \(C\), and new bases \(\tilde{B}\) and \(\tilde{C}\), the transformation matrices \(\mathbf{S}\) and \(\mathbf{T}\) are constructed by expressing the new basis vectors in terms of the old basis vectors. The new transformation matrix is:
+\[
+\tilde{\mathbf{A}}_\Phi = \mathbf{T}^{-1} \mathbf{A}_\Phi \mathbf{S}.
+\]
+
+\subsection{Image and Kernel}
+For a linear mapping \(\Phi: V \to W\):
+\begin{itemize}
+    \item \textbf{Kernel (Null Space)}: \(\ker(\Phi) = \{\mathbf{v} \in V \mid \Phi(\mathbf{v}) = \mathbf{0}_W\}\). The kernel is a subspace of \(V\).
+
+    \item \textbf{Image (Range)}: \(\text{Im}(\Phi) = \{\Phi(\mathbf{v}) \mid \mathbf{v} \in V\}\). The image is a subspace of \(W\).
+\end{itemize}
+
+\subsection{Rank-Nullity Theorem}
+The \textbf{Rank-Nullity Theorem} states:
+\[
+\dim(\ker(\Phi)) + \dim(\text{Im}(\Phi)) = \dim(V).
+\]
+This theorem is fundamental in linear algebra and has several important consequences:
+\begin{itemize}
+    \item If \(\dim(\text{Im}(\Phi)) < \dim(V)\), then \(\ker(\Phi)\) is non-trivial.
+    \item If \(\dim(V) = \dim(W)\), then \(\Phi\) is injective if and only if it is surjective if and only if it is bijective.
+\end{itemize}
+
+\subsection{Example: Image and Kernel}
+For a linear mapping \(\Phi: \mathbb{R}^4 \to \mathbb{R}^2\) defined by:
+\[
+\Phi(\mathbf{x}) = \begin{bmatrix} 1 & 2 & -1 & 0 \\ 1 & 0 & 0 & 1 \end{bmatrix} \mathbf{x},
+\]
+the image is the span of the columns of the transformation matrix:
+\[
+\text{Im}(\Phi) = \text{span}\left\{\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \end{bmatrix}, \begin{bmatrix} -1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}\right\}.
+\]
+The kernel is found by solving \(\mathbf{A}\mathbf{x} = \mathbf{0}\):
+\[
+\ker(\Phi) = \text{span}\left\{\begin{bmatrix} 0 \\ \frac{1}{2} \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} -1 \\ \frac{1}{2} \\ 0 \\ 1 \end{bmatrix}\right\}.
+\]
+
+\subsection{Key Theorems and Results}
+\begin{itemize}
+    \item Two finite-dimensional vector spaces \(V\) and \(W\) are isomorphic if and only if \(\dim(V) = \dim(W)\).
+
+    \item The composition of linear mappings is linear. If \(\Phi: V \to W\) and \(\Psi: W \to X\) are linear, then \(\Psi \circ \Phi: V \to X\) is also linear.
+
+    \item If \(\Phi: V \to W\) is an isomorphism, then \(\Phi^{-1}: W \to V\) is also an isomorphism.
+\end{itemize}
+
+\subsection{Examples of Linear Mappings}
+\begin{itemize}
+    \item The mapping \(\Phi: \mathbb{R}^2 \to \mathbb{C}, \Phi(\mathbf{x}) = x_1 + i x_2\) is a homomorphism, justifying the representation of complex numbers as tuples in \(\mathbb{R}^2\).
+
+    \item Linear transformations can represent geometric operations such as rotations, stretches, and reflections in \(\mathbb{R}^2\).
+\end{itemize}
+
+\subsection{Example: Geometric Transformations}
+For a rotation by \(45^\circ\) in \(\mathbb{R}^2\), the transformation matrix is:
+\[
+\mathbf{A}_1 = \begin{bmatrix} \cos(\pi/4) & -\sin(\pi/4) \\ \sin(\pi/4) & \cos(\pi/4) \end{bmatrix}.
+\]
+For a stretch along the horizontal axis by a factor of 2, the transformation matrix is:
+\[
+\mathbf{A}_2 = \begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix}.
+\]
+
+% 54 til 
 
 \subsection{Affine spaces}
