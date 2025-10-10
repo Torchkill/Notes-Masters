@@ -9,12 +9,20 @@
 \usepackage[nottoc,notlot,notlof]{tocbibind}
 \usepackage[hidelinks]{hyperref}
 \usepackage{amsthm}
+\usepackage{physics}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\usepackage{tikz}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
 
 \newcommand{\mycomment}[1]{}
+
+% Define \circled
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 
 \title{Støddfrøðiligt grundarlag til tilgjørt vit - 2025}
 \date{\today}
