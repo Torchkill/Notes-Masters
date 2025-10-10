@@ -614,5 +614,130 @@ Where:
 \]
 
 
-\subsection{Matrix approximation}
-\subsection{Matrix phylogeny}
+\subsection{Matrix approximation (Summary Mistral)}
+
+\subsection{Introduction}
+The Singular Value Decomposition (SVD) allows a matrix \(\boldsymbol{A} \in \mathbb{R}^{m \times n}\) to be factorized as:
+\[
+\boldsymbol{A} = \boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^\top,
+\]
+where \(\boldsymbol{U}\) and \(\boldsymbol{V}\) are orthogonal matrices, and \(\boldsymbol{\Sigma}\) is a diagonal matrix containing singular values \(\sigma_i\).
+
+\subsection{Rank-1 Matrices}
+A rank-1 matrix \(\boldsymbol{A}_i\) is constructed as the outer product of the \(i\)-th left and right singular vectors:
+\[
+\boldsymbol{A}_i = \sigma_i \boldsymbol{u}_i \boldsymbol{v}_i^\top.
+\]
+The matrix \(\boldsymbol{A}\) can be expressed as a sum of rank-1 matrices:
+\[
+\boldsymbol{A} = \sum_{i=1}^r \sigma_i \boldsymbol{u}_i \boldsymbol{v}_i^\top,
+\]
+where \(r\) is the rank of \(\boldsymbol{A}\).
+
+\subsection{Rank-\(k\) Approximation}
+A rank-\(k\) approximation of \(\boldsymbol{A}\) is given by:
+\[
+\widehat{\boldsymbol{A}}(k) = \sum_{i=1}^k \sigma_i \boldsymbol{u}_i \boldsymbol{v}_i^\top.
+\]
+This approximation is optimal in the spectral norm sense, as stated by the \textbf{Eckart-Young Theorem}:
+\[
+\widehat{\boldsymbol{A}}(k) = \operatorname{argmin}_{\operatorname{rk}(\boldsymbol{B}) = k} \|\boldsymbol{A} - \boldsymbol{B}\|_2,
+\]
+with the error \(\|\boldsymbol{A} - \widehat{\boldsymbol{A}}(k)\|_2 = \sigma_{k+1}\).
+
+\subsection{Applications}
+The rank-\(k\) approximation is used for:
+\begin{itemize}
+    \item Dimensionality reduction
+    \item Data compression
+    \item Noise filtering
+    \item Principal Component Analysis (PCA)
+\end{itemize}
+
+\subsection{Example: Image Compression}
+For an image represented by \(\boldsymbol{A} \in \mathbb{R}^{1432 \times 1910}\), a rank-5 approximation requires only \(0.6\%\) of the original storage, demonstrating the efficiency of SVD for compression.
+
+\subsection{Spectral Norm}
+The spectral norm of \(\boldsymbol{A}\) is defined as:
+\[
+\|\boldsymbol{A}\|_2 = \max_{\boldsymbol{x} \neq \mathbf{0}} \frac{\|\boldsymbol{A}\boldsymbol{x}\|_2}{\|\boldsymbol{x}\|_2} = \sigma_1.
+\]
+
+\subsection{Key Takeaways}
+\begin{itemize}
+    \item SVD enables principled matrix approximation by projecting \(\boldsymbol{A}\) onto a lower-dimensional space.
+    \item The Eckart-Young Theorem guarantees the optimality of the rank-\(k\) approximation.
+    \item Applications include image processing, clustering, and regularization.
+\end{itemize}
+
+
+\subsection{Matrix approximation (Summary ChatGPT)}
+
+\paragraph{Setup.}
+Given a matrix \(A \in \mathbb{R}^{m\times n}\) with singular value decomposition (SVD)
+\(A = U\Sigma V^\top\),
+let \(\{u_i\}_{i=1}^r\) and \(\{v_i\}_{i=1}^r\) denote the left- and right-singular vectors
+corresponding to nonzero singular values \(\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r>0\),
+where \(r=\mathrm{rank}(A)\). The SVD expresses \(A\) as a sum of rank-1 outer products \(\{u_iv_i^\top\}\) scaled by \(\sigma_i\). % See mml-c4.6_til_4.7.pdf, 4.6 intro.
+
+\paragraph{Rank-1 building blocks.}
+Define the rank-1 matrices
+\[
+A_i := u_i v_i^\top \in \mathbb{R}^{m\times n}.
+\]
+Then the full matrix can be written as the finite sum
+\[
+A = \sum_{i=1}^r \sigma_i A_i
+= \sum_{i=1}^r \sigma_i\, u_i v_i^\top.
+\]
+This decomposition isolates interpretable ``directions'' in the data, each contributing
+\(\sigma_i\) units of energy/strength. % Eq. (4.90) and (4.91).
+
+\paragraph{Low-rank (truncated) approximation.}
+For a target rank \(k<r\),
+the truncated SVD (rank-\(k\) approximation) is
+\[
+A^{(k)} := \sum_{i=1}^k \sigma_i\, u_i v_i^\top,
+\qquad \mathrm{rank}\!\left(A^{(k)}\right)=k,
+\]
+obtained by keeping only the top \(k\) singular values/vectors. This provides
+a principled lossy compression of \(A\). % Eq. (4.92) and discussion (image compression example).
+
+\paragraph{Spectral norm.}
+The spectral norm of a matrix \(A\) is
+\[
+\|A\|_2 := \max_{x\neq 0} \frac{\|Ax\|_2}{\|x\|_2},
+\]
+and satisfies
+\[
+\|A\|_2 = \sigma_1.
+\]
+Thus the action of \(A\) on vectors is dominated by its largest singular value. % Def. 4.23 and Thm. 4.24.
+
+\paragraph{Eckart--Young theorem.}
+Among all rank-\(k\) matrices \(B\), the truncated SVD \(A^{(k)}\) uniquely minimizes
+the spectral-norm error:
+\[
+A^{(k)} \;=\; \arg\min_{\mathrm{rank}(B)=k}\, \|A-B\|_2,
+\qquad
+\|A - A^{(k)}\|_2 = \sigma_{k+1}.
+\]
+Hence the best achievable spectral-norm error at rank \(k\) is exactly the next
+singular value. % Thm. 4.25 (Eckart-Young) and Eq. (4.94)–(4.95).
+
+\paragraph{Interpretation and uses.}
+Truncated SVD projects \(A\) onto the manifold of rank-\(\le k\) matrices with
+provably minimal spectral-norm distortion. It underpins dimensionality
+reduction, denoising/regularization, topic modeling, and data compression.
+In practice, storing \(k\) singular values and the corresponding singular vectors
+can dramatically reduce storage compared to the full \(m\times n\) matrix, while
+preserving the dominant structure of the data. % Applications and storage trade-off (Stonehenge example discussion).
+
+\paragraph{Toy example (ratings).}
+In a small movie–ratings matrix, the rank-1 terms can align with coherent
+latent ``themes'' (e.g., sci-fi vs.\ art-house). A rank-2 approximation
+\(A^{(2)}\) may already reconstruct the table well, indicating that only two
+latent factors are needed to explain the observed preferences. % Example 4.15 and Eq. (4.100)–(4.103).
+
+
+
