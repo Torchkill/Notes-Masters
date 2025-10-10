@@ -1,10 +1,225 @@
-\section{}
-% Description
+\section{Probability Distribution}
+% This chapter introduces the concept of probability spaces, distributions (discrete and continuous), rules for computing probabilities, summary statistics, and key distributions including Gaussian. It also discusses conjugacy, exponential family, and change of variables.
 
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
-\subsection{}
+\subsection{Construction of Probability Space}
+
+A probability space is a triplet \( (\Omega, \mathcal{F}, P) \):
+
+\begin{itemize}
+    \item \( \Omega \): sample space – set of all possible outcomes
+    \item \( \mathcal{F} \): sigma-algebra – collection of events (subsets of \( \Omega \))
+    \item \( P \): probability measure – assigns a value \( P: \mathcal{F} \rightarrow [0,1] \)
+\end{itemize}
+
+\textbf{Target space:} Let \( \mathcal{T} \subseteq \mathbb{R}^n \) be the space in which random variables take values.  
+For a random variable \( X: \Omega \rightarrow \mathcal{T} \), we define:
+
+\[
+P_X(B) = P(X^{-1}(B)) \quad \text{for } B \subseteq \mathcal{T}
+\]
+
+\textbf{Example:} Tossing a fair coin:
+
+\begin{itemize}
+    \item \( \Omega = \{\text{Heads}, \text{Tails}\} \)
+    \item \( \mathcal{F} = \mathcal{P}(\Omega) \)
+    \item \( P(\text{Heads}) = P(\text{Tails}) = 0.5 \)
+\end{itemize}
+
+---
+
+\subsection{Discrete and Continuous Probabilities}
+
+\textbf{Discrete random variable:}
+\begin{itemize}
+    \item Has a countable number of outcomes
+    \item Probability mass function (PMF): \( P(X = x_i) = p_i \)
+    \item Must satisfy: \( \sum_i p_i = 1 \)
+\end{itemize}
+
+\textbf{Continuous random variable:}
+\begin{itemize}
+    \item Takes values in \( \mathcal{T} \subseteq \mathbb{R}^n \)
+    \item Described by a probability density function (PDF) \( p(x) \)
+    \item Must satisfy: \( \int_{\mathcal{T}} p(x)\, dx = 1 \)
+\end{itemize}
+
+\textbf{Example (Discrete):}  
+\( X \sim \text{Bernoulli}(p) \Rightarrow P(X=1)=p, \; P(X=0)=1-p \)
+
+\textbf{Example (Continuous):}  
+\( X \sim \text{Uniform}(0,1) \Rightarrow p(x) = 1 \) for \( x \in (0,1) \)
+
+---
+
+\subsection{Sum Rule, Product Rule, Bayes' Theorem}
+
+\textbf{Sum Rule:}
+\[
+P(A) = \sum_B P(A, B) = \sum_B P(A|B)P(B)
+\]
+
+\textbf{Product Rule:}
+\[
+P(A, B) = P(A|B)P(B) = P(B|A)P(A)
+\]
+
+\textbf{Bayes' Theorem:}
+\[
+P(A|B) = \frac{P(B|A)P(A)}{P(B)} \quad \text{if } P(B) > 0
+\]
+
+\textbf{Example:}  
+Suppose:
+\begin{itemize}
+    \item \( P(\text{Rain}) = 0.2 \)
+    \item \( P(\text{Umbrella}|\text{Rain}) = 0.9 \)
+    \item \( P(\text{Umbrella}|\text{No Rain}) = 0.1 \)
+\end{itemize}
+
+Then:
+\[
+P(\text{Umbrella}) = 0.9 \cdot 0.2 + 0.1 \cdot 0.8 = 0.26
+\]
+\[
+P(\text{Rain}|\text{Umbrella}) = \frac{0.9 \cdot 0.2}{0.26} \approx 0.692
+\]
+
+---
+
+\subsection{Summary Statistics and Independence}
+
+\textbf{Mean (Expectation):}
+\[
+\mathbb{E}[X] = 
+\begin{cases}
+\sum_x x \cdot p(x) & \text{(discrete)} \\
+\int_{\mathcal{T}} x \cdot p(x) \, dx & \text{(continuous)}
+\end{cases}
+\]
+
+\textbf{Variance:}
+\[
+\mathrm{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\]
+
+\textbf{Covariance:}
+\[
+\mathrm{Cov}(X, Y) = \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]
+\]
+
+\textbf{Independence:}  
+Two variables \( X \) and \( Y \) are independent if:
+
+\[
+P(X, Y) = P(X) \cdot P(Y) \quad \text{or} \quad p(x, y) = p(x)p(y)
+\]
+
+\textbf{Example:}  
+Let \( X, Y \sim \text{Uniform}(0,1) \), independent. Then:
+
+\[
+\mathbb{E}[X] = \mathbb{E}[Y] = 0.5, \quad \mathrm{Var}(X) = \mathrm{Var}(Y) = \frac{1}{12}
+\]
+\[
+\mathrm{Cov}(X, Y) = 0
+\]
+
+---
+
+\subsection{Gaussian Distribution}
+
+\textbf{Univariate Gaussian:}
+\[
+X \sim \mathcal{N}(\mu, \sigma^2), \quad p(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)
+\]
+
+\textbf{Multivariate Gaussian:}
+\[
+\vec{X} \sim \mathcal{N}(\vec{\mu}, \boldsymbol{\Sigma}), \quad
+p(\vec{x}) = \frac{1}{(2\pi)^{d/2} |\boldsymbol{\Sigma}|^{1/2}} \exp\left(-\frac{1}{2} (\vec{x} - \vec{\mu})^\top \boldsymbol{\Sigma}^{-1} (\vec{x} - \vec{\mu})\right)
+\]
+
+\textbf{Example:}  
+Let \( X \sim \mathcal{N}(0,1) \). Then:
+
+\[
+\mathbb{E}[X] = 0, \quad \mathrm{Var}(X) = 1
+\]
+
+---
+
+\subsection{Conjugacy and the Exponential Family}
+
+\textbf{Exponential Family Form:}
+\[
+p(x|\theta) = h(x) \exp\left( \eta(\theta)^\top T(x) - A(\theta) \right)
+\]
+
+Where:
+\begin{itemize}
+    \item \( T(x) \): sufficient statistic
+    \item \( \eta(\theta) \): natural parameter
+    \item \( A(\theta) \): log-partition function
+    \item \( h(x) \): base measure
+\end{itemize}
+
+\textbf{Conjugate prior:} A prior \( p(\theta) \) is conjugate to the likelihood \( p(x|\theta) \) if the posterior is in the same family.
+
+\textbf{Example:}
+\begin{itemize}
+    \item Likelihood: \( x \sim \text{Bernoulli}(\theta) \)
+    \item Prior: \( \theta \sim \text{Beta}(\alpha, \beta) \)
+    \item Posterior: \( \theta | x \sim \text{Beta}(\alpha + x, \beta + 1 - x) \)
+\end{itemize}
+
+---
+
+\subsection{Change of Variables / Inverse Transform}
+
+Let \( Y = g(X) \), where \( g \) is differentiable and invertible.
+
+\textbf{1D Change of Variables:}
+\[
+p_Y(y) = p_X(g^{-1}(y)) \cdot \left| \frac{d}{dy} g^{-1}(y) \right|
+\]
+
+\textbf{Multivariate Case:}
+\[
+p_Y(\vec{y}) = p_X(\vec{x}) \cdot 
+\left| \det \left( \frac{\partial \vec{x}}{\partial \vec{y}} \right) \right|
+\quad \text{(Jacobian determinant)}
+\]
+
+\textbf{Inverse Transform Sampling:}
+
+\begin{itemize}
+    \item Sample \(u \sim \text{Uniform}(0,1)\)
+    \item Set \(x = F^{-1}(u)\)
+    \item Then \(x \sim p(x)\)
+\end{itemize}
+
+\textbf{Example 1: Change of Variables (1D)}
+
+Let \( X \sim \text{Uniform}(0,1) \), and define \( Y = -\log(X) \). Then:
+
+\[
+x = e^{-y}, \quad \frac{dx}{dy} = -e^{-y}
+\quad \Rightarrow \quad
+p_Y(y) = e^{-y}, \quad y \geq 0
+\]
+
+\textbf{Example 2: Inverse Transform Sampling (Exponential)}
+
+Given CDF \( F(x) = 1 - e^{-\lambda x} \), we invert:
+
+\[
+x = F^{-1}(u) = -\frac{1}{\lambda} \ln(1 - u)
+\]
+
+So to sample:
+
+\begin{itemize}
+    \item Sample \(u \sim \text{Uniform}(0,1)\)
+    \item Set \(x = -\frac{1}{\lambda} \ln(1 - u)\)
+\end{itemize}
