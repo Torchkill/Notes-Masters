@@ -1,0 +1,182 @@
+
+A search problem is the foundational concept in AI problem-solving.
+The agent must decide which actions to take to transition from the initial state to a goal state,
+while considering the path cost and possible state transitions.
+
+\section{Elements of a Search Problem (Common exam question)}
+
+\begin{itemize}
+    \item Initial State :  The starting point of the agent in the problem space.
+    \item Actions : A set of all possible actions the agent can take from a state.
+    \item Transition Model: A function $Result(s, a)$ that returns the resulting state from performing action $a$ in state $s$.
+    \item States: All possible configurations or situations the agent may encounter.
+    \item Goal Test: A function that checks if a given state is a goal state.
+    \item Path Cost: A numerical value that defines the cost associated with a path from the initial state to a given state.
+\end{itemize}
+
+Key point: A solution is a sequence of actions that leads from the initial state to the goal state.
+
+\subsection{Additional Key Concepts}
+
+State space: The complete set of all possible states reachable from the initial state, given the actions and transition model.\\
+
+Search Tree: A structure where nodes represent states, and branches represent actions leading to those states. \\
+
+Search Graph (vs. Tree): Includes cycles and shared states — more efficient than trees but requires cycle detection.\\
+
+Node (in a search tree/graph):  
+  A data structure that typically contains:
+  \begin{itemize}
+    \item State  
+    \item Parent Node
+    \item Action taken to reach this state
+    \item Path cost so far
+    \item Depth (optional)
+  \end{itemize}
+
+Branching Factor (b): The average number of successors (child nodes) per state. \\
+
+Belief State:  A representation of all the information an agent has about the world (useful in partially observable environments). Example: tracking visited locations.\\
+
+Directed Acyclic Graph (DAG):  A graph with directed edges and no cycles.
+
+\section{Search Strategies}
+
+\subsection{Uninformed Search}
+
+Uninformed (Blind) Search has no domain-specific knowledge is used.\\
+
+Strategies:
+
+\begin{itemize}
+    \item Breadth-First Search (BFS)
+    \item Depth-First Search (DFS)
+    \item Uniform-Cost Search (Lowest-Cost-First)
+    \item Iterative Deepening DFS\\
+\end{itemize}
+
+\subsection{Search Algorithm Structure}
+
+Generic Graph Search\\
+
+\begin{itemize}
+    \item Initialize:\begin{itemize}
+        \item Frontier = {Initial State}
+        \item Explored set = empty set
+    \end{itemize}
+    \item Loop \begin{itemize}
+        \item If Frontier is empty return no solution
+        \item Remove node from Frontier
+        \item If node.state is goal return the solution
+        \item add node.state to Explored set
+        \item Expand node and add resulting nodes to Frontier (Only if not in Frontier or Explored set)\\
+    \end{itemize}
+\end{itemize}
+
+ Depth-First Search (DFS):
+ \begin{itemize}
+    \item Frontier: Stack (Last in first out)
+    \item Explores the deepest node first.
+    \item Pros: Low memory usage
+    \item Cons: Can get stuck in deep or infinite paths
+    \item Time complexity: $O(b^m)$
+    \item Space complexity: $O(b \cdot m)$\\
+ \end{itemize}
+
+ Where $b$ is the branching factor and $m$ is the maximum depth.\\\\
+
+Iterative Deepening DFS (IDDFS)
+\begin{itemize}
+    \item Combines benefits of BFS and DFS.
+    \item Repeatedly runs DFS with increasing depth limits.
+    \item Pros: Finds optimal solution with less space
+    \item Redundant expansions\\
+\end{itemize}
+
+
+\textbf{Simplified Pseudocode:}
+\begin{verbatim}
+for depth = 0 to infinity:
+    result = Depth-Limited-Search(initial, depth)
+    if result not equal failure:
+        return result
+\end{verbatim}
+
+Breadth-First Search (BFS)
+\begin{itemize}
+    \item Frontier: Queue (FIFO)
+    \item Explores the shallowest nodes first.
+    \item Guarantees: Finds the solution with the fewest steps (minimum depth)
+    \item Time complexity: $O(b^d)$  
+    \item Space complexity: $O(b^d)$\\
+\end{itemize}
+
+Where $b$ is the branching factor and $d$ is depth of the shallowest solution.\\\\
+
+
+Uniform-Cost Search (UCS)
+\begin{itemize}
+    \item Expands the node with the lowest path cost.
+    \item Uses a priority queue, ordered by path cost.
+    \item Guarantees:Finds optimal solution (lowest cost)
+    \item Time complexity: Depends on cost granularity (can be exponential)\\
+\end{itemize}
+-
+
+Informed (Heuristic) Search
+\begin{itemize}
+    \item Uses domain-specific knowledge (heuristics) to guide search.
+    \item Examples: $A*$ Search and Greedy Best-First Search\\
+\end{itemize}
+
+
+\section{Heuristic (Informed) Search}
+Heuristic search leverages problem-specific knowledge to guide exploration more efficiently than uninformed strategies.
+
+\subsection{Heuristic Function $h(n)$}
+A heuristic is a non-negative estimate of the cost from node $n$ to the goal.
+\begin{itemize}
+    \item Example: Euclidean (straight-line) distance in a map.
+\end{itemize}
+
+\subsection{Admissibility}
+A heuristic is \textbf{admissible} if it never overestimates the true cost:
+\[
+h(n) \leq \text{true cost from $n$ to goal}
+\]
+\begin{itemize}
+    \item Examples: Euclidean distance, Manhattan distance (in grid environments without obstacles).
+\end{itemize}
+
+\subsection{Consistency (Monotonicity)}
+A heuristic is \textbf{consistent} if:
+\[
+h(n) \leq c(n, n') + h(n')
+\]
+where $c(n, n')$ is the cost of moving from $n$ to $n'$.
+\begin{itemize}
+    \item Equivalent to the triangle inequality.
+    \item Ensures the total estimated cost $f(n) = g(n) + h(n)$ is non-decreasing along a path.
+\end{itemize}
+
+
+
+\section{Summary of Key Terms}
+\begin{itemize}
+    \item Agent: Entity making decisions
+    \item Environment: The world the agent operates in
+    \item Action: Operation an agent can take
+    \item Frontier: Set of nodes available for expansion
+    \item Explored Set: Set of visited states
+    \item Goal State: Target state for the agent
+    \item Path Cost: Numerical cost of reaching a node
+    \item Optimal Solution: The solution with the lowest total path cost
+\end{itemize}
+
+\textbf{Exam Tips:}
+\begin{itemize}
+    \item List and explain the 5 elements of a search problem
+    \item Distinguish between search tree and search graph
+    \item Compare time and space complexity for BFS, DFS, IDDFS
+    \item Know pros/cons of different search methods
+\end{itemize}

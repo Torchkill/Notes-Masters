@@ -1,0 +1,128 @@
+
+
+\section{Types of Heuristic Search Algorithms}
+
+\subsection{Greedy Best-First Search}
+\begin{itemize}
+    \item Expands the node that appears closest to the goal (lowest $h(n)$).
+    \item Frontier: Priority Queue ordered by $h(n)$.
+    \item Pros: Fast in many cases.
+    \item Cons: Not optimal; can fail with misleading heuristics.
+\end{itemize}
+
+\subsection{$A^*$ Search}
+Evaluates nodes using:
+\[
+f(n) = g(n) + h(n)
+\]
+where $g(n)$ = cost so far, $h(n)$ = estimated cost to goal.
+\begin{itemize}
+    \item Frontier: Priority Queue ordered by $f(n)$.
+    \item Combines UCS (optimality) and Greedy Best-First (efficiency).
+    \item Guarantees:
+    \begin{itemize}
+        \item Completeness: Finds a solution if one exists.
+        \item Optimality: Finds least-cost path if $h(n)$ is admissible.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Time Complexity}
+\begin{itemize}
+    \item Generally exponential in solution depth.
+    \item Strongly affected by branching factor $b$.
+\end{itemize}
+
+\section{Search Complexity Concepts}
+\begin{itemize}
+    \item \textbf{Forward Branching Factor}: Number of successors from a node.
+    \item \textbf{Backward Branching Factor}: Number of predecessors.
+    \item Lower branching factor $\Rightarrow$ better time complexity.
+    \item Example: $2 \cdot b^{k/2} \ll b^k$
+\end{itemize}
+
+\section{Multi-Agent Systems \& Game Theory}
+
+\subsection{Overview}
+Game theory studies the behavior of multiple agents that may be cooperative, competitive, or mixed.
+
+\subsection{Utility}
+Utility measures future rewards from a state or action.
+\begin{itemize}
+    \item Agents may have different utility functions.
+    \item They act autonomously with limited/incomplete information.
+    \item Outcomes depend on other agents’ actions.
+\end{itemize}
+
+\section{Types of Games}
+
+\subsection{Cooperative Games}
+Agents coordinate to achieve shared goals.
+
+\subsection{Competitive Games}
+Agents have conflicting goals. Often modeled as zero-sum games.
+
+\section{Game Representations}
+
+\subsection{Normal Form (Strategic Form)}
+\begin{itemize}
+    \item Payoff matrix shows utilities for each agent given action profiles.
+    \item Action Profile: Assignment of an action to each agent.
+    \item Utility Function: Maps action profiles to payoffs.
+\end{itemize}
+
+\subsection{Extensive Form (Game Tree)}
+Represents sequential games with perfect information.
+
+\subsection{Imperfect Information \& Simultaneous Actions}
+\begin{itemize}
+    \item Partially Observable Games: Agents lack full information (e.g., card games).
+    \item Simultaneous Move Games: Players act without knowing others’ choices.
+    \item Information Set: States indistinguishable to a player at decision time.
+\end{itemize}
+
+\section{Strategy and Planning}
+\begin{itemize}
+    \item \textbf{Strategy}: A full plan of actions for all possible situations.
+    \item \textbf{Strategy Profile}: One strategy per agent.
+    \item Strategies may be deterministic or probabilistic.
+\end{itemize}
+
+\section{Adversarial Search}
+
+\subsection{Minimax Algorithm}
+\begin{itemize}
+    \item MAX tries to maximize utility; MIN tries to minimize it.
+    \item Works recursively from terminal states backward.
+\end{itemize}
+
+\textbf{Key Functions:}
+\begin{itemize}
+    \item $s_0$: Initial state.
+    \item Player($s$): Returns whose turn it is.
+    \item Actions($s$): Legal actions.
+    \item Result($s, a$): Next state.
+    \item Terminal($s$): Checks if game is over.
+    \item Utility($s$): Value of terminal state.
+\end{itemize}
+
+\textbf{Simplified Pseudocode:}
+\begin{verbatim}
+def minimax(s):
+    if Terminal(s):
+        return Utility(s)
+    if Player(s) == MAX:
+        return max(minimax(Result(s,a)) for a in Actions(s))
+    else:
+        return min(minimax(Result(s,a)) for a in Actions(s))
+\end{verbatim}
+
+\section{Optimizations}
+
+\subsection{Alpha-Beta Pruning}
+Prunes branches of the minimax tree that cannot affect the final decision, greatly reducing node evaluations.
+
+\section{Evaluation Function}
+Used when search is cut off early (e.g., depth limit).  
+Estimates utility of a non-terminal state for approximate reasoning.
+
+
