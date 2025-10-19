@@ -1,0 +1,203 @@
+\section{Monte Carlo Tree Search \& AlphaGo}
+
+\subsection{AlphaGo Overview}
+AlphaGo is an AI developed to play the board game Go at a professional level.  
+It defeated top human players using a combination of techniques:
+\begin{itemize}
+    \item Deep Learning
+    \item Monte Carlo Tree Search (MCTS)
+    \item High-Performance Computing
+\end{itemize}
+
+\subsection{The Game of Go}
+\begin{itemize}
+    \item Played on a $19 \times 19$ grid $\Rightarrow$ very high branching factor.
+    \item Branching factor: $\sim 250$ moves on average per turn.
+    \item For comparison, chess has a branching factor of $\sim 35$.
+    \item Goal: Surround more territory than the opponent.
+    \item Complexity: 
+    \begin{itemize}
+        \item Estimated state space: $\sim 10^{100}$
+        \item Very subtle mechanics $\Rightarrow$ traditional evaluation functions (like in chess) are ineffective.
+    \end{itemize}
+\end{itemize}
+
+\section{Limitations of Traditional Approaches}
+
+\subsection{Minimax with Alpha-Beta Pruning}
+\begin{itemize}
+    \item Works well for chess:
+    \begin{itemize}
+        \item Modest branching factor
+        \item Good heuristic evaluation functions
+    \end{itemize}
+    \item In Go:
+    \begin{itemize}
+        \item Branching factor is too large
+        \item Evaluation functions are too subtle to model effectively
+    \end{itemize}
+\end{itemize}
+
+\section{Monte Carlo Tree Search (MCTS)}
+
+\subsection{Overview}
+\begin{itemize}
+    \item Heuristic search algorithm applied to decision trees.
+    \item Common in Go (last $\sim$10 years).
+    \item Used when no good evaluation function exists.
+\end{itemize}
+
+\subsection{Core Components}
+\begin{itemize}
+    \item \textbf{Selection:} Choose promising moves recursively until a leaf node is reached.
+    \item \textbf{Expansion:} Add child nodes (possible future states) at the leaf.
+    \item \textbf{Simulation:} Play out the game randomly to the end; record win/loss.
+    \item \textbf{Backpropagation:} Propagate results back up the tree; update selection policy.
+\end{itemize}
+
+\subsection{Benefits and Drawbacks}
+\textbf{Pros:}
+\begin{itemize}
+    \item Does not require a predefined evaluation function.
+    \item Effective in large, complex spaces.
+\end{itemize}
+\textbf{Cons:}
+\begin{itemize}
+    \item Requires many simulations.
+    \item Slow for very large games like Go.
+\end{itemize}
+
+\section{Exploration vs Exploitation (Multi-Armed Bandit Problem)}
+
+\subsection{Analogy}
+\begin{itemize}
+    \item Faced with multiple slot machines ("arms").
+    \item Each has an unknown reward distribution.
+    \item Must balance:
+    \begin{itemize}
+        \item \textbf{Exploitation:} Use the arm that seems best.
+        \item \textbf{Exploration:} Try others to discover potential improvements.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Upper Confidence Bound (UCB)}
+\begin{itemize}
+    \item Balances exploration and exploitation.
+    \item Formula considers both:
+    \begin{itemize}
+        \item Average reward of each arm.
+        \item Number of times each arm has been tried.
+    \end{itemize}
+    \item Policy:
+    \begin{itemize}
+        \item Try each option once.
+        \item Then choose the option maximizing the UCB formula.
+    \end{itemize}
+\end{itemize}
+
+\section{Deep Learning in AlphaGo}
+
+\subsection{Policy and Value Networks}
+\begin{itemize}
+    \item \textbf{Policy Network:} Suggests promising moves, reducing branching factor.
+    \item \textbf{Value Network:} Estimates game state value without full simulation.
+\end{itemize}
+
+\subsection{Self-Play and Reinforcement Learning}
+\begin{itemize}
+    \item AlphaGo trained by playing against itself.
+    \item Reinforcement learning improved decision-making, reducing search depth and branching factor.
+\end{itemize}
+
+\section{Symbolic vs Sub-Symbolic Strategies}
+
+\subsection{Symbolic AI}
+\begin{itemize}
+    \item Based on explicit knowledge and logical reasoning.
+    \item Uses rules, symbols, and logic.
+    \item Examples: Knowledge bases, expert systems, logic inference.
+\end{itemize}
+
+\subsection{Sub-Symbolic AI}
+\begin{itemize}
+    \item Uses numerical/statistical methods.
+    \item Examples: Neural networks, genetic algorithms, deep learning.
+    \item Learns patterns from data rather than explicit rules.
+\end{itemize}
+
+\section{Knowledge-Based Agents}
+
+\subsection{Definition}
+Agents using internal knowledge representation to reason and derive conclusions.
+
+\subsection{Knowledge Base (KB)}
+\begin{itemize}
+    \item Repository of information stored in sentences.
+    \item Sentences: Assertions about the world in a formal language.
+\end{itemize}
+
+\subsection{Declarative vs Procedural Approaches}
+\begin{itemize}
+    \item \textbf{Declarative:} Feed system facts; it reasons to conclusions.
+    \item \textbf{Procedural:} Encode specific behaviours directly.
+    \item Often combined in modern systems.
+\end{itemize}
+
+\section{Logic and Inference}
+
+\subsection{Syntax and Semantics}
+\begin{itemize}
+    \item \textbf{Syntax:} Rules for forming valid sentences.
+    \item \textbf{Semantics:} Meaning of sentences; correspondence with the world.
+\end{itemize}
+
+\subsection{Logical Inference}
+\begin{itemize}
+    \item Derive new sentences from known ones using rules.
+    \item Goal: Use facts to answer queries or deduce new knowledge.
+\end{itemize}
+
+\subsection{Properties}
+\begin{itemize}
+    \item \textbf{Entailment:} $\alpha$ is entailed by KB if $\alpha$ is true in all models where KB is true.  
+    Example:  
+    KB = \{"All humans are mortal", "Socrates is a human"\}  
+    $\Rightarrow$ "Socrates is mortal"
+    \item \textbf{Completeness:} An inference algorithm is complete if it can derive all entailed sentences.
+\end{itemize}
+
+\section{Propositional Logic}
+
+\subsection{Syntax}
+\begin{itemize}
+    \item Atomic symbols: $P, Q, \dots$
+    \item Compound sentences:
+    \begin{itemize}
+        \item Conjunction: $P \land Q$
+        \item Disjunction: $P \lor Q$
+        \item Implication: $P \rightarrow Q$
+    \end{itemize}
+\end{itemize}
+
+\subsection{Semantics (Models)}
+\begin{itemize}
+    \item A model assigns truth values to atomic propositions.
+    \item A model = one possible world configuration.
+\end{itemize}
+
+\subsection{Entailment in Propositional Logic}
+\begin{itemize}
+    \item $KB \models \alpha \iff \alpha$ is true in all models where $KB$ is true.
+    \item \textbf{Truth Table:} Lists all possible truth assignments; used to check entailment.
+\end{itemize}
+
+\section{Inference Algorithms}
+\begin{itemize}
+    \item Goal: Decide if $KB \models \alpha$
+    \item Methods:
+    \begin{itemize}
+        \item Truth table checking (exhaustive).
+        \item More efficient algorithms (e.g., resolution).
+    \end{itemize}
+\end{itemize}
+
