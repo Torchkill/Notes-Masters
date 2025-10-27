@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{gauss, amssymb}
+\usepackage{nicematrix}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{booktabs}
+\usepackage{nicematrix}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+
+\newcommand{\mycomment}[1]{}
+
+% Define \circled
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+
+\title{5705.25 - Hagfrøðilig læring H25}
+\date{\today}
+%This material is based upon the book 
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\input{chapters/chapter_01.tex}
+\newpage
+\input{chapters/chapter_02.tex}
+\newpage
+\input{chapters/chapter_03.tex}
+\newpage
+
+\end{document}
