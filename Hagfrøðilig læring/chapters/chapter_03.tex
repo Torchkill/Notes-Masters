@@ -214,3 +214,166 @@ Parametric models typically have higher bias but lower variance, while non-param
 \subsection{Software Note: R and Quarto}
 
 When working with R in VSCode, you can compile regression analyses and visualizations within \texttt{.qmd} (Quarto) files, which support both code and markdown text for reproducible reports.
+
+
+
+% Regression Notes (Version with expanded Model Selection only)
+
+
+
+\section{Multivariate Regression}
+Multivariate (multiple) linear regression models the relationship between a response variable \(Y\) and multiple predictors \(X_1, X_2, \dots, X_p\) using an additive model:
+\begin{equation}
+Y = \beta_0 + \sum_{i=1}^p \beta_i X_i + \varepsilon.
+\end{equation}
+The goal is to estimate coefficients \(\beta_i\) that minimize the Residual Sum of Squares (RSS):
+\begin{equation}
+RSS = \sum_{i=1}^n (y_i - \hat{y}_i)^2.
+\end{equation}
+
+\subsection{Design Matrix and Hat Matrix}
+In matrix notation, the model can be written:
+\begin{equation}
+\mathbf{y} = X\boldsymbol{\beta} + \boldsymbol{\varepsilon}.
+\end{equation}
+The fitted values are given by:
+\begin{equation}
+\hat{\mathbf{y}} = H \mathbf{y}, \quad \text{where } H = X(X^TX)^{-1}X^T.
+\end{equation}
+The matrix \(H\) is the \textbf{hat matrix}, projecting the data onto the regression hyperplane.
+
+\subsection{Correlation and Visualization}
+To assess relationships between predictors and the response, we often compute the sample correlation:
+\begin{equation}
+\text{Cor}(X, Y) = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}
+{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}.
+\end{equation}
+Heatmaps of correlation matrices are helpful for identifying linear associations.
+
+\subsection{Inference: t-statistics and p-values}
+To test whether individual predictors have a relationship with \(Y\), we test:
+\begin{equation}
+H_0: \beta_j = 0, 
+\qquad 
+H_a: \beta_j \neq 0.
+\end{equation}
+We compute the t-statistic:
+\begin{equation}
+t_j = \frac{\hat{\beta}_j}{SE(\hat{\beta}_j)}.
+\end{equation}
+A small p-value indicates evidence against \(H_0\).
+
+\subsection{F-statistic for Overall Significance}
+The F-test evaluates whether the model provides a better fit than a constant-only model:
+\begin{equation}
+H_0: \beta_1 = \beta_2 = \dots = \beta_p = 0.
+\end{equation}
+Large \(F\) values suggest the model explains significant variation.
+
+\subsection{Variable Selection}
+When many predictors are available, we must decide which ones to include.
+Adding more variables always reduces RSS and always increases \(R^2\), so we need principled methods.
+
+\subsubsection{Forward Selection}
+
+\begin{enumerate}
+\item Start with the intercept-only model.
+\item Add the predictor that most improves the model (largest reduction in RSS or improvement in F-statistic).
+\item Continue adding predictors until no significant improvement occurs.
+\end{enumerate}
+
+\subsubsection{Backward Selection}
+
+\begin{enumerate}
+\item Start with the full model.
+\item Remove the predictor with the highest p-value (least significant).
+\item Continue removing predictors until all remaining variables are significant.
+\end{enumerate}
+
+\subsubsection{Stepwise (Mixed) Selection}
+A combination of forward and backward selection:
+\begin{itemize}
+\item Add the best candidate predictor.
+\item Then check whether any included predictors should be removed.
+\end{itemize}
+This continues until no improvement is possible.
+
+\subsubsection{Model Selection Rationale}
+Variable selection helps:
+\begin{itemize}
+\item Improve interpretability.
+\item Reduce variance of coefficient estimates.
+\item Avoid multicollinearity.
+\item Prevent overfitting.
+\end{itemize}
+P-values alone are not sufficient; the overall model validity should be checked using the F-statistic.
+
+\subsection{Model Fit: RSE and \(R^2\)}
+\textbf{Residual Standard Error (RSE)} estimates the standard deviation of the error term:
+\begin{equation}
+RSE = \sqrt{\frac{RSS}{n - p - 1}}.
+\end{equation}
+\textbf{\(R^2\)} measures the fraction of variance explained:
+\begin{equation}
+R^2 = 1 - \frac{RSS}{TSS} = \text{Cor}(Y, \hat{Y})^2.
+\end{equation}
+Note: \(R^2\) always increases when adding predictors.
+
+\subsection{Prediction and Uncertainty}
+Predictions come with two types of uncertainty:
+\begin{itemize}
+\item \textbf{Confidence intervals}: uncertainty in the mean response.
+\item \textbf{Prediction intervals}: includes irreducible error; always wider.
+\end{itemize}
+Example in R:
+\begin{verbatim}
+model <- lm(y ~ x1 + x2)
+predict(model, newdata, interval = "confidence")
+\end{verbatim}
+
+\subsection{Interaction Terms}
+Including interactions allows the effect of one predictor to depend on another:
+\begin{equation}
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1X_2 + \varepsilon.
+\end{equation}
+
+\subsection{Polynomial Regression}
+A polynomial model remains linear in the parameters:
+\begin{equation}
+Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \dots + \beta_d X^d + \varepsilon.
+\end{equation}
+
+\subsection{Residuals and Nonlinearity}
+Examining residuals helps diagnose model misfit. If residuals show curvature, a polynomial or nonlinear transformation may be appropriate.
+
+\subsection{Correlated Error Terms}
+Assuming errors are independent is critical. Correlated errors lead to underestimation of standard errors.
+
+\subsection{Heteroskedasticity}
+If error variance is not constant:
+\begin{equation}
+\operatorname{Var}(\varepsilon_i) = \sigma_i^2 \neq \sigma^2,
+\end{equation}
+then confidence intervals and standard errors become unreliable.
+
+\subsection{Outliers and Leverage Points}
+Outliers have unusual \(Y\) values; leverage points have unusual \(X\) values.
+Leverage for observation \(i\):
+\begin{equation}
+h_{ii} = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum (x_i - \bar{x})^2}.
+\end{equation}
+High-leverage points can strongly affect regression lines.
+
+\subsection{Collinearity}
+When predictors are highly correlated, it becomes difficult to distinguish their individual effects.
+Consequences include:
+\begin{itemize}
+\item Inflated standard errors
+\item Small t-statistics
+\item Unstable coefficient estimates
+\end{itemize}
+The Variance Inflation Factor (VIF) detects multicollinearity.
+
+
+
+
