@@ -2,48 +2,48 @@
 
 ## Course information
 
-__Title__
+__Title:__
 Introduction to AI
 
-__Course number__
+__Course number:__
 5700.25
 
-__Academic year__
+__Academic year:__
 2025-2026
 
-__ECTS__
+__ECTS:__
 7.50
 
-__Level__
+__Level:__
 Master
 
-__Faculties__
+__Faculties:__
 Science and Tecnology
 
-__Educations__
+__Educations:__
 MSc in Data Science
 
-__Prerequisites__
+__Prerequisites:__
 Discrete Mathematics (7.5 ECTS), Algorithms and data structures (7.5 ECTS), Introductory programming with Python (7.5 ECTS) or similar courses.
 
-__Language of instruction__
+__Language of instruction:__
 The course is taught in English.
 
-__Registration__
+__Registration:__
 Students on the first semester of M.Sc in Data Science are automatically enrolled. Applicants for an individual course must apply via the Student Affairs Centre.
 
-__Beginning date__
+__Beginning date:__
 Monday, August 25, 2025
 
-__End date__
+__End date:__
 Friday, October 17, 2025
 
 ## Academic content
 
-__Purpose__
+__Purpose:__
 The purpose of this course is to give the student an understanding of introductory concepts and design principles in Artificial intelligence, with a focus on symbolic AI. The course provides the student with the tools to independently determine and apply the relevant techniques within search, logic, probability and optimisation techniques to a given AI problem. Moreover, the student will be able to identify and discuss applications, challenges, and societal implications of AI.
 
-__Learning outcomes__
+__Learning outcomes:__
 On completion of the course, students will be able to demonstrate ability to:
 -Identify and discuss strength and weaknesses of symbolic and sub-symbolic approaches in AI.
  -Analyze and compare the effectiveness of different search and optimization techniques, including uninformed, informed, adversarial search, and hill-climbing methods.
@@ -53,7 +53,7 @@ On completion of the course, students will be able to demonstrate ability to:
 -Recognise and discuss the role of search, logic, optimisation and probabilistic reasoning in current AI research and modern technology.
 -Evaluate and discuss the societal, ethical, and legal implications of AI, and common biases in AI models.
 
-__Content__
+__Content:__
  - 	Definition of AI. 
  - 	Symbolic versus sub-symbolic AI. Intelligent agents and search problems. Informed and uninformed search, heuristics, adversarial search, and games. 
  - 	Knowledge and logic. Propositional and first order logic, inference rules and techniques (modus ponens, model checking, resolution), theorem proving, belief revision. Inference in a probabilistic setting. Bayes rule and Markov models.
@@ -62,32 +62,32 @@ __Content__
  - 	General introduction to machine learning. 
  - 	AI bias and fairness, societal and ethical implications.
 
-__Learning and teaching approaches__
+__Learning and teaching approaches:__
 Lectures, exercises, assignments, self-study.
 
 ## Assessment
 
-__Assessment method__
+__Assessment method:__
 The assessment is based on the following: two mandatory assignments to be submitted in accordance with deadlines, and an oral examination – without preparation – which counts for 100% of the grade. The oral exam will cover the whole content of the course. Moreover, the students will receive formative feedback about the assignments, as they will be asked to defend them during the oral exam; assignments should therefore be handed in timely before the examination.
 
-__Examination (internal/external)__
+__Examination (internal/external):__
 External
 
-__Grading scale__
+__Grading scale:__
 7-scale
 
-__Exam date/dates__
+__Exam date/dates:__
 The oral exam will be on the 23/10 and 24/10, 2025.
 The reexam is set for week 2, 2026.
 
-__Deadline for withdrawal from exam__
+__Deadline for withdrawal from exam:__
 Monday, August 25, 2025
 
 ## Academic responsibility and teachers
 
-__Academic responsibility__
+__Academic responsibility:__
 Barbara Scalvini
 
-__Teachers__
+__Teachers:__
 Barbara Scalvini
 

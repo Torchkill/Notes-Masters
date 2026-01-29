@@ -2,48 +2,48 @@
 
 ## Skeiðsupplýsingar
 
-__Heiti__
+__Heiti:__
 Innleiðing í tilgjørdum viti
 
-__Skeiðsnummar__
+__Skeiðsnummar:__
 5700.25
 
-__Lestrarár__
+__Lestrarár:__
 2025-2026
 
-__ECTS__
+__ECTS:__
 7,50
 
-__Stig__
+__Stig:__
 Master
 
-__Deildir__
+__Deildir:__
 Náttúruvísindadeildin
 
-__Útbúgvingar__
+__Útbúgvingar:__
 M.Sc. í dátuvísindum
 
-__Fortreytir__
+__Fortreytir:__
 Diskret støddfrøði (7,5 ECTS), Algoritmur og dátustrukturar (7,5 ECTS), Innleiðandi forritan við Python (7,5 ECTS) ella annað skeið í innleiðandi forritan.
 
-__Undirvísingarmál__
+__Undirvísingarmál:__
 Undirvíst verður á enskum.
 
-__Tilmelding__
+__Tilmelding:__
 Lesandi á 1. lestrarhálvu í M.Sc. í dátuvísindum eru sjálvirkandi tilmeldað. Stakgreinalesandi melda seg til skeiðið umvegis Lestrarskrivstovuna.
 
-__Byrjanardato__
+__Byrjanardato:__
 25. august 2025
 
-__Endadato__
+__Endadato:__
 17. oktober 2025
 
 ## Fakligt innihald
 
-__Endamál__
+__Endamál:__
 Endamálið við hesum skeiði er at geva teimum lesandi kunnleika til innleiðandi hugtøk og sniðgávu-meginreglur í vitlíki við denti á symbolikk. Skeiðið gevur tí lesandi amboð til sjálvstøðugt at velja og brúka týðandi tøknir frá leiting, logikki, sannlíkindi og optimeringshættum til ávísar trupulleikar í sambandi við vitlíki. Harafturat fer tann lesandi at kunna eyðmerkja og kjakast um nýtslumøguleikar, avbjóðingar og samfelagsligar avleiðingar av vitlíki.
 
-__Læruúrtøka__
+__Læruúrtøka:__
 Tá skeiðið er lokið, skal tann lesandi vera før/ur fyri at:
 
 - Eyðmerkja og kjakast um styrkir og veikleikar av symbolskum móti sub-symbolskum vitlíki. 
@@ -54,7 +54,7 @@ Tá skeiðið er lokið, skal tann lesandi vera før/ur fyri at:
 - Kenna aftur og kjakast um leiting, logikk, optimeringshættir og tað sannlíkinda-grundaða háttalagið í núverandi gransking í vitlíki og tøkni. 
 - Meta um og kjakast um samfelagsligar, etiskar og løgfrøðiligar avleiðingar av vitlíki og vanliga helling (biases) í samband við vitlíki.
 
-__Innihald__
+__Innihald:__
  - 	Allýsing av vitlíki. 
  - 	Symbolskt vitlíki móti sub-symbolskum vitlíki. Intelligentir agentar og leititrupulleikar. Upplýst og óupplýst leiting, leitihættir, leiting millum mótspælandi agentar og spøl.
  - 	Kunnleiki og logikkur. Propositionellur og "first order" logikkur, avgerðarreglur og hættir (modus ponens, kanning av modelli, loysni), prógva setningar, endurskoða sannføring. Niðurstøður grundaðar á sannlíkindi. Bayesisk regla og Markov modellir. 
@@ -63,32 +63,32 @@ __Innihald__
  - 	Almenn innleiðsla í maskinlæring. 
  - 	Rættvísi og helling (bias) í vitlíki, samfelagsligar og etiskar avbjóðingar við vitlíki.
 
-__Læru- og undirvísingarhættir__
+__Læru- og undirvísingarhættir:__
 Fyrilestrar, venjingar, uppgávur, sjálvlestur.
 
 ## Próvtøka
 
-__Próvtøkuháttur__
+__Próvtøkuháttur:__
 Ein munnlig próvtøka við ongari fyrireikingartíð, ið metir alt  skeiðsinnihaldið (vigar 100%). Fyri at sleppa til próvtøku skulu tvær kravdar innlatingar latast inn til ásettar tíðarfreistir, sum tey lesandi fáa afturboðan um, og sum eisini skulu verjast til próvtøkuna.
 
-__Próvdøming (innanhýsis/uttanhýsis)__
+__Próvdøming (innanhýsis/uttanhýsis):__
 Uttanhýsis
 
-__Próvtalsstigi__
+__Próvtalsstigi:__
 7-talsstigin
 
-__Próvtøkudagur/dagar__
+__Próvtøkudagur/dagar:__
 Munnliga próvtøkan verður 23/10 og 24/10, 2025.
 Endurpróvtøkan verður í viku 2, 2026.
 
-__Freist fyri frámelding til próvtøku__
+__Freist fyri frámelding til próvtøku:__
 25. august 2025
 
 ## Ábyrgd og undirvísarar
 
-__Ábyrgd__
+__Ábyrgd:__
 Barbara Scalvini
 
-__Undirvísarar__
+__Undirvísarar:__
 Barbara Scalvini
 

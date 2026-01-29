@@ -2,51 +2,51 @@
 
 ## Skeiðsupplýsingar
 
-__Heiti__
+__Heiti:__
 Djúp læring
 
-__Skeiðsnummar__
+__Skeiðsnummar:__
 5735.24
 
-__Lestrarár__
+__Lestrarár:__
 2025-2026
 
-__ECTS__
+__ECTS:__
 7,50
 
-__Stig__
+__Stig:__
 Master
 
-__Deildir__
+__Deildir:__
 Náttúruvísindadeildin
 
-__Útbúgvingar__
+__Útbúgvingar:__
 M.Sc. í dátuvísindum
 
-__Fortreytir__
+__Fortreytir:__
 Hesi (ella líknandi) skeið:
  - 	Innleiðandi forritan við Python
  - 	Maskinlæring
  - 	Støddfrøðiligt grundarlag til tilgjørt vit
 
-__Undirvísingarmál__
+__Undirvísingarmál:__
 Undirvíst verður á føroyskum og enskum-
 
-__Tilmelding__
+__Tilmelding:__
 Lesandi á 2. lestrarhálvu í M.Sc. í dátuvísindum eru sjálvirkandi tilmeldað. Stakgreinalesandi melda seg til skeiðið umvegis Lestrarskrivstovuna.
 
-__Byrjanardato__
+__Byrjanardato:__
 14. apríl 2026
 
-__Endadato__
+__Endadato:__
 4. juni 2026
 
 ## Fakligt innihald
 
-__Endamál__
+__Endamál:__
 Endamálið við skeiðinum er, at lesandi ogna sær eina víðfevnda fatan av framkomnum hugtøkum og byggiløgum í nevralum netverkum (neural networks), har fokus er á djúplærutøkni. Lesandi ogna sær førleikar at sjálvstøðugt brúka optimeringsalgoritmur, reguleringshættir og nýmótans nevral netverksmodell, so sum convolutional nevral netverk og transformers, til uppgávur í veruliga heiminum. Harumframt ogna lesandi sær førleikan at meta kritiskt um avrik, nýtslu og avmarkingar hjá hesum modellum innan AI-gransking og vinnu.
 
-__Læruúrtøka__
+__Læruúrtøka:__
 Tá skeiðið er lokið, skal tann lesandi vera før/ur fyri at: 
 
  - 	Greiða frá grundleggjandi hugtøkum í djúpum nevralum netverkum.
@@ -57,7 +57,7 @@ Tá skeiðið er lokið, skal tann lesandi vera før/ur fyri at:
  - 	Gera eina verkætlan og tulka úrslit við at nýta telduskipan (computational framework) til GPU forritan so sum PyTorch. 
  - 	Skipa og skriva eina samanhangandi og greiða tøkniliga frágreiðing um verkætlanararbeiðið.
 
-__Innihald__
+__Innihald:__
  - 	Nágreiniligt yvirlit yvir djúp nevral netverk, harímillum byggiløg og meginreglur.
  - 	Optimeringshættir, eitt nú gradient descent hættir.
  - 	Backpropagation og hvussu tað verður nýtt at trena nevral netverk.
@@ -66,31 +66,31 @@ __Innihald__
  - 	Byggiløg til transformers, attention mekanisman og nýtsluhættir í natural language processing (NLP) uppgávum. 
  - 	Innleiðsla í graf nevral netverk (graph neural networks) og nýtsluhættir til skipa dáta.
 
-__Læru- og undirvísingarhættir__
+__Læru- og undirvísingarhættir:__
 Fyrilestrar, uppgávur, verkætlanir, bólkaarbeiði og sjálvlestur
 
 ## Próvtøka
 
-__Próvtøkuháttur__
+__Próvtøkuháttur:__
 Ein uppgáva og ein verkætlan skulu gerast meðan skeiðið koyrur. Uppgávan og ein frágreiðing av verkætlanini skulu latast inn, og tann lesandi skal hava staðið báðar til ásettar tíðarfreistir fyri at sleppa til próvtøku. Endaliga próvtøkan er munnlig við ongari fyrireikingartíð. Fyrru helvt av próvtøkuni verja tey lesandi verkætlanar frágreiðingina, og seinnu helvt tosa vit um spurningar úr pensum, ið tey lesandi draga tilvildarliga. Eingin hjálparmiðil er loyvdur undir próvtøkuni, undantikið avrit av frágreiðingini. Munnliga próvtøkan telur 100% av próvtalinum. Endurpróvtøkan fer fram á sama hátt.
 
-__Próvdøming (innanhýsis/uttanhýsis)__
+__Próvdøming (innanhýsis/uttanhýsis):__
 Uttanhýsis
 
-__Próvtalsstigi__
+__Próvtalsstigi:__
 7-talsstigin
 
-__Próvtøkudagur/dagar__
+__Próvtøkudagur/dagar:__
 Próvtøkuinnlatingin verður 05/06-2026. Munnliga próvtøkan verður 18/06-2026 og 19/06-2026.
 
-__Freist fyri frámelding til próvtøku__
+__Freist fyri frámelding til próvtøku:__
 14. apríl 2026
 
 ## Ábyrgd og undirvísarar
 
-__Ábyrgd__
+__Ábyrgd:__
 Høgni Carlsson Kamban
 
-__Undirvísarar__
+__Undirvísarar:__
 Barbara Scalvini, Høgni Carlsson Kamban
 
