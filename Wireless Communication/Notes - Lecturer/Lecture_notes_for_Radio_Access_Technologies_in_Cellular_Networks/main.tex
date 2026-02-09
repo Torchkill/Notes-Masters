@@ -1,0 +1,565 @@
+\documentclass[a4paper,11pt]{article}  % Specifies A4 paper and 11pt font size
+\usepackage[a4paper,margin=1in]{geometry}  % Sets standard 1-inch ma
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\title{Lecture notes for Radio Access Technologies in Cellular Networks}
+\author{Jóhannus Kristmundsson}
+
+\begin{document}
+
+\maketitle
+Version: 13. Feb 2025
+\section{Introduction}
+In modern wireless communication, radio access technologies (RATs) serve as the foundation for enabling connectivity between user devices and the core network infrastructure. These technologies have evolved significantly, from early analog cellular systems to today's advanced 5G networks, optimizing factors such as data rates, latency, and spectral efficiency. Understanding RATs is essential for grasping the mechanisms that facilitate seamless wireless communication in mobile networks.
+
+At the heart of any radio access technology lies the communication channel, which acts as the medium for transmitting information between transmitters and receivers. This channel is inherently affected by various factors, including signal attenuation, interference, and noise, all of which influence the quality and reliability of wireless communication.
+
+In this lecture, we will first establish a fundamental understanding of communication channels, their characteristics, and how they impact wireless transmission. By doing so, we will build the necessary foundation for exploring the key principles and technologies that drive modern cellular networks.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/System-Model-for-HRLL-Transmission-in-IoT_W640.jpg}
+    \caption{Model of a wireless communication channel including transmitter and receiver}\footnotemark
+\end{figure}
+\footnotetext{Figure from Khaled Salah Mohamed, Wireless Communications Systems Architecture, Transceiver Design and DSP Towards 6G. 2022}
+\FloatBarrier
+\section{Additive White Gaussian Noise (AWGN) Channel}
+
+In any wireless communication system, the transmitted signal is inevitably affected by various impairments as it propagates through the channel. One of the most fundamental models used to describe these impairments is the Additive White Gaussian Noise (AWGN) channel. This model provides a baseline for understanding how noise influences signal transmission in an idealized setting without considering additional factors such as fading or interference.
+\subsection{Key Characteristics of AWGN}
+Additive: The noise is added to the transmitted signal rather than modifying it in a multiplicative manner. This means that the received signal can be expressed as:
+\begin{equation} 
+y(t) = x(t) + n(t) 
+\end{equation}
+where y(t) is the received signal, x(t) is the transmitted signal, and n(t) represents the noise component.
+
+White: The noise power is uniformly distributed across all frequencies, meaning it has a constant power spectral density. This assumption simplifies analysis, as it ensures that noise does not preferentially affect certain frequency components of the signal.
+
+Gaussian: The noise follows a normal distribution, which is a reasonable assumption due to the Central Limit Theorem—many independent noise sources combine to form an approximately Gaussian distribution. The noise is typically characterized by a mean of zero and a variance $N_0/2$ per dimension, where $N_0$ represents the power spectral density of the noise.
+
+\subsection{Signal-to-Noise Ratio (SNR)}
+
+A critical parameter in AWGN channels is the signal-to-noise ratio (SNR), which quantifies the relative strength of the signal compared to the noise. It is defined as:
+\begin{equation}
+\text{SNR} = \frac{P_s}{P_n}
+\end{equation}
+where $P_s$ is the signal power, and $P_n$ is the noise power. In practical scenarios, SNR is often expressed in decibels (dB):
+\begin{equation} \text{SNR (dB)} = 10 \log_{10} \left(\frac{P_s}{P_n}\right) \end{equation}
+Higher SNR values indicate better signal quality, leading to lower error rates in communication systems.
+
+
+While real-world cellular channels experience additional impairments such as multipath fading and interference, the AWGN model remains a fundamental building block for understanding more complex channel behaviors. Many digital communication techniques, including modulation, coding, and detection strategies, are initially analyzed under the AWGN assumption before incorporating more realistic channel models.
+
+In the next section, we will expand on the basic AWGN model by introducing fading channels, which capture the additional effects caused by signal reflections, Doppler shifts, and other real-world phenomena that impact radio access technologies.
+
+\section{Bandwidth in Communication Systems}
+
+Bandwidth is a fundamental concept in wireless communication, representing the range of frequencies over which a signal is transmitted or a system operates. It directly affects data transmission rates, signal quality, and spectral efficiency in radio access technologies.
+\subsection{Definition of Bandwidth}
+
+In general, the bandwidth B of a signal or system is the difference between the highest and lowest frequencies it occupies:
+\begin{equation} B = f_{\text{max}} - f_{\text{min}} \end{equation}
+where $f_{\text{max}}$ and $f_{\text{min}}$ are the upper and lower frequency limits of the signal, respectively.
+\subsection{Types of Bandwidth}
+\subsubsection{Signal Bandwidth}
+This refers to the frequency range occupied by a transmitted signal. A wider signal bandwidth typically allows for higher data rates but may require more spectral resources.
+\subsubsection{System Bandwidth}
+This represents the frequency range allocated to a communication system (e.g., LTE, 5G). Regulatory bodies define these bandwidth limits to ensure efficient spectrum usage.
+
+\subsection{Bandwidth and Data Rate}
+
+According to Shannon’s Capacity Theorem, the maximum achievable data rate C for a communication channel with bandwidth B and signal-to-noise ratio (SNR) $\gamma$ is given by:
+\begin{equation} C = B \log_2(1 + \gamma) \end{equation}
+where $\gamma=\frac{P_s}{P_n}$ is the SNR.
+
+From this equation, we observe that increasing the bandwidth $B$, or the SNR, leads to a higher achievable data rate.
+\subsection{Bandwidth Limitations in Cellular Networks}
+
+While increasing bandwidth B allows for higher data rates, practical limitations exist due to regulatory constraints, interference, and spectral efficiency. These factors influence how bandwidth is allocated and utilized in modern cellular networks.
+\subsubsection{Regulatory Constraints}
+Governments and regulatory agencies, such as the International Telecommunication Union (ITU) and national bodies, such as Fjarskiftiseftirlitið, allocate specific frequency bands for different wireless technologies to avoid interference between systems. For example:
+\begin{itemize}
+    \item LTE (4G) operates in bandwidths ranging from 1.4 MHz to 20 MHz per carrier.
+    \item 5G NR supports significantly larger bandwidths, up to 100 MHz in sub-6 GHz (FR1) and 400 MHz in mmWave (FR2).
+\end{itemize}
+
+\subsection{Noise Floor}
+
+In any communication system, the noise floor represents the minimum level of background noise present in the system, setting a fundamental limit on signal detection and receiver sensitivity. This noise is primarily due to thermal noise, which is present in all electronic components and is characterized by Boltzmann’s constant.
+Thermal noise, also known as Johnson-Nyquist noise, is caused by the random motion of electrons in any resistive component. The power spectral density (PSD) of thermal noise is given by:
+
+\begin{equation} 
+N_0 = k_B T 
+\end{equation}
+
+where:
+
+    $kB=1.38×10^{-23}$ J/K is Boltzmann’s constant,
+    $T$ is the absolute temperature in Kelvin (typically 290K for room temperature),
+    $N_0$ is the noise power per unit bandwidth (W/Hz).
+
+Since noise is distributed over all frequencies, the total noise power within a system's bandwidth B is:
+
+\begin{equation}
+P_n = k_B T B 
+\end{equation}
+
+where B is the system’s bandwidth in Hertz (Hz).
+Thus, increasing bandwidth increases the total noise power, which impacts signal-to-noise ratio (SNR) and system sensitivity.
+
+For practical systems, noise power is often expressed in decibels relative to 1 mW (dBm):
+
+\begin{equation} P_n (\text{dBm}) = 10 \log_{10} (k_B T B) + 30 \end{equation}
+
+At room temperature (290K), the thermal noise power for common bandwidths is:
+\begin{equation}
+    P_n(\text{dBm})\approx-174+10\log_{10}(B)
+\end{equation}
+
+where -174 dBm/Hz is the thermal noise floor at 1 Hz bandwidth.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Bandwidth (Hz)} & \textbf{Noise Power (dBm)} \\
+        \hline
+        $1$ Hz       & $-174$ dBm \\
+        $1$ kHz      & $-144$ dBm \\
+        $1$ MHz      & $-114$ dBm \\
+        $10$ MHz     & $-104$ dBm \\
+        $100$ MHz    & $-94$ dBm \\
+        \hline
+    \end{tabular}
+    \caption{Thermal Noise Power at Different Bandwidths (Room Temperature, $T = 290$K)}
+    \label{tab:noise_power}
+\end{table}
+
+
+\subsection{Shannon Capacity Calculation for 4G and 5G}
+
+Using Shannon’s Capacity Theorem, the theoretical maximum data rate C for a given bandwidth B and signal-to-noise ratio (SNR) $\gamma$ is:
+
+\begin{equation} C = B \log_2(1 + \gamma) \end{equation}
+\subsubsection{Assuming 4G LTE (Maximum Bandwidth: 20 MHz, SNR = 20 dB)}
+Convert SNR from dB to linear scale:
+\begin{equation}
+\gamma = 10^{(20/10)} = 100
+\end{equation}
+Apply to Shannon’s formula:
+\begin{equation} 
+C_{\text{4G}} = 20 \times 10^6 \times \log_2(1 + 100)
+\end{equation}
+\begin{equation} 
+C_{\text{4G}} \approx 133.8 \text{ Mbps}
+\end{equation}
+
+\subsubsection{5G NR (Maximum Bandwidth: 400 MHz, SNR = 25 dB)}
+Convert SNR from dB to linear scale:
+\begin{equation}
+\gamma = 10^{(25/10)} = 316.23
+\end{equation}
+Apply to Shannon’s formula:
+\begin{equation} C_{\text{5G}} = 400 \times 10^6 \times \log_2(1 + 316.23)
+\end{equation}
+\begin{equation}
+C_{\text{5G}} \approx 3.32 \text{ Gbps}
+\end{equation}
+
+
+Real-world performance will be lower due to practical factors like interference, mobility, and implementation overhead.
+
+In the next section, we will explore modulation techniques, which determine how information is encoded onto carrier waves to make the best use of available bandwidth.
+
+\section{Modulation in Wireless Communication}
+
+Modulation is the process of encoding information onto a carrier wave by altering its fundamental properties. This enables efficient signal transmission over long distances, minimizes interference, and optimizes bandwidth usage. In cellular networks, modulation techniques are crucial for achieving high data rates and reliable communication.
+\subsection{Types of Modulation}
+
+Modulation techniques can be broadly classified into three categories based on which property of the carrier wave is varied:
+\begin{itemize}
+    \item Amplitude Modulation (AM): The signal is encoded by varying the amplitude of the carrier wave.
+    \begin{itemize}
+        \item Example: KVF on longwave (531 kHz) and Amplitude Shift Keying (ASK) in digital communication.
+        \item Limitation: Highly susceptible to noise and interference.
+    \end{itemize}
+    \item Frequency Modulation (FM): The signal is encoded by varying the frequency of the carrier wave.
+    \begin{itemize}
+        \item Example: KVF on FM (100 MHz), Frequency Shift Keying (FSK) in digital communication.
+        \item Advantage: More resistant to noise than AM.
+    \end{itemize}
+    \item Phase Modulation (PM): The signal is encoded by varying the phase of the carrier wave.
+    \begin{itemize}
+        \item Example: Phase Shift Keying (PSK) in digital communication.
+    \end{itemize}
+\end{itemize}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/RRB_JE_EC_13_6Q_28thAug_2015_Shift3_Hindi_images_Q1.PNG}
+    \caption{Example of AM, FM and PM}\footnotemark
+    \label{fig:enter-label}
+\end{figure}
+\footnotetext{Figure from: https://testbook.com/question-answer/the-process-of-mixing-the-signal-with-the-carrier--5f9120753184406b483df2e6}
+\FloatBarrier
+
+In modern wireless systems, digital modulation techniques are preferred due to their higher spectral efficiency and better noise resistance.
+
+\subsection{Digital Modulation in Cellular Networks}
+
+Phase shift keying can be described as: 
+\begin{equation} 
+s(t) = A \cos(2\pi f_c t + \theta) 
+\end{equation}
+Alternatively, each transmitted symbol can be represented as a complex number consisting of an in-phase (I) component and a quadrature (Q) component. This allows for a more intuitive representation of modulation in the IQ plane, which is widely used in digital communication systems.
+A modulated PSK symbol can be expressed as:
+
+\begin{equation} 
+s = I + jQ 
+\end{equation}
+where:
+    $I=Acos(\theta)$ is the in-phase component,
+    $Q=Asin(\theta)$ is the quadrature component,
+    $j$ is the imaginary unit,
+    $A$ is the signal amplitude,
+    $\theta$ is the phase shift corresponding to the transmitted data.
+\subsubsection{Binary Phase Shift Keying (BPSK)}
+
+Represents data using two phase states:  $\theta = 0^\circ$ and $\theta = 180^\circ$.
+Low spectral efficiency (1 bit per symbol), but high noise resistance.
+Used in control channels and low-SNR environments.
+\subsection{Quadrature Phase Shift Keying (QPSK)}
+Uses four phase states: $0°$, $90^\circ$, $180^\circ$, and $270^\circ$°.
+Each symbol carries 2 bits, improving spectral efficiency. Used extensively in 4G LTE.
+
+\subsection{Quadrature Amplitude Modulation (QAM)}
+Combines amplitude and phase modulation for higher spectral efficiency. Example: 16-QAM, 64-QAM, 256-QAM (common in 4G and 5G).
+For an M-QAM system, the number of bits per symbol is:
+\begin{equation} \log_2(M) \end{equation}
+where M is the number of symbols in the constellation.
+For 256-QAM:
+\begin{equation} 
+b=\log_2(256) = 8 \text{ bits per symbol}
+\end{equation}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/BPSK-4-QAM-and-16-QAM-constellation-diagrams-10.png}
+    \caption{Constellation chart for BPSK, QPSK, QAM}\footnotemark
+\end{figure}
+\footnotetext{Figure from Islam, S., Ali, M., Nasir, U., Ajmal, F., Ali, S., \& Rashdi, A. (2009, February). Enhancing software defined radio (SDR) security using variations in gray coded mapping scheme in rectangular QAM. In 2009 2nd International Conference on Computer, Control and Communication (pp. 1-4). IEEE.}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/QPSK_timing_diagram.png}\footnotemark
+    \caption{Timing diagram for QPSK. The binary data stream is shown beneath the time axis. The two signal components with their bit assignments are shown at the top, and the total combined signal at the bottom. Note the abrupt changes in phase at some of the bit-period boundaries.}
+\end{figure}
+\footnotetext{Figure from Wikipedia contributor Splash}
+\FloatBarrier
+\section{Spectral Efficiency and Symbol Duration}
+
+Spectral efficiency is a key metric in wireless communication, measuring how efficiently data is transmitted over a given bandwidth. However, it is not solely determined by the modulation order; the symbol duration also plays a role in defining overall data throughput.
+\subsection{Definition of Spectral Efficiency}
+Spectral efficiency $\eta$ (measured in bits per second per Hz) is given by:
+\begin{equation} \eta = \frac{R_b}{B}  \quad \text{(bits/s/Hz)} \end{equation}
+where: $R_b$ is the bit rate (bits per second), $B$ is the bandwidth (Hz).
+
+For a given modulation scheme, the bit rate depends on both the modulation order and the symbol rate. At high symbol rates, Inter-Symbol Interference (ISI) becomes a limiting factor. As symbols are transmitted faster, they begin to overlap due to channel dispersion, causing distortion and degrading performance. Techniques such as pulse shaping and equalization are required to mitigate ISI and maintain reliable communication.
+
+Thus, spectral efficiency is a balance between modulation order, ISI constraints, and channel conditions. In the next section, we will discuss channel coding, which enhances reliability by adding redundancy to transmitted signals, improving performance in noisy and interference-prone environments.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/isi.jpeg}
+    \caption{Illustration of Inter-Symbol Interference (ISI) in a multipath wireless channel. The left side shows a transmitted signal encountering multiple propagation paths (A, B, and C) due to reflections from buildings and moving objects. On the right, the delayed arrival of symbols from different paths causes overlap between adjacent symbols at the receiver, resulting in ISI}\footnotemark
+\end{figure}
+\footnotetext{Figure from: https://www.telecomhall.net/t/what-is-isi-inter-symbol-interference-in-lte/6370}
+
+
+\section{Channel Coding and Bit Error Rate (BER) in Wireless Communication}
+In wireless communication, channel coding is essential for improving the reliability of data transmission over noisy channels. It introduces redundancy into the transmitted data, allowing the receiver to detect and correct errors caused by noise, interference, and fading.
+
+At the same time, Bit Error Rate (BER) quantifies the likelihood of errors in a received signal. By applying error-correcting codes, we can significantly reduce the BER and improve the robustness of communication systems
+Channel coding involves adding extra bits to the transmitted message to detect and correct errors at the receiver. The efficiency of a coding scheme is determined by:
+\subsection{Code Rate ($R_c$)}
+\begin{equation} R_c = \frac{k}{n} \end{equation}
+where k is the number of data bits, and n is the total transmitted bits (including redundancy). Lower $R_c$ means more redundancy and better error correction.
+\subsection{Coding Gain}
+The improvement in SNR (in dB) due to channel coding, reducing the required power for a given BER.
+
+Different coding schemes are used across wireless standards to enhance error correction and improve transmission reliability.
+
+Convolutional coding was widely used in 3G, LTE, and earlier wireless systems. It processes data continuously using shift registers and is typically decoded with the Viterbi algorithm. A common example is a rate-1/2 convolutional code, where each input bit produces two coded bits, effectively doubling the transmitted data while improving error correction.
+
+Turbo codes, introduced in 3G and LTE, offer significantly improved error correction by employing two convolutional encoders separated by an interleaver that spreads out errors. This interleaving step helps Turbo codes approach performance close to the Shannon limit, making them highly efficient for mobile communication.
+
+Low-Density Parity-Check (LDPC) codes replaced Turbo codes in 5G NR due to their superior efficiency, particularly for high data rate applications. LDPC codes use a sparse parity-check matrix, allowing for parallelized decoding, which significantly improves computational efficiency and latency in modern wireless systems.
+
+Polar codes, another coding scheme used in 5G NR, are the first proven codes to achieve Shannon capacity in the limit of infinite block length. While they are less effective for large data blocks, they excel in short block-length scenarios, making them the preferred choice for 5G control channels, where rapid and reliable error correction is essential.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Coding Scheme} & \textbf{Code Rate} ($R_c$) & \textbf{Coding Gain (dB) at BER $= 10^{-6}$} \\
+        \hline
+        Uncoded BPSK & 1.00 & 0 dB (Baseline) \\
+        Convolutional Code (Rate 1/2) & 0.5 & 5 dB \\
+        Turbo Code (Rate 1/3) & 0.33 & 7 dB \\
+        LDPC Code (Rate 5/6) & 0.83 & 8 dB \\
+        Polar Code (Rate 1/2) & 0.5 & 7.5 dB \\
+        \hline
+    \end{tabular}
+    \caption{Expected Coding Gain of Different Channel Coding Techniques}
+    \label{tab:coding_gain}
+\end{table}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/1762449a113648d6d419f950e26462bba0b34785.png}
+    \caption{Spectral efficiency verus SNR at different MCS for LTE}\footnotemark
+\end{figure}
+\footnotetext{Figure from 3GGP}
+
+\subsection{Bit Error Rate (BER) and Its Relationship with Coding}
+
+The Bit Error Rate (BER) measures the fraction of incorrectly received bits after transmission. It depends on:
+Modulation scheme (higher-order QAM has higher BER for the same SNR).
+SNR ($\gamma$) (higher SNR reduces BER) and Channel coding (coding reduces BER at the cost of extra redundancy).
+
+For uncoded transmission, the BER for BPSK over an AWGN channel is given by:
+\begin{equation} 
+\text{BER} = Q\left( \sqrt{2\gamma} \right) 
+\end{equation}
+where $Q(x)$ is the Q-function, representing the tail probability of the Gaussian distribution.
+
+For coded transmission, the effective BER is significantly lower due to error correction. The coded BER is approximated as:
+\begin{equation} 
+\text{BER}_{\text{coded}} \approx \frac{1}{n} \sum{i=1}^{n} Q\left( \sqrt{2R_c \gamma} \right) 
+\end{equation}
+where Rc (code rate) reduces the required SNR for a given BER.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figures/PSK_BER_curves.png}
+    \caption{Bit error rate (BER) verus Signal to noise ratio ($\gamma$) for different modulation types.}\footnotemark
+\end{figure}
+\footnotetext{Figure from Wikipedia contributor Splash}
+\FloatBarrier
+\section{Multiple Antenna Techniques in Cellular Networks}
+Multiple-Input Multiple-Output (MIMO) technology employs multiple antennas at both the transmitter and receiver to exploit spatial diversity and improve wireless communication performance. It enables higher data rates and increased reliability without requiring additional bandwidth or transmit power.
+
+\subsubsection{MIMO Configurations and Types}
+\begin{itemize}
+    \item SISO (Single-Input Single-Output): A basic system with one transmit and one receive antenna. Used in legacy systems.
+    \item SIMO (Single-Input Multiple-Output): A single transmit antenna but multiple receive antennas to improve reception (e.g., maximal ratio combining).
+    \item MISO (Multiple-Input Single-Output): Multiple transmit antennas with a single receiver, often used for beamforming.
+    \item MIMO (Multiple-Input Multiple-Output): Multiple antennas at both ends, significantly enhancing performance.
+    \item Massive MIMO (Massive Multiple-Input Multiple-Output): A system with a very large number of antennas at the base station, serving multiple users simultaneously. It leverages spatial multiplexing, beamforming, and interference suppression to significantly improve spectral efficiency, reliability, and network capacity, making it a key technology in 5G and beyond. 
+\end{itemize}
+MIMO systems are classified into spatial diversity and spatial multiplexing techniques, where spatial diversity increases reliability by sending redundant copies of the signal over multiple paths and spatial multiplexing ncreases data throughput by transmitting independent data streams on different antennas.
+\begin{figure}[h] 
+\centering 
+\includegraphics[width=0.7\linewidth]{figures/SISO-SIMO-MISO-MIMO-Channels_W640.jpg} 
+\caption{Different MIMO configurations: SISO, SIMO, MISO, and MIMO.}\footnotemark
+\end{figure}
+\footnotetext{Figure from: Ghayoula, E., Bouallegue, A., Ghayoula, R., \& Chouinard, J. Y. (2014). Capacity and Performance of MIMO systems for Wireless Communications. Journal of Engineering Science and Technology, Review, 7(3).}
+
+\subsection{Beamforming in Cellular Networks}
+
+Beamforming is a signal processing technique that directs radio waves towards a specific user rather than broadcasting signals in all directions. It enhances signal strength, interference rejection, and network capacity.
+
+\subsection{Principles of Beamforming}
+Traditional antenna systems radiate energy omnidirectionally, causing unnecessary interference. Beamforming, however, uses an antenna array to create a focused directional beam, dynamically adjusting to the user’s location.
+
+For an antenna array with N elements, the transmitted signal is:
+\begin{equation} y(t) = \sum_{n=1}^{N} w_n x_n (t) e^{j\phi_n} \end{equation}
+where: $w_n$ are the beamforming weights, $x_n(t)$ is the transmitted signal, $\phi_n$ are the phase shifts applied to steer the beam.
+
+The beamforming gain increases with the number of antennas. The theoretical array gain for N antennas is:
+\begin{equation}
+G_{\text{array}} = 10 \log_{10}(N) \text{ dB}
+\end{equation}
+This means that doubling the number of antennas results in a 3 dB gain, effectively doubling the received power.
+For Massive MIMO systems (e.g., 64, 128, or 256 antennas at the base station), beamforming achieves significant gains, improving cell-edge performance and enabling multi-user spatial multiplexing in 5G networks. For example, with 64 antennas, the array gain is:
+\begin{equation}
+G_{\text{array}} = 10 \log_{10}(64) = 18 \text{ dB} \end{equation}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/example.jpg}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/output.jpg}
+    \end{subfigure}
+    \caption{Illustration of beamforming, where signals from multiple antennas constructively combine in a desired direction.}\footnotemark
+\end{figure}
+\footnotetext{Figure from Antenna-Theory.org}
+\FloatBarrier
+Types of Beamforming
+\begin{itemize}
+    \item Analog Beamforming: Adjusts phase shifts using RF components. Used in mmWave 5G.
+    \item Digital Beamforming: Applies beamforming weights at baseband, allowing multiple beams per antenna array.
+    \item Hybrid Beamforming: A combination of both, balancing complexity and flexibility.
+\end{itemize}
+    
+Beamforming is a key enabler for 5G NR, especially for mmWave frequencies, where narrow beams are necessary to combat high path loss.
+\section{Path Loss in Wireless Communication}
+Path loss refers to the attenuation of signal power as it propagates through the wireless channel. It is a fundamental challenge in cellular networks, directly impacting coverage, capacity, and link reliability. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.3\linewidth]{figures/pathloss.png}
+    \caption{Illustration of Path Loss in Wireless Communication}
+\end{figure}
+In an ideal environment without obstacles, the received power $P_r$ at a distance $d$ from the transmitter is given by the Friis Free-Space Equation:
+
+\begin{equation}
+P_r =  G_t G_r \frac{P_t\lambda^2}{\left(4\pi d\right)^2}
+\end{equation}
+where:
+    $P_t$ is the transmit power (dBm),
+    $G_t$, $G_r$ are the transmitter and receiver antenna gains (dBi),
+    $\lambda = c/f$ is the wavelength (with c being the speed of light and f the frequency),
+    d is the distance between transmitter and receiver.
+
+The corresponding path loss (FSPL) in dB is:
+
+\begin{equation}
+L_{\text{FSPL}} (dB) = 20 \log_{10}(d) + 20 \log_{10}(f) + 20 \log_{10} \left(\frac{4\pi}{c}\right)
+\end{equation}
+
+From this equation, we see that higher frequencies (e.g., mmWave 5G) suffer from greater path loss than lower frequencies.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/output(11).png}
+    \caption{FSPL versus Distance at different frequencies}
+\end{figure}
+
+\section{Link Budget in Wireless Communication}
+
+A link budget is an essential tool for analyzing the performance of a wireless communication system. It quantifies all the gains and losses along a transmission path, allowing engineers to estimate the received signal strength and determine whether a reliable connection can be maintained.
+The general link budget equation expresses the received power $P_R$ in terms of transmit power, path loss, and additional gains or losses in the system:
+
+\begin{equation}
+P_r = P_t + G_t + G_r - L_{\text{path}} - L_{\text{misc}}
+\end{equation}
+
+where:
+    $L_{\text{path}}$ = Path loss (dB), including FSPL and additional propagation losses
+    $L_{\text{misc}}$ = Miscellaneous losses (dB) due to fading, interference, atmospheric absorption, and penetration losses
+
+The received power $P_r$ must be must be above both the receiver sensitivity and the noise floor plus the required SNR to maintain a reliable connection:
+
+\begin{equation} 
+P_r - P_n \geq \text{SNR}_{\text{min}} 
+\end{equation}
+
+where $P_n$ s the thermal noise power, given by:
+
+\begin{equation} P_n = -174 + 10 \log_{10}(B) \end{equation}
+
+for bandwidth B in Hz.
+\subsection{Example Link Budget Calculation (5G mmWave)}
+Sample link budget for a 5G mmWave system (28 GHz) over 500 meters:
+Given Parameters:
+
+    Transmit Power: $Pt=30$ dBm (1 W)
+    Transmitter Antenna Gain: $Gt=24$ dBi
+    Receiver Antenna Gain: $Gr=24$ dBi
+    Path Loss (FSPL at 28 GHz, 500 m):
+    \begin{equation}
+    L_{\text{FSPL}} = 20 \log_{10}(500) + 20 \log_{10}(28 \times 10^9) + 20 \log_{10} \left(\frac{4\pi}{3 \times 10^8}\right)
+    \end{equation}
+    Evaluating this, we get FSPL$\approx122.5$ dB.
+    Miscellaneous Losses (penetration, fading, etc.): $L_{misc}=8$ dB
+    Receiver Sensitivity: $Pmin=-90$ dBm
+
+Compute the Received Power
+
+\begin{equation}
+P_r = 30 + 24 + 24 - 122.5 - 8
+\end{equation}
+\begin{equation}
+P_r = -52.5 \text{ dBm}
+\end{equation}
+Compute the Noise Floor
+
+\begin{equation} P_n = -174 + 10 \log_{10}(10^8) \end{equation}
+
+\begin{equation} P_n = -94 \text{ dBm} \end{equation}
+Compute SNR and Feasibility Check
+
+\begin{equation} \text{SNR} = P_r - P_n = -52.5 - (-94) = 41.5 \text{ dB} \end{equation}
+
+Since SNR$=41.5$ dB is much higher than the required SNR for 16-QAM ($\approx~10 dB$), the link is feasible.\\
+\noindent\fbox{%
+    \parbox{\textwidth}{%
+        Is this link feasible without antenna gain? Calculate \( P_r \) assuming \( G_t = 0 \) dBi and \( G_r = 0 \) dBi.
+    }%
+}
+
+
+\newpage
+
+\section*{Lab Experiment: Measuring Path Loss}
+
+The purpose of this lab is to measure received power at different distances and frequencies using the Rohde \& Schwarz CMU200 as the receiver and an Agilent Signal Generator as the transmitter. You will analyse how frequency, distance, and environment affect signal attenuation and compare their findings to theoretical models.\\
+Equipment:
+\begin{itemize}
+    \item Rohde \& Schwarz CMU200 (Receiver)
+    \item Agilent Signal Generator (Transmitter)
+    \item Antenna for 145 MHz (VHF) and 475 MHz (UHF)
+    \item Measuring Tape
+    \item Notebook or Spreadsheet for data recording
+\end{itemize}
+
+\subsection*{Experimental Setup}
+Configure the Signal Generator to output a continuous wave (CW):
+\begin{itemize}
+    \item Install antenna on RF port. Attach in such a way it is pointing "up"
+    \item Set frequency to 145 MHz, then repeat at 475 MHz.
+    \item Set Amplitude to -20 dBm
+    \item Ensure modulation is OFF, and RF is ON.
+\end{itemize}
+Configure the CMU200
+\begin{itemize}
+    \item Install antenna on RF 2 port. Attach so that it is pointing up.
+    \item Select Basic Functions -> RF -> Spectrum
+    \item Select Analyzer settings. Set Span to 100 KHz and Center to 145 MHz or 475 MHz. Set RBW (Bandwith) to Auto.
+    \item Set marker to the frequency being measured. 
+\end{itemize}
+
+Measurement Locations:
+\begin{itemize}
+    \item Enclosed Hallway (Narrow corridor with walls on both sides)
+    \item Open Room (Large indoor space with fewer obstructions)
+    \item Outdoor Area (if possible) 
+\end{itemize}
+Measurement Procedure:
+\begin{itemize}
+    \item Place the Signal Generator at a fixed position, with the same orientation as the receiving antenna. Ensure that no objects (including people) are obstructing the line of sight between the antennas.
+    \item Use the CMU200/FPC1000 to measure the received power (dBm) at increasing distances (e.g., 0.1m, 0.5m, 1m, 2m, 5m, 10m, 20m, more if possible?).
+    \item Repeat the process for both 145 MHz and 475 MHz in all environments.
+\end{itemize}
+
+\subsection*{Predictions \& Analysis}
+
+Before collecting data, make predictions on:
+\begin{itemize}
+    \item Which environment will experience the highest path loss? (Hallway, Open Room, or Outdoor)
+    \item How does frequency impact attenuation? (Will 475 MHz experience more loss than 145 MHz?)
+    \item How will the environment affect the received power? (e.g., higher losses in in hallways or in the open environment.)
+\end{itemize}
+
+\subsection*{Assignment 2: Report on Path Loss and Frequency Selection for IoT}
+
+Each group, of max 3 people, will submit a concise report (max 5 pages) analysing their measured results, predictions, and implications for IoT applications. The report should compare received power at different distances and frequencies, discussing deviations from predictions and the influence of multipath effects.
+
+A comparison with the Free-Space Path Loss (FSPL) model should be included, and a discussion on environmental impacts on signal attenuation. The discussion should then focus on frequency and bandwidth choices for IoT, evaluating trade-offs in coverage and power efficiency between lower and higher frequencies. 
+
+The report should conclude with key takeaways on path loss behaviour and a recommendation on the best frequency and bandwidth for IoT. 
+
+The equipment is available at Sjóvinnuhúsið until the 17. Feb, and will be available at the NVD lab at INOVA after. The lab is open during working hours\\
+To schedule a lab session, please contact Mats, the laboratory technician. He will grant you access and provide a brief tour of the facility. You can reach him via email at matsap@setur.fo or by phone at 267278.
+\end{document}
