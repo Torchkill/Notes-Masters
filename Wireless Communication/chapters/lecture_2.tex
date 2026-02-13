@@ -1,83 +1,48 @@
 %====================================================
 \section{Lecture 2}
 
+%====================================================
 \subsection{Modulation}
 
-In practical wireless systems, information cannot be transmitted directly at baseband over long distances. Antennas are physically inefficient at very low frequencies, and multiple users cannot share the spectrum effectively without frequency separation. 
+In wireless communication, information cannot be transmitted efficiently at baseband over long distances. Antennas are physically inefficient at very low frequencies, and multiple users require frequency separation to share spectrum. 
 
-For this reason, a baseband message signal $m(t)$ is shifted to a higher frequency using a carrier wave of frequency $f_c$. This process is known as modulation.
+To enable radiation and spectrum allocation, a baseband message signal $m(t)$ is shifted to a higher carrier frequency $f_c$. This process is called modulation.
 
-The simplest modulation process multiplies the baseband signal by a cosine carrier:
+The simplest modulation is:
 
 \[
 s(t) = m(t)\cos(2\pi f_c t).
 \]
 
-Here, $f_c$ is called the carrier frequency, and it determines where the transmitted signal appears in the frequency spectrum.
-
-Modulation therefore performs two key roles:
-\begin{enumerate}
-    \item Enables practical radiation through antennas.
-    \item Allows multiple signals to coexist at different carrier frequencies.
-\end{enumerate}
+Here, $f_c$ determines where the signal appears in the spectrum. Modulation enables efficient transmission and multiplexing.
 
 %====================================================
 \subsection{Baseband and Bandpass Signals}
 
-A baseband signal is centered around 0 Hz in the frequency domain. Its spectrum extends from $-B$ to $B$, where $B$ is the bandwidth of the signal.
+A baseband signal has spectrum centered at 0 Hz. Its bandwidth extends from $-B$ to $B$.
 
-After modulation, the signal becomes a bandpass signal whose spectrum is centered at $f_c$.
+After modulation, the spectrum is shifted to $\pm f_c$, forming a bandpass signal.
 
-\subsubsection*{Baseband Spectrum}
-
-\begin{center}
-\begin{tikzpicture}
-\draw[->] (-4,0) -- (4,0) node[right] {Frequency};
-\draw[->] (0,0) -- (0,2);
-\draw[thick] (-1.5,0) -- (-1.5,1.5);
-\draw[thick] (1.5,0) -- (1.5,1.5);
-\node at (0,-0.6) {0 Hz};
-\node at (0,-1.2) {Baseband};
-\end{tikzpicture}
-\end{center}
-
-\subsubsection*{Bandpass Spectrum}
-
-\begin{center}
-\begin{tikzpicture}
-\draw[->] (0,0) -- (10,0) node[right] {Frequency};
-\draw[->] (0,0) -- (0,2);
-\draw[thick] (3,0) -- (3,1.5);
-\draw[thick] (7,0) -- (7,1.5);
-\node at (5,-0.6) {$f_c$};
-\node at (5,-1.2) {Bandpass};
-\end{tikzpicture}
-\end{center}
-
-The bandwidth of the bandpass signal remains:
+Bandwidth is defined as:
 
 \[
 B = f_H - f_L.
 \]
 
-A fundamental efficiency metric is spectral efficiency:
+Spectral efficiency measures how efficiently bandwidth is used:
 
 \[
 \eta = \frac{R_b}{B}.
 \]
 
-This measures how efficiently bandwidth is used to transmit information.
-
 %====================================================
 \subsection{Amplitude Modulation (AM)}
 
-In amplitude modulation, the amplitude of the carrier is varied proportionally to the message signal:
+In AM, the carrier amplitude varies with the message:
 
 \[
 s(t) = A_c [1 + k_a m(t)] \cos(2\pi f_c t).
 \]
-
-The quantity $k_a$ controls how strongly the message influences the carrier amplitude.
 
 The modulation index is:
 
@@ -85,35 +50,20 @@ The modulation index is:
 \mu = k_a \max |m(t)|.
 \]
 
-If $\mu > 1$, the envelope crosses zero, causing overmodulation and distortion.
+If $\mu > 1$, overmodulation occurs and distortion appears.
 
-AM is simple to implement but inefficient in power because a large portion of transmitted energy resides in the carrier.
-
-\subsubsection*{AM Envelope}
-
-\begin{center}
-\begin{tikzpicture}[scale=1]
-\draw[->] (-0.5,0) -- (6,0) node[right] {$t$};
-\draw[->] (0,-2) -- (0,2);
-\draw[domain=0:6,smooth,variable=\x,blue]
-plot ({\x},{(1+0.5*sin(2*pi*\x/4))*sin(2*pi*\x)});
-\draw[domain=0:6,smooth,variable=\x,red,dashed]
-plot ({\x},{(1+0.5*sin(2*pi*\x/4))});
-\draw[domain=0:6,smooth,variable=\x,red,dashed]
-plot ({\x},{-(1+0.5*sin(2*pi*\x/4))});
-\end{tikzpicture}
-\end{center}
+AM is simple but inefficient in power because energy is transmitted in both the carrier and sidebands.
 
 %====================================================
 \subsection{Double Sideband Suppressed Carrier (DSB-SC)}
 
-If the carrier is removed and only the product $m(t)\cos(2\pi f_c t)$ is transmitted, the scheme is called DSB-SC.
+Removing the carrier produces:
 
 \[
 s(t) = m(t)\cos(2\pi f_c t).
 \]
 
-The resulting spectrum consists of two shifted copies of the baseband spectrum, producing bandwidth:
+The bandwidth is:
 
 \[
 B_{DSB} = 2B.
@@ -122,40 +72,33 @@ B_{DSB} = 2B.
 This improves power efficiency but still occupies twice the baseband bandwidth.
 
 %====================================================
-\subsection{Frequency Modulation (FM)}
+\subsection{Angle Modulation: FM and PM}
 
-In frequency modulation, information is conveyed by varying the instantaneous frequency of the carrier:
+Frequency modulation (FM):
 
 \[
 s(t) = A_c \cos\left(2\pi f_c t + 2\pi k_f \int m(t) dt \right).
 \]
 
-The peak frequency deviation is:
+Peak deviation:
 
 \[
 \Delta f = k_f A_m.
 \]
 
-Unlike AM, FM has constant amplitude, making it more resistant to noise.
-
-Practical bandwidth is estimated using Carson’s rule:
+Carson’s rule:
 
 \[
 B_{FM} = 2(\Delta f + B).
 \]
 
-This shows that FM bandwidth increases with deviation.
-
-%====================================================
-\subsection{Phase Modulation (PM)}
-
-In phase modulation, the carrier phase varies directly with the message:
+Phase modulation (PM):
 
 \[
 s(t) = A_c \cos(2\pi f_c t + k_p m(t)).
 \]
 
-FM and PM are closely related. Both belong to the class of angle modulation schemes.
+FM and PM are collectively called angle modulation and offer better noise immunity than AM.
 
 %====================================================
 \subsection{Complex Baseband Representation}
@@ -166,106 +109,224 @@ Bandpass signals can be expressed using complex notation:
 s(t) = I(t) + jQ(t) = A e^{j\theta}.
 \]
 
-This representation simplifies analysis and forms the foundation of digital modulation techniques.
-
-Symbols are transmitted over finite intervals:
+Symbols are transmitted over finite time intervals:
 
 \[
 R_s = \frac{1}{T_s}.
 \]
 
-If $M$ symbols are used:
+Bit rate:
 
 \[
 R_b = R_s \log_2 M.
 \]
 
-Higher $M$ increases data rate but reduces noise tolerance.
+Increasing $M$ increases data rate but reduces noise tolerance.
 
 %====================================================
-\subsection{Multipath Propagation}
+\subsection{Electromagnetic Wave Propagation}
 
-Wireless signals rarely follow a single direct path. Instead, reflections from buildings, ground, and objects create multiple delayed copies of the signal.
+In free space, the electric field of a propagating wave is:
 
-This leads to:
-\begin{itemize}
-\item Inter-Symbol Interference (ISI)
-\item Fading
-\end{itemize}
+\[
+E(f,t,r) = \frac{E_0}{r} e^{-j(2\pi f t - kr)},
+\quad k = \frac{2\pi}{\lambda}.
+\]
 
-\begin{center}
-\begin{tikzpicture}
-\node (tx) at (0,0) {Tx};
-\node (rx) at (8,0) {Rx};
-\draw[->] (tx) -- (rx);
-\draw[->] (tx) to[out=40,in=140] (rx);
-\draw[->] (tx) to[out=-40,in=-140] (rx);
-\end{tikzpicture}
-\end{center}
+Amplitude decays as $\frac{1}{r}$ and power decays as $\frac{1}{r^2}$.
 
-%====================================================
-\subsection{Free Space Propagation Model (Exam Important)}
-
-In ideal free space:
+Free-space received power:
 
 \[
 P_r = P_t \left(\frac{\lambda}{4\pi d}\right)^2.
 \]
 
-Since $\lambda = \frac{c}{f_c}$, higher carrier frequencies produce greater path loss.
+Since $\lambda = \frac{c}{f_c}$, higher carrier frequencies suffer greater path loss.
 
-Received power decays proportionally to:
-
-\[
-d^2.
-\]
-
-This quadratic decay is fundamental in link budget design.
-
-%====================================================
-\subsection{Duplexing}
-
-Communication may occur in one or both directions:
-
-Simplex allows one-way communication.
-
-Half-duplex allows two-way communication, but not simultaneously.
-
-Full-duplex allows simultaneous transmission and reception.
-
-%====================================================
-\subsection{Multiple Access Techniques}
-
-To allow multiple users to share limited spectrum, several strategies are used.
-
-FDMA separates users in frequency.
-
-TDMA separates users in time.
-
-CDMA separates users using orthogonal codes:
-
-\[
-s(t) = m(t)c(t).
-\]
-
-Modern systems use OFDM and OFDMA to dynamically allocate subcarriers.
-
-%====================================================
-\subsection{Path Loss Model}
-
-Real environments are more complex than free space. A general empirical model is:
+More generally:
 
 \[
 PL(d) = PL(d_0) + 10n \log_{10}\left(\frac{d}{d_0}\right).
 \]
 
-The exponent $n$ depends on the environment.
+%====================================================
+\subsection{Multipath Propagation}
+
+In realistic environments, signals reach the receiver via multiple paths due to reflection, diffraction, and scattering.
+
+Each path has:
+\[
+\text{Amplitude } \alpha_i, \quad
+\text{Delay } \tau_i, \quad
+\text{Phase } \phi_i.
+\]
+
+Phase depends on distance:
+
+\[
+\phi = \frac{2\pi d}{\lambda}.
+\]
+
+Even small path differences create large phase shifts, producing constructive and destructive interference.
+
+\begin{center}
+\begin{tikzpicture}
+\node (tx) at (0,0) {Tx};
+\node (rx) at (8,0) {Rx};
+\node (obs) at (4,2) {Obstacle};
+\draw[->] (tx) -- (rx);
+\draw[->] (tx) -- (obs);
+\draw[->] (obs) -- (rx);
+\draw[->] (tx) to[out=-40,in=-140] (rx);
+\end{tikzpicture}
+\end{center}
+
+This causes fading and inter-symbol interference (ISI).
 
 %====================================================
-\subsection{Channel Behavior}
+\subsection{Time Variation and Doppler}
 
-Wireless channels may be:
-Line-of-sight (LOS), where a direct path exists.
-Time-invariant, where channel conditions remain stable.
-Time-variant, where motion causes fading and Doppler effects.
-Understanding channel behavior is essential for robust system design.
+Wireless channels vary over time due to motion and environmental changes.
+
+Slow fading results from distance and shadowing.
+
+Fast fading results from multipath interference.
+
+Motion causes Doppler shift:
+
+\[
+f_D = \frac{v}{\lambda}\cos(\theta).
+\]
+
+Doppler introduces frequency spreading and limits coherence time.
+
+%====================================================
+\subsection{Linear Time-Varying Channel Model}
+
+The wireless channel is modeled as:
+
+\[
+y(t) = \int h(t,\tau)x(t-\tau)d\tau + n(t).
+\]
+
+The impulse response is:
+
+\[
+h(t,\tau) = \sum_{i=1}^{N} \alpha_i(t)\delta(\tau - \tau_i).
+\]
+
+If only a Line-of-Sight (LOS) path exists:
+
+\[
+h(\tau) = \alpha_0 \delta(\tau - \tau_0),
+\quad \tau_0 = \frac{D}{c}.
+\]
+
+%====================================================
+\subsection{Power Delay Profile (PDP)}
+
+The Power Delay Profile describes received power versus delay.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[->] (0,0) -- (8,0) node[right] {Delay};
+\draw[->] (0,0) -- (0,3) node[above] {Power};
+\draw[thick] (1,0) -- (1,2.5);
+\draw[thick] (2.5,0) -- (2.5,1.8);
+\draw[thick] (4,0) -- (4,1.2);
+\draw[thick] (6,0) -- (6,0.6);
+\end{tikzpicture}
+\end{center}
+
+Delay spread $T_d$ determines coherence bandwidth:
+
+\[
+W_c \approx \frac{1}{T_d}.
+\]
+
+If:
+
+\[
+B \ll W_c \Rightarrow \text{Flat fading}.
+\]
+
+If:
+
+\[
+B > W_c \Rightarrow \text{Frequency-selective fading}.
+\]
+
+%====================================================
+\subsection{Four-Domain Channel Representation}
+
+The wireless channel can be represented in four equivalent domains:
+
+Time–Delay:
+\[
+h(t,\tau)
+\]
+
+Time–Frequency:
+\[
+H(f,t)
+\]
+
+Delay–Doppler:
+\[
+S(\tau,\nu)
+\]
+
+Frequency–Doppler:
+\[
+H(f,\nu)
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node (ht) at (0,2) {$h(t,\tau)$};
+\node (Hft) at (6,2) {$H(f,t)$};
+\node (Stv) at (0,-1) {$S(\tau,\nu)$};
+\node (Hfv) at (6,-1) {$H(f,\nu)$};
+\draw[<->,thick] (ht) -- node[above]{Fourier in $\tau$} (Hft);
+\draw[<->,thick] (Stv) -- node[below]{Fourier in $\tau$} (Hfv);
+\draw[<->,thick] (ht) -- node[left]{Fourier in $t$} (Stv);
+\draw[<->,thick] (Hft) -- node[right]{Fourier in $t$} (Hfv);
+\end{tikzpicture}
+\end{center}
+
+Each representation emphasizes different physical aspects: delay spread, Doppler spread, frequency selectivity, and time variation.
+
+%====================================================
+\subsection{Noise and SNR}
+
+Wireless systems are affected by Additive White Gaussian Noise (AWGN):
+
+\[
+y(t) = x(t) + n(t).
+\]
+
+Noise power over bandwidth $B$:
+
+\[
+P_n = N_0 B.
+\]
+
+Signal-to-noise ratio:
+
+\[
+\text{SNR} = \frac{P_s}{P_n}.
+\]
+
+%====================================================
+\subsection{Multiple Access and Duplexing}
+
+Spectrum is shared using:
+
+FDMA (frequency separation),  
+TDMA (time separation),  
+CDMA (code separation),  
+OFDM/OFDMA (subcarrier allocation).
+
+Communication modes include simplex, half-duplex, and full-duplex.
+
+%====================================================
