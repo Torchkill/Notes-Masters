@@ -1,0 +1,217 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{lastpage}  % Ensures total page count
+
+\title{5730 - Mobile Communications and Internet of Things Spring Exam 2025
+Anwser Key}
+\date{18. March 2025}
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhf{}  % Clear default headers and footers
+\renewcommand{\headrulewidth}{0pt}  % No top horizontal line
+\renewcommand{\footrulewidth}{0pt}  % No bottom horizontal line
+\fancyfoot[R]{\thepage/\pageref{LastPage}}  % Right footer: X/Y format
+\fancypagestyle{plain}{
+    \fancyhf{}  % Clear default first-page footer
+    \fancyfoot[R]{\thepage/\pageref{LastPage}}  % Apply the same footer
+    \renewcommand{\headrulewidth}{0pt}  % Remove top line on first page
+    \renewcommand{\footrulewidth}{0pt}  % Ensure no bottom line
+}
+\maketitle
+
+\section{Answer Key - Multiple Choice Questions (MCQs)}
+\begin{multicols}{2}
+\begin{enumerate}
+    \item \textbf{D.} IPv4
+    \item \textbf{A.} To allow gradual migration from LTE to 5G while maintaining service continuity.
+    \item \textbf{B.} Enabling multiple virtual networks on a single physical infrastructure.
+    \item \textbf{A.} NB-IoT
+    \item \textbf{B.} Increasing antenna gain
+    \item \textbf{B.} Low-latency data processing close to the source
+    \item \textbf{B.} 1-10 kilometers
+    \item \textbf{B.} Autonomous driving
+    \item \textbf{A.} Predicting network congestion and optimizing routing  
+    \item \textbf{B.} Improve security
+    \item \textbf{A.} Allowing simultaneous transmission to multiple users
+    \item \textbf{B.} Using edge computing for local processing
+    \item \textbf{B.} Reducing energy consumption
+    \item \textbf{B.} SDN
+    \item \textbf{B.} Low-power, long-range communication
+    \item \textbf{A.} Providing high data rates for enhanced multimedia experiences
+    \item \textbf{B.} Message Queue Telemetry Transport
+    \item \textbf{B.} By enabling predictive maintenance and efficient routing
+    \item \textbf{C.} Ultra-low latency and high reliability
+    \item \textbf{B.} Broker
+    \item \textbf{B.} Frequency attenuation and penetration losses
+    \item \textbf{A.} It uses licensed spectrum for improved reliability.
+    \item \textbf{A.} Bandwidth and signal-to-noise ratio (SNR)
+    \item \textbf{B.} Blockchain allows for immutable and decentralized identity verification without a single point of failure
+    \item \textbf{C.} Lower computational and memory overhead comes at the cost of reduced cryptographic strength or resistance to certain attacks.
+\end{enumerate}
+\end{multicols}
+
+
+
+\newpage
+\section*{Answer Key: Short Questions}
+
+\begin{enumerate}
+    \item \textbf{Role of eMBB in 5G communication:} \\
+    eMBB (enhanced Mobile Broadband) enables high data rates and supports applications such as HD video streaming, AR/VR, and cloud computing. It is designed to enhance user experiences in scenarios requiring large bandwidth.
+
+    \item \textbf{Definition and significance of edge computing:} \\
+    Edge computing refers to processing data near the source (e.g., at the sensor or gateway), rather than sending it to a centralized cloud. This reduces latency, improves responsiveness, and saves bandwidth—especially important for time-sensitive IoT applications.
+
+    \item \textbf{Purpose of beamforming in massive MIMO:} \\
+    Beamforming directs radio signals toward a specific user/device rather than broadcasting in all directions. In massive MIMO, it improves signal strength, increases spectral efficiency, and reduces interference.
+
+    \item \textbf{Two real-world applications of massive IoT:} 
+    \begin{itemize}
+        \item Smart metering (e.g., electricity, water usage monitoring)
+        \item Environmental monitoring (e.g., air quality sensors in smart cities)
+    \end{itemize}
+
+    \item \textbf{Relationship between bandwidth and data rate:} \\
+    The data rate in a wireless system is directly proportional to the bandwidth and the spectral efficiency of the modulation scheme. Increasing bandwidth allows higher data rates, assuming the SNR is sufficient.
+
+    \item \textbf{Comparison of QPSK and 16-QAM:} 
+    \begin{itemize}
+        \item \textbf{Spectral Efficiency:} 16-QAM is more efficient (4 bits/symbol) than QPSK (2 bits/symbol).
+        \item \textbf{Noise Robustness:} QPSK is more robust to noise due to greater symbol spacing in the constellation.
+    \end{itemize}
+
+    \item \textbf{How massive MIMO improves energy efficiency:} \\
+    Massive MIMO enables precise beamforming, allowing devices to transmit at lower power while maintaining reliable connections. It also supports spatial multiplexing, reducing overall energy per bit transmitted.
+
+    \item \textbf{Difference between SDN and traditional architecture:} \\
+    Software-Defined Networking (SDN) separates the control plane from the data plane, allowing centralized, programmable control of the network. Traditional architectures integrate control and forwarding, making them less flexible and harder to scale.
+
+    \item \textbf{Licensed vs. unlicensed spectrum for IoT (with examples):}
+    \begin{itemize}
+        \item \textbf{Licensed:} Reliable and interference-free, but costly (e.g., NB-IoT using cellular spectrum).
+        \item \textbf{Unlicensed:} Free to use but may suffer from interference (e.g., LoRaWAN operating in ISM bands).
+    \end{itemize}
+
+    \item \textbf{Role and limitations of SHA-256 in IoT authentication:}
+    \begin{itemize}
+        \item \textbf{Role:} SHA-256 is a cryptographic hash used to verify integrity and authenticate devices or messages.
+        \item \textbf{Limitations:} Computationally intensive for resource-constrained IoT devices; may increase latency and power consumption.
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+\section*{Logical Reasoning}
+
+\begin{enumerate}
+\item \textbf{Noise Floor:} \\
+The thermal noise power at room temperature (290 K) for 180 kHz bandwidth is calculated using:
+\[
+P_n = 10 \log_{10}(k_B \cdot T \cdot B) + 30
+\]
+where:
+\begin{itemize}
+    \item \(k_B = 1.38 \times 10^{-23} \, \text{J/K}\) (Boltzmann's constant)
+    \item \(T = 290 \, \text{K}\) (room temperature)
+    \item \(B = 180 \times 10^3 \, \text{Hz} = 180\, \text{kHz}\) (bandwidth)
+\end{itemize}
+
+Substituting the values:
+\[
+P_n = 10 \log_{10}(1.38 \times 10^{-23} \cdot 290 \cdot 180 \times 10^3) + 30
+\approx 10 \log_{10}(7.21 \times 10^{-15}) + 30
+\]
+\[
+P_n \approx 10 \cdot (-14.142) + 30 = -141.42 + 30 = \boxed{-121.4 \, \text{dBm}}
+\]
+
+\vspace{0.5em}
+\noindent\textit{Alternative method:}
+
+At room temperature, the thermal noise floor is approximately \(-174 \, \text{dBm/Hz}\). To find the total noise power over a 180 kHz bandwidth:
+\[
+P_n = -174 + 10 \log_{10}(180 000)
+= -174 + 52.55 = \boxed{-121.4 \, \text{dBm}}
+\]
+
+    \item \textbf{Sensor and Base Station Setup:}
+    \begin{enumerate}
+        \item \textbf{Free-Space Path Loss (FSPL):}
+        \[
+        \text{FSPL} = 20\log_{10}(d) + 20\log_{10}(f) - 20\log_{10}\left(\frac{4\pi}{c}\right) = 101.99 \text{ dB}
+        \]
+        where \(d = 1000 \, \text{m}\), \(f = 3 \, \text{GHz}\)
+
+        \item \textbf{Required Transmission Power:} \\
+
+        To determine the minimum required transmission power for an SNR of 0 dB, we begin with the link budget equation:
+
+        \[
+        P_{\text{rx}} = P_{\text{tx}} + G_{\text{tx}} + G_{\text{rx}} - L_{\text{fs}} - L_{\text{other}}
+        \]
+
+        Rearranged to solve for \( P_{\text{tx}} \):
+
+        \[
+        P_{\text{tx}} = P_{\text{rx}} - G_{\text{tx}} - G_{\text{rx}} + L_{\text{fs}} + L_{\text{other}}
+        \]
+
+        Where:
+        \begin{itemize}
+            \item \( P_{\text{rx}} = -121.42 \) dBm (minimum required received power to achieve SNR = 0 dB)
+            \item \( G_{\text{tx}} = G_{\text{rx}} = 0 \) dBi (antenna gains)
+            \item \( L_{\text{fs}} = 101.99 \) dB (free-space path loss)
+            \item \( L_{\text{other}} = 8 \) dB (additional losses, e.g., wall attenuation, fading)
+        \end{itemize}
+
+        Substituting the values:
+
+        \[
+        P_{\text{tx}} = -121.42 + 101.99 + 8 = -11.43 \text{ dBm}
+        \]
+
+       To achieve an SNR of 0 dB at the receiver, the system must transmit at a minimum power of \(-11.43\) dBm.
+
+
+        \item \textbf{Effect of Increasing Bandwidth to 1.4 MHz:} \\
+        The new noise power is:
+        \[
+        P_n = -112.52 \text{ dBm}
+        \]
+        Compared to 180 kHz, the SNR decreases by:
+        \[
+        \Delta \text{SNR} = 8.91 \text{ dB}
+        \]
+        Increasing bandwidth increases noise, which reduces SNR.
+
+    \end{enumerate}
+
+    \item \textbf{Modulation:}
+    \begin{enumerate}
+        \item 16-QAM supports:
+        \[
+        \log_2(16) = 4 \text{ bits per symbol}
+        \]
+
+        \item \textit{Switching to 64-QAM:} Increases bits per symbol (6), improving spectral efficiency, but requires higher SNR. For low-SNR devices like IoT sensors, this can worsen reliability.
+    \end{enumerate}
+
+    \item \textbf{Beamforming and Capacity:}
+    \begin{enumerate}
+        \item To achieve a 10 dB SNR gain:
+        \[
+        \text{Linear gain} = 10 \Rightarrow \text{Approx. } 10 \text{ antennas needed}
+        \]
+
+        \item For 100 MHz bandwidth and SNR = 10 dB:
+        \[
+        C = B \log_2(1 + \text{SNR}) = 100 \times 10^6 \log_2(11) \approx 345.94 \text{ Mbps}
+        \]
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

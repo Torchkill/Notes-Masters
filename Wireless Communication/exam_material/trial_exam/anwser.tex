@@ -1,0 +1,203 @@
+\section*{Suggested Solutions}
+
+\subsection*{Section 1 --- Multiple Choice}
+
+\begin{center}
+\begin{tabular}{cccccccccc}
+1:b & 2:a & 3:b & 4:b & 5:b & 6:b & 7:b & 8:c & 9:c & 10:a \\
+11:a & 12:b & 13:a & 14:b & 15:b & 16:a & 17:b & 18:a & 19:a & 20:a
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\subsection*{Section 2 --- Short Answers}
+
+\begin{enumerate}[leftmargin=0.9cm]
+
+\item 
+\[
+L_{\mathrm{FSPL}} = 32.44 + 20\log_{10}(f_{\mathrm{MHz}}) + 20\log_{10}(d_{\mathrm{km}})
+\]
+Frequency $\uparrow$ $\Rightarrow$ loss $\uparrow$, distance $\uparrow$ $\Rightarrow$ loss $\uparrow$.
+
+\item 
+Licensed: exclusive use (e.g., NB-IoT).  
+Unlicensed: shared (e.g., LoRa/WiFi).  
+
+a) More users $\Rightarrow$ more interference.  
+b) Example: CSMA / listen-before-talk.
+
+\item 
+\[
+\mathrm{SINR} = \frac{S}{N+I}
+\]
+Includes interference, more realistic than SNR.
+
+\item 
+Increasing bandwidth increases noise power $\Rightarrow$ SNR decreases $\Rightarrow$ diminishing capacity gain.
+
+\item 
+Example: eavesdropping or spoofing.  
+Solution: encryption or authentication.
+
+\item 
+Beamforming focuses energy $\Rightarrow$ higher SNR, less interference.  
+Limitation: requires channel knowledge, sensitive to mobility.
+
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Section 3 --- Long Questions}
+
+\subsubsection*{Question 1}
+
+a)
+\[
+L = 32.44 + 20\log_{10}(800) \approx 90.5\ \mathrm{dB}
+\]
+
+b)
+\[
+P_r = 15 + 2 + 2 - 90.5 = -71.5\ \mathrm{dBm}
+\]
+
+c)
+\[
+P_{\min} = -120 + 3 = -117\ \mathrm{dBm}
+\]
+
+d) Feasible ($-71.5 > -117$)
+
+e)
+\[
+L_{3\,\mathrm{GHz}} \approx 102\ \mathrm{dB}, \quad P_r \approx -83\ \mathrm{dBm}
+\]
+
+f) Higher frequency $\Rightarrow$ higher path loss.
+
+\vspace{0.3cm}
+
+\subsubsection*{Question 2}
+
+a)
+\[
+L_{\text{total}} = 75 + 20 + 3 + 2 = 100\ \mathrm{dB}
+\]
+
+b)
+\[
+P_r = 10 - 100 = -90\ \mathrm{dBm}
+\]
+
+c) Not feasible ($-90 < -85$)
+
+d) Loss depends on material properties and frequency.
+
+\vspace{0.3cm}
+
+\subsubsection*{Question 3}
+
+a) $N = 7$
+
+b) $(i,j) = (2,1)$
+
+c)
+\begin{itemize}
+\item Bandwidth per cell increases as $N$ decreases
+\item Interference increases as $N$ decreases
+\end{itemize}
+
+\vspace{0.3cm}
+
+\subsubsection*{Question 4}
+
+a)
+\[
+N = 10^{-12}\ \mathrm{mW}, \quad I \approx 1.58\times 10^{-11}\ \mathrm{mW}
+\]
+
+b)
+\[
+N+I \approx 1.68\times10^{-11} \Rightarrow -107.7\ \mathrm{dBm}
+\]
+
+c)
+\[
+\mathrm{SINR} = -95 - (-107.7) = 12.7\ \mathrm{dB}
+\]
+
+d) Feasible ($12.7 > 5$)
+
+e) Many users $\Rightarrow$ interference dominates.
+
+\vspace{0.3cm}
+
+\subsubsection*{Question 5}
+
+a)
+\begin{itemize}
+\item $1 \rightarrow 2 \rightarrow G$
+\item $1 \rightarrow 2 \rightarrow 3 \rightarrow G$
+\item $1 \rightarrow 3 \rightarrow G$
+\end{itemize}
+
+b)
+\[
+5.1,\quad 5.5,\quad 6.8
+\]
+
+c) Minimum: $1 \rightarrow 2 \rightarrow G$
+
+d) Shorter hops reduce path loss.
+
+e) Advantage: lower power. Disadvantage: delay/complexity.
+
+\vspace{0.3cm}
+
+\subsubsection*{Question 6}
+
+a)
+\[
+C = 200\,\mathrm{kHz} \cdot \log_2(11) \approx 200 \cdot 3.46 = 692\ \mathrm{kbps}
+\]
+
+b)
+MCS $\approx$ QPSK, $R=1/2$, throughput $\approx 1$ bit/s/Hz
+
+c)
+
+Threshold $\approx 8$ dB
+
+\[
+\Delta = 12 - 8 = 4\ \mathrm{dB}
+\]
+
+\[
+\text{Power factor} = 10^{4/10} \approx 2.51
+\]
+
+\[
+P_{\min} \approx \frac{100}{2.51} \approx 40\ \mathrm{W}
+\]
+
+Reduction $\approx 60\ \mathrm{W}$
+
+\vspace{0.3cm}
+
+\subsubsection*{Question 7}
+
+a) Place BS at elevated position for LOS.
+
+b) Two-site/relay improves coverage in shadowed regions.
+
+c)
+\begin{itemize}
+\item Two-site: better coverage, lower tower
+\item Single-site: cheaper but more shadowing
+\end{itemize}
+
+d) Two-site better: load split, less interference/medium access contention.
+
+e) Path loss, shadowing, diffraction.

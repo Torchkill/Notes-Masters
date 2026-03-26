@@ -1,0 +1,183 @@
+\newpage
+\section{Supplemental material}
+\subsection{Logarithm Properties}
+\begin{itemize}
+    \item \textbf{Product Rule:} 
+    \[
+    \log_b (xy) = \log_b (x) + \log_b (y)
+    \]
+    \item \textbf{Quotient Rule:} 
+    \[
+    \log_b \left( \frac{x}{y} \right) = \log_b (x) - \log_b (y)
+    \]
+    \item \textbf{Power Rule:} 
+    \[
+    \log_b (x^n) = n \log_b (x)
+    \]
+    \item \textbf{Base Change Formula:} 
+    \[
+    \log_b (x) = \frac{\log_c (x)}{\log_c (b)}
+    \]
+    \item \textbf{Log of Reciprocal:} 
+    \[
+    \log_b \left( \frac{1}{x} \right) = -\log_b (x)
+    \]
+    \item \textbf{Logarithm to Exponential Conversion:}
+    \[
+    x \cdot \log_b(y) = z \quad \Rightarrow \quad y = b^{\frac{z}{x}}
+    \]
+\end{itemize}
+\subsection{Commonly Used Constants and Units}
+
+\begin{itemize}
+    \item \textbf{Speed of Light:} 
+    \[
+    c \approx 3.0 \times 10^8 \text{ m/s}
+    \]
+    \item \textbf{Boltzmann's Constant:} 
+    \[
+    k_B = 1.38 \times 10^{-23} \text{ J/K}
+    \]
+        \item \textbf{Thermal Noise Power Density:}  
+    \[
+    P_n (1 \text{ Hz}) = -174 \text{ dBm/Hz}
+    \]
+    
+\end{itemize}
+
+\subsection{Conversion Examples}
+\begin{itemize}
+    \item \(\log_{2} (16) = 4\), since \(2^4 = 16\).
+    \item \(\log_{10}(12) = \log_{10}(6)+\log_{10}(2)\)
+    \item Converting \( 20 \) dB to a linear factor: \(10^{\frac{20}{10}} = 10^{2} = 100\)
+    \item \(10^{1.5} = 10^1 \cdot 10^{0.5} \approx 10 \cdot 3.16 = 31.6\)
+
+\end{itemize}
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|l|r|r|r|r|}
+        \hline
+        \textbf{Value} & \(\log_{10}(\text{Value})\) & \(\log_{2}(\text{Value})\) & Scientific Notation & SI - Prefix \\
+        \hline
+        \(10^{-9}\)   & -9.000  & -29.897 & \(1.0 \times 10^{-9}\) & Nano \\
+        \(10^{-8}\)   & -8.000  & -26.575 & \(1.0 \times 10^{-8}\) & \\
+        \(10^{-7}\)   & -7.000  & -23.253 & \(1.0 \times 10^{-7}\) & \\
+        \(10^{-6}\)   & -6.000  & -19.931 & \(1.0 \times 10^{-6}\) & Micro \\
+        \(10^{-5}\)   & -5.000  & -16.609 & \(1.0 \times 10^{-5}\) & \\
+        \(10^{-4}\)   & -4.000  & -13.287 & \(1.0 \times 10^{-4}\) & \\
+        \(10^{-3}\)   & -3.000  & -9.966  & \(1.0 \times 10^{-3}\) & Milli \\
+        \(0.01\)   & -2.000  & -6.644  & \(1.0 \times 10^{-2}\) & \\
+        \(0.1\)   & -1.000  & -3.322  & \(1.0 \times 10^{-1}\) & \\
+        \hline
+        1             & 0.000   & 0.000   & \(1.0 \times 10^{0}\) & - \\
+        2             & 0.301   & 1.000   & \(2.0 \times 10^{0}\) & \\
+        3             & 0.477   & 1.585   & \(3.0 \times 10^{0}\) & \\
+        4             & 0.602   & 2.000   & \(4.0 \times 10^{0}\) & \\
+        5             & 0.699   & 2.322   & \(5.0 \times 10^{0}\) & \\
+        6             & 0.778   & 2.585   & \(6.0 \times 10^{0}\) & \\
+        7             & 0.845   & 2.807   & \(7.0 \times 10^{0}\) & \\
+        8             & 0.903   & 3.000   & \(8.0 \times 10^{0}\) & \\
+        9             & 0.954   & 3.170   & \(9.0 \times 10^{0}\) & \\
+        10            & 1.000   & 3.322   & \(1.0 \times 10^{1}\) & \\
+        \hline
+        \(100\)      & 2.000   & 6.644   & \(1.0 \times 10^{2}\) & \\
+        \(1000\)      & 3.000   & 9.966   & \(1.0 \times 10^{3}\) & Kilo \\
+        \(10^4\)      & 4.000   & 13.287  & \(1.0 \times 10^{4}\) & \\
+        \(10^5\)      & 5.000   & 16.609  & \(1.0 \times 10^{5}\) & \\
+        \(10^6\)      & 6.000   & 19.931  & \(1.0 \times 10^{6}\) & Mega \\
+        \(10^7\)      & 7.000   & 23.253  & \(1.0 \times 10^{7}\) & \\
+        \(10^8\)      & 8.000   & 26.575  & \(1.0 \times 10^{8}\) & \\
+        \(10^9\)      & 9.000   & 29.897  & \(1.0 \times 10^{9}\) & Giga \\
+        \hline
+    \end{tabular}
+\end{table}
+\newpage
+\.\\
+\newpage
+
+\begin{center}
+\textbf{\Large Answer Page – Coverage Design}
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent
+\textbf{Name:} \rule{6cm}{0.4pt}
+\hfill
+\textbf{Page} [\ \ \ ] \textbf{of} [\ \ \ ]
+
+\vspace{0.8cm}
+
+\textbf{Single-site solution (mark base station and sketch coverage):}\\
+Red crosses indicate town location. 
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+
+% Axes
+\draw[->] (0,-0.5) -- (21,-0.5) node[right] {Distance};
+\draw[->] (0,-0.5) -- (0,8) node[above] {Height};
+
+% Terrain
+\draw[thick] 
+(0,0.5) -- (1,0.3) -- (2,0.4) -- (3,0.6)
+-- (4,1.5) -- (5,3.0) -- (6,4.0) -- (7,4.3)
+-- (8,4.2) -- (8.5,3.8) -- (9,2.0)
+-- (10,1.8) -- (11,1.7) -- (12,1.8)
+-- (13,2.5) -- (14,5.7) -- (15,5.7)
+-- (16,4.8) -- (17,4.6) -- (18,5.2)
+-- (19,6.0) -- (20,7.0);
+
+% Town A
+\draw[red, thick] (2.5,0.5) -- (3.2,1.0);
+\draw[red, thick] (3.2,0.5) -- (2.5,1.0);
+
+% Town B
+\draw[red, thick] (9.5,1.5) -- (10.2,2.0);
+\draw[red, thick] (10.2,1.5) -- (9.5,2.0);
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.8cm}
+
+\textbf{Multi-site solution with relay (mark base stations and sketch coverage):}
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+
+% Axes
+\draw[->] (0,-0.5) -- (21,-0.5) node[right] {Distance};
+\draw[->] (0,-0.5) -- (0,8) node[above] {Height};
+
+% Terrain
+\draw[thick] 
+(0,0.5) -- (1,0.3) -- (2,0.4) -- (3,0.6)
+-- (4,1.5) -- (5,3.0) -- (6,4.0) -- (7,4.3)
+-- (8,4.2) -- (8.5,3.8) -- (9,2.0)
+-- (10,1.8) -- (11,1.7) -- (12,1.8)
+-- (13,2.5) -- (14,5.7) -- (15,5.7)
+-- (16,4.8) -- (17,4.6) -- (18,5.2)
+-- (19,6.0) -- (20,7.0);
+
+% Town A
+\draw[red, thick] (2.5,0.5) -- (3.2,1.0);
+\draw[red, thick] (3.2,0.5) -- (2.5,1.0);
+
+% Town B
+\draw[red, thick] (9.5,1.5) -- (10.2,2.0);
+\draw[red, thick] (10.2,1.5) -- (9.5,2.0);
+
+\end{tikzpicture}
+\end{center}
+
+\vfill
+
+\hrule
+\vspace{0.3cm}
+\textit{Clearly indicate base station locations and draw approximate coverage areas.}
