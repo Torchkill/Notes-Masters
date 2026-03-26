@@ -1,0 +1,177 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{placeins}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[R]{\thepage/\pageref{LastPage}}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage/\pageref{LastPage}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\title{5731.25 Wireless Communication --- Trial Exam 7}
+\date{26. March 2026}
+\maketitle
+
+\section*{Instructions to Students}
+\begin{itemize}
+    \item Ensure clarity and precision in your answers.
+    \item Attempt all sections. Each of the three sections contributes one-third (1/3) of the total mark.
+    \item All answers must be written in \textbf{English}.
+    \item Write your answers in the provided answer sheets using a pen.
+    \item Each page must contain your name and student number.
+    \item Number all submitted pages as \textit{Page X/Y}.
+    \item For the multiple-choice section, indicate your answers using the format: Q1 A, Q2 C, ...
+    \item In the appendix of this document, you will find a logarithm table for reference.
+\end{itemize}
+
+\newpage
+\input{multiple}
+\newpage
+
+\section*{Section 2 --- Short Questions (6 questions)}
+Answer briefly but clearly.
+
+\begin{enumerate}[leftmargin=0.9cm]
+\item If a symbol duration is $T_s$, what is the relationship to symbol rate $R_s$?
+
+\item What is a symbol, and what does it mean that symbols are not instantaneous?
+
+\item ISI: describe the key idea behind why symbols can overlap at the receiver.
+
+\item Spectral efficiency: define $\eta$ in terms of $R_b$ and $B$.
+
+\item Define duplexing.
+
+\item Resource allocation: list two challenges it must address (e.g., limited spectrum, interference management, QoS, scalability).
+\end{enumerate}
+
+\newpage
+\section*{Section 3 --- Long / Applied Questions}
+\textbf{Show all calculations and reasoning.}
+
+\subsection*{Question 1 --- Link Budget and Feasibility}
+A transmitter operates at $f = 950$ MHz with:
+\begin{itemize}[leftmargin=1.2cm]
+    \item transmit power $P_t = 20$ dBm,
+    \item transmit antenna gain $G_t = 1$ dBi,
+    \item receive antenna gain $G_r = 2$ dBi,
+    \item distance $d = 3.2$ km.
+\end{itemize}
+
+Assume:
+\[
+N = -108\ \mathrm{dBm}, \qquad \gamma_{\min} = 8\ \mathrm{dB}
+\]
+
+\begin{enumerate}[label=\alph*)]
+    \item Compute the free-space path loss at 950 MHz.
+    \item Compute the received power $P_r$.
+    \item Compute the minimum required received power for feasibility.
+    \item Is the link feasible?
+\end{enumerate}
+
+\subsection*{Question 2 --- Indoor Path Loss}
+An indoor link has:
+\begin{itemize}[leftmargin=1.2cm]
+    \item distance-based path loss of $60$ dB,
+    \item one concrete wall causing $10$ dB loss,
+    \item one concrete wall causing $7$ dB loss,
+    \item one wooden door causing $5$ dB loss,
+    \item one glass window causing $2$ dB loss.
+\end{itemize}
+
+Transmitter and receiver antenna gains are $0$ dBi, and $P_t = 8$ dBm.
+
+\begin{enumerate}[label=\alph*)]
+    \item Compute total path loss.
+    \item Compute received power.
+    \item If receiver sensitivity is $-75$ dBm, does the link work?
+    \item Suggest two simple ways to improve this link without changing bandwidth.
+\end{enumerate}
+
+\subsection*{Question 3 --- Frequency Reuse}
+Assume a cellular layout with reuse factor $N=7$.
+
+\begin{enumerate}[label=\alph*)]
+    \item What fraction of total spectrum is available in each cell?
+    \item Compare this with a system using $N=10$.
+    \item Explain how changing $N$ impacts:
+    \begin{enumerate}[label=\roman*)]
+        \item co-channel interference,
+        \item capacity per cell.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection*{Question 4 --- Multi-hop Routing}
+Only the following links are feasible:
+\[
+1 \rightarrow 2,\quad 1 \rightarrow 3,\quad 2 \rightarrow 3,\quad 2 \rightarrow 4,\quad 3 \rightarrow 4,\quad 1 \rightarrow 4
+\]
+Transmission energy costs are:
+\[
+E_{12}=2.1,\quad E_{13}=2.9,\quad E_{23}=1.8,\quad E_{24}=3.0,\quad E_{34}=1.7,\quad E_{14}=6.2
+\]
+where node 1 is source and node 4 is gateway.
+
+\begin{enumerate}[label=\alph*)]
+    \item List all feasible routes from node 1 to node 4.
+    \item Compute total energy for each route.
+    \item Identify the minimum-energy route.
+    \item Give one advantage and one disadvantage of multi-hop communication.
+\end{enumerate}
+
+\subsection*{Question 5 --- Modulation and Throughput}
+A wireless channel has bandwidth $B = 140$ kHz.
+
+Figure~\ref{fig:amc_snr_2} shows throughput (bits/s/Hz) versus SNR for several candidate modulation/coding schemes.
+\input{../trial_exam_2/figure}
+\FloatBarrier
+
+\begin{enumerate}[label=\alph*)]
+    \item For $\mathrm{SNR}=10$ dB, compute Shannon capacity in bit/s.
+    \item From Figure~\ref{fig:amc_snr_2}, choose the highest usable scheme at 10 dB and compute data rate in bit/s.
+    \item At 14 dB the system uses scheme-5. How much SNR drop (in dB) is possible before switching down to scheme-4?
+\end{enumerate}
+
+\section*{Question 6 --- Coverage Planning}
+The terrain sketch on the last page shows two towns separated by a hill.
+
+\begin{enumerate}[label=\alph*)]
+\item Propose a single base-station location and explain your choice.
+\item Propose a two-site solution (base station + relay) and explain the benefit.
+\item Compare the two solutions in terms of coverage, cost, and reliability.
+\item Which propagation effects are most important in this scenario?
+\end{enumerate}
+
+\vspace{0.6cm}
+\hrule
+\vspace{0.3cm}
+\textbf{End of exam}
+
+\input{lastpages}
+\clearpage
+\label{LastPage}
+\end{document}
