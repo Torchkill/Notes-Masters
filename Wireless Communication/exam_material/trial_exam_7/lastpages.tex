@@ -1,0 +1,136 @@
+\newpage
+\section{Supplemental material}
+\subsection{Logarithm Properties}
+\begin{itemize}
+    \item \textbf{Product Rule:}
+    \[
+    \log_b (xy) = \log_b (x) + \log_b (y)
+    \]
+    \item \textbf{Quotient Rule:}
+    \[
+    \log_b \left( \frac{x}{y} \right) = \log_b (x) - \log_b (y)
+    \]
+    \item \textbf{Power Rule:}
+    \[
+    \log_b (x^n) = n \log_b (x)
+    \]
+    \item \textbf{Base Change Formula:}
+    \[
+    \log_b (x) = \frac{\log_c (x)}{\log_c (b)}
+    \]
+\end{itemize}
+
+\subsection{Common Constants}
+\begin{itemize}
+    \item \textbf{Speed of Light:}
+    \[
+    c \approx 3.0 \times 10^8 \text{ m/s}
+    \]
+    \item \textbf{Thermal Noise Density (room temperature):}
+    \[
+    P_n (1 \text{ Hz}) \approx -174 \text{ dBm/Hz}
+    \]
+\end{itemize}
+
+\subsection{Useful Log Values}
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Value & $\log_{10}(\text{Value})$ & $\log_{2}(\text{Value})$ & Scientific Notation \\
+        \hline
+        2 & 0.301 & 1.000 & $2.0 \times 10^0$ \\
+        3 & 0.477 & 1.585 & $3.0 \times 10^0$ \\
+        4 & 0.602 & 2.000 & $4.0 \times 10^0$ \\
+        5 & 0.699 & 2.322 & $5.0 \times 10^0$ \\
+        6 & 0.778 & 2.585 & $6.0 \times 10^0$ \\
+        7 & 0.845 & 2.807 & $7.0 \times 10^0$ \\
+        8 & 0.903 & 3.000 & $8.0 \times 10^0$ \\
+        9 & 0.954 & 3.170 & $9.0 \times 10^0$ \\
+        10 & 1.000 & 3.322 & $1.0 \times 10^1$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+\begin{center}
+\textbf{\Large Answer Page --- Coverage Planning}
+\end{center}
+
+\vspace{0.5cm}
+\noindent
+\textbf{Name:} \rule{6cm}{0.4pt}
+\hfill
+\textbf{Page} [\ \ \ ] \textbf{of} [\ \ \ ]
+
+\vspace{0.8cm}
+\textbf{Single-site solution (mark base station and sketch coverage):}
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw[->] (0,-0.5) -- (21,-0.5) node[right] {Distance};
+\draw[->] (0,-0.5) -- (0,8) node[above] {Height};
+\draw[thick]
+(0,0.5) -- (1,0.3) -- (2,0.5) -- (3,0.8)
+-- (4,1.6) -- (5,3.2) -- (6,4.4) -- (7,4.8)
+-- (8,4.5) -- (9,3.2) -- (10,2.0) -- (11,1.7)
+-- (12,2.0) -- (13,3.0) -- (14,5.5) -- (15,6.0)
+-- (16,5.2) -- (17,4.6) -- (18,5.0) -- (19,6.1) -- (20,7.0);
+
+% Town markers
+\draw[red, thick] (6,4.55) -- (6.15,4.7);
+\draw[red, thick] (6.15,4.55) -- (6,4.7);
+\draw[red, thick] (14,5.65) -- (14.15,5.8);
+\draw[red, thick] (14.15,5.65) -- (14,5.8);
+\node[red] at (6,4.95) {Town A};
+\node[red] at (14,6.05) {Town B};
+
+% Antenna legend (3-bar BS icon)
+\draw[blue, thick] (18,7.0) -- (18,7.85);
+\draw[blue, thick] (17.6,7.55) -- (18.4,7.55);
+\draw[blue, thick] (17.55,7.7) -- (18.45,7.7);
+\draw[blue, thick] (17.65,7.3) -- (18.35,7.3);
+\node[blue] at (18.25,7.55) {\small BS};
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.8cm}
+\textbf{Two-site solution with relay (mark both sites and sketch coverage):}
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw[->] (0,-0.5) -- (21,-0.5) node[right] {Distance};
+\draw[->] (0,-0.5) -- (0,8) node[above] {Height};
+\draw[thick]
+(0,0.5) -- (1,0.3) -- (2,0.5) -- (3,0.8)
+-- (4,1.6) -- (5,3.2) -- (6,4.4) -- (7,4.8)
+-- (8,4.5) -- (9,3.2) -- (10,2.0) -- (11,1.7)
+-- (12,2.0) -- (13,3.0) -- (14,5.5) -- (15,6.0)
+-- (16,5.2) -- (17,4.6) -- (18,5.0) -- (19,6.1) -- (20,7.0);
+
+% Town markers
+\draw[red, thick] (6,4.55) -- (6.15,4.7);
+\draw[red, thick] (6.15,4.55) -- (6,4.7);
+\draw[red, thick] (14,5.65) -- (14.15,5.8);
+\draw[red, thick] (14.15,5.65) -- (14,5.8);
+
+% Antenna legends (BS + Relay)
+\draw[blue, thick] (17.5,7.0) -- (17.5,7.85);
+\draw[blue, thick] (17.15,7.55) -- (17.85,7.55);
+\node[blue] at (17.85,7.55) {\small BS};
+
+\draw[green!60!black, thick] (19,7.0) -- (19,7.7);
+\fill[green!60!black] (18.85,7.7) -- (19,7.95) -- (19.15,7.7) -- cycle;
+\node[green!60!black] at (19.25,7.55) {\small Relay};
+
+\end{tikzpicture}
+\end{center}
+
+\vfill
+\hrule
+\vspace{0.3cm}
+\textit{Clearly indicate site locations and approximate coverage regions.}

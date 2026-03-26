@@ -1,0 +1,268 @@
+
+57
+
+Automatic Zoom
+Recap
+MM1
+MM2
+MM3
+Modulation
+Bandpass
+Amplitude Modulation
+DSB-SC
+SSB
+Phase Modulation
+FM
+Angle modulation
+Symbol rate
+MM4
+MM5
+MM6
+MM7
+Exam
+Preparation
+50/151
+Constellations: BPSK, QPSK, 8-PSK, and 16-QAM
+BPSK
+I
+Q
+QPSK (4-PSK)
+I
+Q 8-PSK
+I
+Q
+16-QAM
+I
+Q
+Higher-order constellations pack symbols closer together, requiring higher SNR to
+maintain low BER.
+Recap
+MM1
+MM2
+MM3
+Modulation
+Bandpass
+Amplitude Modulation
+DSB-SC
+SSB
+Phase Modulation
+FM
+Angle modulation
+Symbol rate
+MM4
+MM5
+MM6
+MM7
+Exam
+Preparation
+51/151
+Amplitude and Phase from I/Q
+Any complex baseband sample can be written as
+s = I + jQ = Aejθ
+▶ Amplitude (radius):
+A = |s| = pI 2 + Q2
+▶ Phase (angle):
+θ = arg(s) = atan2(Q, I )
+PSK: constant amplitude, varying phase. QAM: varying amplitude and phase.
+Recap
+MM1
+MM2
+MM3
+Modulation
+Bandpass
+Amplitude Modulation
+DSB-SC
+SSB
+Phase Modulation
+Symbol rate
+MM4
+MM5
+MM6
+MM7
+Exam
+Preparation
+52/151
+What Is a Symbol?
+▶ A symbol represents information over a finite time interval
+▶ Symbols are not instantaneous — they last for a duration
+▶ Different patterns (dots and dashes) represent different symbols
+In wireless communication, symbols are waveforms transmitted over time.
+Recap
+MM1
+MM2
+MM3
+Modulation
+Bandpass
+Amplitude Modulation
+DSB-SC
+SSB
+Phase Modulation
+Symbol rate
+MM4
+MM5
+MM6
+MM7
+Exam
+Preparation
+53/151
+Symbol Duration
+A symbol is transmitted over a finite time interval.
+Key definitions
+▶ Symbol duration: Ts (seconds per symbol)
+▶ Symbol rate: Rs = 1
+Ts
+(symbols per second)
+Relation to bit rate
+▶ Each symbol carries log2 M bits
+▶ Bit rate:
+Rb = Rs log2 M
+Why symbol duration matters
+▶ Shorter symbols ⇒ higher data rate
+▶ Shorter symbols require more bandwidth
+▶ Noise and channel distortion affect shorter symbols more strongly
+Recap
+MM1
+MM2
+MM3
+Modulation
+Bandpass
+Amplitude Modulation
+DSB-SC
+SSB
+Phase Modulation
+Symbol rate
+MM4
+MM5
+MM6
+MM7
+Exam
+Preparation
+54/151
+Symbols in Time
+▶ Each symbol occupies a fixed time interval Ts
+▶ Information is carried by the waveform over that interval
+▶ The receiver samples once per symbol to make a decision
+Symbol boundaries define when decisions are made.
+Recap
+MM1
+MM2
+MM3
+Modulation
+Bandpass
+Amplitude Modulation
+DSB-SC
+SSB
+Phase Modulation
+Symbol rate
+MM4
+MM5
+MM6
+MM7
+Exam
+Preparation
+55/151
+Multipath Propagation and Symbol Overlap
+▶ Signals arrive at the receiver over multiple paths
+▶ Each path has a different delay
+▶ Symbols can overlap in time at the receiver
+This phenomenon is known as intersymbol interference (ISI).
+Recap
+MM1
+MM2
+MM3
+Modulation
+Bandpass
+Amplitude Modulation
+DSB-SC
+SSB
+Phase Modulation
+Symbol rate
+MM4
+MM5
+MM6
+MM7
+Exam
+Preparation
+56/151
+Symbol Rate and Bandwidth (Intuition)
+A faster-changing signal needs more bandwidth.
+▶ Symbol rate: Rs = 1
+Ts (baud)
+▶ Higher Rs means faster transitions in time
+▶ Faster transitions ⇒ more high-frequency content
+Rule of thumb
+B ∝ Rs
+Bandwidth is the price you pay for higher symbol rate.
+Recap
+MM1
+MM2
+MM3
+Modulation
+Bandpass
+Amplitude Modulation
+DSB-SC
+SSB
+Phase Modulation
+Symbol rate
+MM4
+MM5
+MM6
+MM7
+Exam
+Preparation
+57/151
+Spectral Efficiency
+We want high data rate while using as little bandwidth as possible.
+Definitions
+Rb = Rs log2 M η = Rb
+B (bits/s/Hz)
+▶ Increasing M increases bits per symbol
+▶ Increasing Rs increases symbols per second
+▶ Both tend to require higher SNR and/or more bandwidth
+Wireless design is a trade-off between rate, bandwidth, and robustness.
+Recap
+MM1
+MM2
+MM3
+MM4
+Duplex
+Resource Allocation
+Media access control
+Wireless Channel
+MM5
+MM6
+MM7
+Exam
+Preparation
+58/151
+Duplexing in Wireless Communication
+What is Duplexing? Duplexing defines whether a communication system can
+send and receive data at the same time.
+Recap
+MM1
+MM2
+MM3
+MM4
+Duplex
+Resource Allocation
+Media access control
+Wireless Channel
+MM5
+MM6
+MM7
+Exam
+Preparation
+59/151
+Resource Allocation in Wireless Networks
+Definition: Resource allocation refers to the efficient distribution of available
+spectrum, time, and power among multiple users in a wireless network to
+maximize performance and minimize interference.
+Key Challenges:
+▶ Limited Spectrum: Wireless spectrum is a finite resource, requiring
+efficient allocation.
+▶ Interference Management: Multiple users accessing the network
+simultaneously can cause interference.
+▶ Quality of Service (QoS): Ensuring reliability, low latency, and fairness
+across users.
+▶ Scalability: Networks must support an increasing number of users and
+devices (e.g., IoT, 5G).
