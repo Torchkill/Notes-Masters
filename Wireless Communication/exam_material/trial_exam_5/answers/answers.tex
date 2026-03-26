@@ -1,0 +1,169 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\begin{document}
+
+\section*{Suggested Answers --- trial\_exam\_5}
+
+\subsection*{Section 1 --- Multiple Choice (Q1--Q20)}
+\begin{itemize}
+    \item Q1 B
+    \item Q2 A
+    \item Q3 A
+    \item Q4 A
+    \item Q5 A
+    \item Q6 A
+    \item Q7 B
+    \item Q8 B
+    \item Q9 C
+    \item Q10 A
+    \item Q11 A
+    \item Q12 C
+    \item Q13 C
+    \item Q14 A
+    \item Q15 B
+    \item Q16 B
+    \item Q17 B
+    \item Q18 B
+    \item Q19 A
+    \item Q20 A
+\end{itemize}
+
+\subsection*{Section 2 --- Short Questions (Q1--Q6)}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Meaning of $T_s$:} $T_s$ is the symbol duration (seconds per symbol). It matters because the receiver must sample at the correct symbol timing to correctly decide each symbol.
+    \item \textbf{ISI:} intersymbol interference happens when the channel causes multipath delays so that energy from one symbol overlaps the next symbol at the receiver.
+    \item \textbf{Spectral efficiency / bit rate:} $R_b=R_s\log_2(M)$. If $R_s$ increases (with fixed $M$), then $R_b$ increases proportionally.
+    \item \textbf{Duplexing:} how uplink and downlink share resources (e.g., time or frequency division).
+    \item \textbf{Resource allocation types:} spectrum, time, and power.
+    \item \textbf{Trade-off (example):} besides interference management, you must also address QoS (e.g., latency/throughput targets) or scalability as users increase.
+\end{enumerate}
+
+\subsection*{Section 3 --- Long / Applied Questions}
+
+\subsubsection*{Question 1 --- Link Budget and Feasibility}
+Given: $f=1000$ MHz, $P_t=12$ dBm, $G_t=2$ dBi, $G_r=1$ dBi, $d=2.2$ km, $N=-115$ dBm, $\gamma_{\min}=9$ dB.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Free-space path loss:}
+    \[
+    L_{\mathrm{FSPL}}=32.44+20\log_{10}(1000)+20\log_{10}(2.2)\approx 99.29\ \mathrm{dB}.
+    \]
+    \item \textbf{Received power:}
+    \[
+    P_r=P_t+G_t+G_r-L_{\mathrm{FSPL}}=12+2+1-99.29\approx -84.29\ \mathrm{dBm}.
+    \]
+    \item \textbf{Minimum required received power:}
+    \[
+    P_{\min}=N+\gamma_{\min}=-115+9=-106\ \mathrm{dBm}.
+    \]
+    \item \textbf{Feasible?} yes, since $P_r\approx -84.29 > -106$ dBm.
+    \item (Optional margin) $\approx 21.71$ dB.
+    
+\end{enumerate}
+
+\subsubsection*{Question 2 --- Indoor Path Loss}
+Given: distance loss $70$ dB, three concrete walls ($3\times 6$ dB), door $3$ dB, glass $2$ dB, $P_t=14$ dBm, $G_t=G_r=0$ dBi, sensitivity $-78$ dBm.
+
+\begin{enumerate}[label=\alph*.]
+    \item Total path loss:
+    \[
+    L_{\text{total}}=70+3\cdot 6+3+2=93\ \mathrm{dB}.
+    \]
+    \item Received power:
+    \[
+    P_r=P_t-L_{\text{total}}=14-93=-79\ \mathrm{dBm}.
+    \]
+    \item Link works? $-79$ dBm is $1$ dB below $-78$ dBm sensitivity, so \textbf{no}.
+    \item Two improvements (examples): increase transmit power; use higher-gain antennas / better placement; reduce number of walls (or add a relay).
+\end{enumerate}
+
+\subsubsection*{Question 3 --- Frequency Reuse}
+Given reuse factor $N=4$.
+
+\begin{enumerate}[label=\alph*.]
+    \item Fraction of spectrum per cell:
+    \[
+    \frac{1}{N}=\frac{1}{4}=0.25=25\%.
+    \]
+    \item For $N=9$:
+    \[
+    \frac{1}{9}\approx 0.111\ (11.1\%).
+    \]
+    \item Impact of $N$:
+    \begin{itemize}
+        \item Larger $N$ reduces co-channel interference, but reduces bandwidth per cell and can lower (nominal) capacity.
+        \item Smaller $N$ increases bandwidth per cell and can increase capacity, but raises co-channel interference.
+    \end{itemize}
+    
+\end{enumerate}
+
+\subsubsection*{Question 4 --- Multi-hop Routing}
+Feasible links: $1\to 2,\ 1\to 3,\ 2\to 3,\ 2\to 4,\ 3\to 4,\ 1\to 4$.
+
+Energies: $E_{12}=2.0,\ E_{13}=3.5,\ E_{23}=1.4,\ E_{24}=2.1,\ E_{34}=2.6,\ E_{14}=7.0$.
+
+\begin{enumerate}[label=\alph*.]
+    \item All feasible routes from node $1$ to node $4$:
+    \begin{itemize}
+        \item Route A: $1\to 4$
+        \item Route B: $1\to 2\to 4$
+        \item Route C: $1\to 3\to 4$
+        \item Route D: $1\to 2\to 3\to 4$
+    \end{itemize}
+    \item Total energy per route:
+    \[
+    E_A=E_{14}=7.0
+    \]
+    \[
+    E_B=E_{12}+E_{24}=2.0+2.1=4.1
+    \]
+    \[
+    E_C=E_{13}+E_{34}=3.5+2.6=6.1
+    \]
+    \[
+    E_D=E_{12}+E_{23}+E_{34}=2.0+1.4+2.6=6.0
+    \]
+    \item Minimum-energy route: Route B with $E_{\min}=4.1$.
+    \item Advantage: improved feasibility/coverage over longer distances. Disadvantage: more delay and overhead due to additional hops.
+\end{enumerate}
+
+\subsubsection*{Question 5 --- Modulation and Throughput}
+Bandwidth: $B=180$ kHz $=1.80\times 10^5$ Hz.
+
+\begin{enumerate}[label=\alph*.]
+    \item Shannon capacity at SNR $=13$ dB:
+    \[
+    C=B\log_2(1+\mathrm{SNR}),\quad \mathrm{SNR}_{\text{lin}}=10^{13/10}\approx 19.95
+    \]
+    \[
+    C\approx 7.90\times 10^5\ \text{bit/s}\ (\approx 790.0\ \text{kbps}).
+    \]
+    \item Highest usable scheme at $13$ dB: scheme-5 (threshold $\ge 13$ dB). Throughput $\approx 3.0$ bit/s/Hz.
+    \[
+    R\approx 3.0\cdot B=3.0\cdot 180000=5.40\times 10^5\ \text{bit/s}\ (540\ \text{kbps}).
+    \]
+    \item SNR drop from scheme-5 to scheme-4:
+    scheme-5 stops being usable below $13$ dB, so from $15$ dB:
+    \[
+    \Delta \approx 15-13=2\ \text{dB}.
+    \]
+\end{enumerate}
+
+\subsubsection*{Question 6 --- Coverage Planning}
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Single-site:} place the base station on/near the hill crest to maximize diffraction/coverage toward both towns.
+    \item \textbf{Two-site (base + relay):} use a relay on the far-side of the hill (or in a higher point behind the hill) to re-establish a strong hop to the shadowed town.
+    \item \textbf{Compare:} two-site improves reliability and coverage but increases cost (extra site, backhaul, coordination).
+    \item \textbf{Most important propagation effects:} shadowing/blockage by the hill, diffraction around the obstacle, and distance-based free-space path loss (plus multipath effects near structures).
+\end{enumerate}
+
+\end{document}
+

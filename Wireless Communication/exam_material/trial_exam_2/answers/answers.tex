@@ -1,0 +1,202 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\begin{document}
+
+\section*{Suggested Answers --- trial\_exam\_2}
+
+\subsection*{Section 1 --- Multiple Choice (Q1--Q20)}
+\begin{itemize}
+    \item Q1 B
+    \item Q2 A
+    \item Q3 B
+    \item Q4 C
+    \item Q5 A
+    \item Q6 B
+    \item Q7 B
+    \item Q8 B
+    \item Q9 C
+    \item Q10 A
+    \item Q11 C
+    \item Q12 C
+    \item Q13 C
+    \item Q14 A
+    \item Q15 B
+    \item Q16 B
+    \item Q17 B
+    \item Q18 B
+    \item Q19 A
+    \item Q20 B
+\end{itemize}
+
+\subsection*{Section 2 --- Short Questions (Q1--Q6)}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Shannon capacity:} \[
+    C = B\log_2(1+\mathrm{SNR})
+    \]
+    where $C$ is capacity (bits/s), $B$ is bandwidth (Hz), and $\mathrm{SNR}$ is signal-to-noise ratio (linear).
+
+    \item \textbf{Large-scale vs. small-scale fading:}
+    \begin{enumerate}[label=\alph*.]
+        \item Large-scale fading is driven by path loss/shadowing (distance and obstacles). Mitigation: link budget margin / shadowing margin, larger cell/link margin.
+        \item Small-scale fading is driven by multipath causing rapid variations. Mitigation: diversity (time/frequency/space), equalization, coding/interleaving.
+    \end{enumerate}
+
+    \item \textbf{Link margin:} the extra received power (or SNR) above the minimum required threshold for feasibility:
+    \[
+    \text{Margin} = P_r - P_{\min} = \gamma_\text{actual} - \gamma_{\min}.
+    \]
+    It is important because real links vary over time (fading, mobility, shadowing), so margin improves reliability.
+
+    \item \textbf{Higher carrier frequency (sub-GHz to 3.5 GHz):}
+    \begin{itemize}
+        \item Benefit: more spectrum/bandwidth can be available and antennas can be smaller (often enabling higher directionality).
+        \item Drawback: path loss increases with frequency and penetration through obstacles typically gets worse.
+    \end{itemize}
+
+    \item \textbf{Duplexing:} whether transmit and receive occur at the same time or share different resources. In practice this is implemented by using the time domain (e.g., split time) or frequency domain (different frequency bands) for uplink/downlink.
+
+    \item \textbf{Why collisions are hard to detect:} in a shared medium, a transmitter may not be able to sense the channel while transmitting (and/or the receiver only sees the superposition at the receiver). Hidden-terminal situations make transmit-side detection unreliable. Consequence: packets may be corrupted, causing retransmissions and reduced throughput/added delay.
+\end{enumerate}
+
+\subsection*{Section 3 --- Long / Applied Questions}
+
+\subsubsection*{Question 1 --- Link Budget and Feasibility}
+Given:
+$f=900$ MHz, $P_t=20$ dBm, $G_t=2$ dBi, $G_r=2$ dBi, $d=2.0$ km,
+$N=-105$ dBm, $\gamma_{\min}=8$ dB.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Free-space path loss:}
+    \[
+    L_{\mathrm{FSPL}} = 32.44 + 20\log_{10}(f_{\mathrm{MHz}}) + 20\log_{10}(d_{\mathrm{km}})
+    \]
+    \[
+    = 32.44 + 20\log_{10}(900) + 20\log_{10}(2.0)
+    \approx 32.44 + 59.08 + 6.02
+    \approx 97.55\ \mathrm{dB}.
+    \]
+
+    \item \textbf{Received power:}
+    \[
+    P_r = P_t + G_t + G_r - L_{\mathrm{FSPL}}
+    = 20 + 2 + 2 - 97.55
+    \approx -73.55\ \mathrm{dBm}.
+    \]
+
+    \item \textbf{Minimum required received power:}
+    \[
+    P_{\min} = N + \gamma_{\min} = -105 + 8 = -97\ \mathrm{dBm}.
+    \]
+
+    \item \textbf{Feasibility:} $P_r \approx -73.55\ \mathrm{dBm} > -97\ \mathrm{dBm}$, so the link is \textbf{feasible}.
+    \item (Optional margin) $\approx -73.55 - (-97) \approx 23.45$ dB.
+    
+\end{enumerate}
+
+\subsubsection*{Question 2 --- Indoor Path Loss}
+Given:
+Distance-based loss $=68$ dB,
+three concrete walls: $3\times 8$ dB,
+door $=3$ dB,
+glass window $=2$ dB,
+$P_t=15$ dBm, $G_t=G_r=0$ dBi.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Total path loss:}
+    \[
+    L_{\text{total}} = 68 + 3\cdot 8 + 3 + 2 = 68+24+3+2=97\ \mathrm{dB}.
+    \]
+    \item \textbf{Received power:}
+    \[
+    P_r = P_t + G_t + G_r - L_{\text{total}} = 15 + 0 + 0 - 97 = -82\ \mathrm{dBm}.
+    \]
+    \item \textbf{Check sensitivity:} receiver sensitivity $=-85$ dBm.
+    \[
+    -82 > -85 \Rightarrow \text{link works.}
+    \]
+    \item \textbf{Two improvements (examples):} increase antenna gain (directional antennas), reduce losses (better placement/less walls), increase transmit power, or add a repeater/relay. (Any two accepted.)
+\end{enumerate}
+
+\subsubsection*{Question 3 --- Frequency Reuse in Cellular Networks}
+Given reuse factor $N=4$.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Fraction of spectrum per cell:} $\frac{1}{N}=\frac{1}{4}=0.25=25\%$.
+    \item For $N=7$: $\frac{1}{7}\approx 0.143$ (about $14.3\%$) per cell.
+    \item \textbf{Effect of changing $N$:}
+    \begin{itemize}
+        \item Smaller $N$: more bandwidth per cell ($1/N$ larger) $\Rightarrow$ higher capacity, but smaller reuse distance $\Rightarrow$ higher co-channel interference.
+        \item Larger $N$: less bandwidth per cell $\Rightarrow$ lower capacity, but reduced co-channel interference.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection*{Question 4 --- Multi-Hop Routing and Energy}
+Feasible links:
+$1\to 2,\ 1\to 3,\ 2\to 3,\ 2\to G,\ 3\to G$ where $G$ is the gateway (node 4).
+
+Energy costs:
+$E_{12}=2.0,\ E_{13}=4.8,\ E_{23}=1.5,\ E_{2G}=3.1,\ E_{3G}=2.0$.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{All feasible routes from node 1 to $G$:}
+    \begin{itemize}
+        \item Route A: $1\to 2\to G$
+        \item Route B: $1\to 2\to 3\to G$
+        \item Route C: $1\to 3\to G$
+    \end{itemize}
+    \item \textbf{Total energy per route:}
+    \[
+    E_A = E_{12}+E_{2G}=2.0+3.1=5.1
+    \]
+    \[
+    E_B = E_{12}+E_{23}+E_{3G}=2.0+1.5+2.0=5.5
+    \]
+    \[
+    E_C = E_{13}+E_{3G}=4.8+2.0=6.8
+    \]
+    \item \textbf{Minimum-energy route:} Route A ($1\to 2\to G$) with total energy $5.1$.
+    \item \textbf{Multi-hop pros/cons (one each):} Pros: lower transmit energy per hop / improved feasibility. Cons: extra delay and extra transmissions/receptions overhead.
+\end{enumerate}
+
+\subsubsection*{Question 5 --- Modulation, Throughput, Adaptive Operation}
+Given bandwidth $B=100$ kHz $=1.0\times 10^5$ Hz.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Shannon capacity at SNR = 10 dB:}
+    \[
+    \mathrm{SNR}_{\text{lin}} = 10^{10/10}=10
+    \]
+    \[
+    C = B\log_2(1+\mathrm{SNR}) = 10^5\log_2(11)
+    \approx 10^5(3.4594)\approx 3.46\times 10^5\ \text{bit/s}.
+    \]
+    \item \textbf{Highest usable scheme at 10 dB:} from the provided plot, the highest constant region available at $10$ dB is scheme-4 with throughput $\approx 2.0$ bit/s/Hz.
+    \[
+    R \approx 2.0\cdot B = 2.0\cdot 10^5 = 2.0\times 10^5\ \text{bit/s}.
+    \]
+    \item \textbf{SNR drop before switching down (scheme-4 at 12 dB):}
+    
+    Scheme-4 is usable for SNR $\ge 8$ dB (from the plot). Thus the maximum drop is
+    \[
+    \Delta \approx 12 - 8 = 4\ \text{dB}.
+    \]
+\end{enumerate}
+
+\subsubsection*{Question 6 --- Base Station Placement and Coverage}
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Single-site:} place the base station on the higher/central elevated position (near the hill crest) to obtain the best line-of-sight or most favorable diffraction path to both towns.
+    \item \textbf{Two-site (base station + relay):} place the base station to serve the first town and place a relay (or secondary site) near/behind the hill to cover the shadowed second town with a shorter, more reliable hop.
+    \item \textbf{Compare:} two-site gives better coverage/reliability in shadowed regions, but increases infrastructure cost and complexity; single-site is cheaper but may leave the far/shadowed town with weak signal.
+    \item \textbf{Main propagation effects:} free-space path loss with distance, shadowing/blockage by the hill, and diffraction around obstacles (plus multipath effects).
+\end{enumerate}
+
+\end{document}
+

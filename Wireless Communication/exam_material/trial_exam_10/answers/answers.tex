@@ -1,0 +1,165 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\begin{document}
+
+\section*{Suggested Answers --- trial\_exam\_10}
+
+\subsection*{Section 1 --- Multiple Choice (Q1--Q20)}
+\begin{itemize}
+    \item Q1 B
+    \item Q2 A
+    \item Q3 A
+    \item Q4 A
+    \item Q5 A
+    \item Q6 A
+    \item Q7 B
+    \item Q8 B
+    \item Q9 C
+    \item Q10 A
+    \item Q11 A
+    \item Q12 C
+    \item Q13 C
+    \item Q14 A
+    \item Q15 B
+    \item Q16 B
+    \item Q17 B
+    \item Q18 B
+    \item Q19 A
+    \item Q20 A
+\end{itemize}
+
+\subsection*{Section 2 --- Short Questions (Q1--Q6)}
+\begin{enumerate}[label=\arabic*.]
+    \item In symbols-based communication, $R_s=\frac{1}{T_s}$.
+    \item If each symbol carries $\log_2(M)$ bits and $M=16$, then $\log_2(16)=4$ bits per symbol.
+    \item \textbf{Duplexing:} duplexing defines how uplink and downlink share resources; it determines whether transmission and reception can occur simultaneously (e.g., time vs frequency sharing).
+    \item \textbf{Resource allocation:} allocate spectrum, time, and power; interference matters because it reduces SINR and can make links infeasible or reduce throughput.
+    \item \textbf{ISI:} intersymbol interference is overlap of symbols at the receiver; it is likely when multipath/channel delay spread causes adjacent symbols (spaced by $T_s$) to overlap.
+    
+\end{enumerate}
+
+\subsection*{Section 3 --- Long / Applied Questions}
+
+\subsubsection*{Question 1 --- Link Budget and Feasibility}
+Given: $f=1050$ MHz, $P_t=14$ dBm, $G_t=1$ dBi, $G_r=1$ dBi, $d=3.0$ km, $N=-110$ dBm, $\gamma_{\min}=9$ dB.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Free-space path loss:}
+    \[
+    L_{\mathrm{FSPL}}=32.44+20\log_{10}(1050)+20\log_{10}(3.0)\approx 102.41\ \mathrm{dB}.
+    \]
+    \item \textbf{Received power:}
+    \[
+    P_r=P_t+G_t+G_r-L_{\mathrm{FSPL}}=14+1+1-102.41\approx -86.41\ \mathrm{dBm}.
+    \]
+    \item \textbf{Minimum required received power:}
+    \[
+    P_{\min}=N+\gamma_{\min}=-110+9=-101\ \mathrm{dBm}.
+    \]
+    \item \textbf{Feasible?} yes, since $P_r\approx -86.41 > -101$ dBm.
+    
+\end{enumerate}
+
+\subsubsection*{Question 2 --- Indoor Path Loss}
+Given: distance loss $62$ dB, two concrete walls ($2\times 9$ dB), door $6$ dB, glass window $2$ dB, $P_t=11$ dBm, $G_t=G_r=0$ dBi, sensitivity $-76$ dBm.
+
+\begin{enumerate}[label=\alph*.]
+    \item Total path loss:
+    \[
+    L_{\text{total}}=62+2\cdot 9+6+2=88\ \mathrm{dB}.
+    \]
+    \item Received power:
+    \[
+    P_r=P_t-L_{\text{total}}=11-88=-77\ \mathrm{dBm}.
+    \]
+    \item Link works? $-77$ dBm is $1$ dB below $-76$ dBm sensitivity, so \textbf{no}.
+    \item Two improvements (examples): increase transmit power; use higher-gain antennas/better placement; reduce obstacles (or add relay); improve receiver sensitivity.
+\end{enumerate}
+
+\subsubsection*{Question 3 --- Frequency Reuse}
+Given reuse factor $N=8$.
+
+\begin{enumerate}[label=\alph*.]
+    \item Fraction of spectrum per cell:
+    \[
+    \frac{1}{8}=0.125=12.5\%.
+    \]
+    \item For $N=4$:
+    \[
+    \frac{1}{4}=0.25=25\%.
+    \]
+    \item Impact of $N$:
+    \begin{itemize}
+        \item Larger $N$ reduces co-channel interference but reduces bandwidth per cell.
+        \item Smaller $N$ increases bandwidth per cell (potentially higher capacity) but increases co-channel interference.
+    \end{itemize}
+    
+\end{enumerate}
+
+\subsubsection*{Question 4 --- Multi-hop Routing}
+Feasible links: $1\to 2,\ 1\to 3,\ 2\to 3,\ 2\to 4,\ 3\to 4,\ 1\to 4$.
+
+Energies: $E_{12}=2.5,\ E_{13}=3.7,\ E_{23}=1.3,\ E_{24}=1.9,\ E_{34}=2.8,\ E_{14}=6.9$.
+
+\begin{enumerate}[label=\alph*.]
+    \item All feasible routes from node $1$ to node $4$:
+    \begin{itemize}
+        \item Route A: $1\to 4$
+        \item Route B: $1\to 2\to 4$
+        \item Route C: $1\to 3\to 4$
+        \item Route D: $1\to 2\to 3\to 4$
+    \end{itemize}
+    \item Total energy per route:
+    \[
+    E_A=E_{14}=6.9
+    \]
+    \[
+    E_B=E_{12}+E_{24}=2.5+1.9=4.4
+    \]
+    \[
+    E_C=E_{13}+E_{34}=3.7+2.8=6.5
+    \]
+    \[
+    E_D=E_{12}+E_{23}+E_{34}=2.5+1.3+2.8=6.6
+    \]
+    \item Minimum-energy route: Route B with $E_{\min}=4.4$.
+    \item Advantage: more feasible communication by splitting long links. Disadvantage: increased delay and overhead from more hops.
+\end{enumerate}
+
+\subsubsection*{Question 5 --- Modulation and Throughput}
+Bandwidth: $B=170$ kHz $=1.70\times 10^5$ Hz.
+
+\begin{enumerate}[label=\alph*.]
+    \item Shannon capacity at SNR $=7$ dB:
+    \[
+    C=B\log_2(1+\mathrm{SNR})\approx 4.399\times 10^5\ \text{bit/s}\ (\approx 439.93\ \text{kbps}).
+    \]
+    \item Highest usable scheme at $7$ dB: scheme-3 (scheme-4 requires SNR $\ge 8$ dB). Throughput $\approx 1.5$ bit/s/Hz.
+    \[
+    R\approx 1.5\cdot B=1.5\cdot 170000=2.55\times 10^5\ \text{bit/s}\ (255\ \text{kbps}).
+    \]
+    \item SNR drop from scheme-4 to scheme-3: scheme-4 is usable at SNR $\ge 8$ dB, so at $8$ dB there is essentially no drop headroom before switching down:
+    \[
+    \Delta \approx 0\ \text{dB}.
+    \]
+\end{enumerate}
+
+\subsubsection*{Question 6 --- Coverage Planning}
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Single-site:} place the base station on/near the hill crest to maximize diffraction/coverage to both towns.
+    \item \textbf{Two-site (base + relay):} add a relay on the far side of the hill (or a ridge position) to strengthen the shadowed-town hop.
+    \item \textbf{Compare:} two-site typically improves reliability and coverage but costs more (extra site/backhaul/coordination).
+    \item \textbf{Most important effects:} hill blockage/shadowing, diffraction, and distance-based free-space path loss (plus multipath effects).
+    
+\end{enumerate}
+
+\end{document}
+

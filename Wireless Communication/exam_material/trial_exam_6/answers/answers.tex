@@ -1,0 +1,166 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\begin{document}
+
+\section*{Suggested Answers --- trial\_exam\_6}
+
+\subsection*{Section 1 --- Multiple Choice (Q1--Q20)}
+\begin{itemize}
+    \item Q1 B
+    \item Q2 A
+    \item Q3 A
+    \item Q4 A
+    \item Q5 A
+    \item Q6 A
+    \item Q7 B
+    \item Q8 B
+    \item Q9 C
+    \item Q10 A
+    \item Q11 A
+    \item Q12 C
+    \item Q13 C
+    \item Q14 A
+    \item Q15 B
+    \item Q16 B
+    \item Q17 B
+    \item Q18 B
+    \item Q19 A
+    \item Q20 A
+\end{itemize}
+
+\subsection*{Section 2 --- Short Questions (Q1--Q6)}
+\begin{enumerate}[label=\arabic*.]
+    \item If symbol duration is $T_s$, then $R_s = 1/T_s$.
+    \item The decision samples occur at the receiver's symbol timing instants (i.e., aligned to symbol boundaries determined by clock/timing recovery).
+    \item $\eta$ is the spectral efficiency; with $\eta=\frac{R_b}{B}$, higher $\eta$ means more information bits per second are carried per Hz.
+    \item \textbf{Duplexing:} how uplink and downlink share resources (time or frequency division).
+    \item \textbf{Resource allocation goal/challenge:} allocate spectrum/time/power to meet performance targets; a key challenge is managing interference (and meeting QoS/scalability constraints).
+    \item Shorter symbols are more sensitive because higher symbol rate generally implies larger required bandwidth (more noise collected) and the channel can cause more overlap between symbols (worse ISI/distortion).
+\end{enumerate}
+
+\subsection*{Section 3 --- Long / Applied Questions}
+
+\subsubsection*{Question 1 --- Link Budget and Feasibility}
+Given: $f=700$ MHz, $P_t=10$ dBm, $G_t=0$ dBi, $G_r=2$ dBi, $d=1.8$ km, $N=-102$ dBm, $\gamma_{\min}=7$ dB.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Free-space path loss:}
+    \[
+    L_{\mathrm{FSPL}}=32.44+20\log_{10}(700)+20\log_{10}(1.8)\approx 94.45\ \mathrm{dB}.
+    \]
+    \item \textbf{Received power:}
+    \[
+    P_r=P_t+G_t+G_r-L_{\mathrm{FSPL}}=10+0+2-94.45\approx -82.45\ \mathrm{dBm}.
+    \]
+    \item \textbf{Minimum required received power:}
+    \[
+    P_{\min}=N+\gamma_{\min}=-102+7=-95\ \mathrm{dBm}.
+    \]
+    \item \textbf{Feasible?} yes, since $P_r\approx -82.45 > -95$ dBm.
+    \item (Optional margin) $\approx 12.55$ dB.
+    
+\end{enumerate}
+
+\subsubsection*{Question 2 --- Indoor Path Loss}
+Given: distance loss $75$ dB, two concrete walls ($2\times 8$ dB), door $5$ dB, glass $3$ dB, $P_t=16$ dBm, $G_t=G_r=0$ dBi, sensitivity $-82$ dBm.
+
+\begin{enumerate}[label=\alph*.]
+    \item Total path loss:
+    \[
+    L_{\text{total}}=75+2\cdot 8+5+3=99\ \mathrm{dB}.
+    \]
+    \item Received power:
+    \[
+    P_r=P_t-L_{\text{total}}=16-99=-83\ \mathrm{dBm}.
+    \]
+    \item Link works? $-83$ dBm is $1$ dB below $-82$ dBm, so \textbf{no}.
+    \item Two improvements (examples): increase transmit power; use higher-gain antennas/better placement; reduce obstacles (or add relay).
+\end{enumerate}
+
+\subsubsection*{Question 3 --- Frequency Reuse}
+Given reuse factor $N=2$.
+
+\begin{enumerate}[label=\alph*.]
+    \item Fraction of spectrum per cell:
+    \[
+    \frac{1}{2}=0.5=50\%.
+    \]
+    \item For $N=6$:
+    \[
+    \frac{1}{6}\approx 0.167\ (16.7\%).
+    \]
+    \item Impact of $N$:
+    \begin{itemize}
+        \item Smaller $N$ $\Rightarrow$ more spectrum per cell but more co-channel interference.
+        \item Larger $N$ $\Rightarrow$ less co-channel interference but less spectrum per cell (lower nominal capacity).
+    \end{itemize}
+    
+\end{enumerate}
+
+\subsubsection*{Question 4 --- Multi-hop Routing}
+Feasible links: $1\to 2,\ 1\to 3,\ 2\to 3,\ 2\to 4,\ 3\to 4,\ 1\to 4$.
+
+Energies: $E_{12}=2.6,\ E_{13}=3.1,\ E_{23}=1.2,\ E_{24}=2.0,\ E_{34}=2.4,\ E_{14}=5.9$.
+
+\begin{enumerate}[label=\alph*.]
+    \item All feasible routes from node $1$ to node $4$:
+    \begin{itemize}
+        \item Route A: $1\to 4$
+        \item Route B: $1\to 2\to 4$
+        \item Route C: $1\to 3\to 4$
+        \item Route D: $1\to 2\to 3\to 4$
+    \end{itemize}
+    \item Total energy per route:
+    \[
+    E_A=E_{14}=5.9
+    \]
+    \[
+    E_B=E_{12}+E_{24}=2.6+2.0=4.6
+    \]
+    \[
+    E_C=E_{13}+E_{34}=3.1+2.4=5.5
+    \]
+    \[
+    E_D=E_{12}+E_{23}+E_{34}=2.6+1.2+2.4=6.2
+    \]
+    \item Minimum-energy route: Route B with $E_{\min}=4.6$.
+    \item Advantage: improved feasibility/coverage with smaller per-hop distances. Disadvantage: more delay and overhead due to more hops.
+\end{enumerate}
+
+\subsubsection*{Question 5 --- Modulation and Throughput}
+Bandwidth: $B=110$ kHz $=1.10\times 10^5$ Hz.
+
+\begin{enumerate}[label=\alph*.]
+    \item Shannon capacity at SNR $=4$ dB:
+    \[
+    C=B\log_2(1+\mathrm{SNR})\approx 1.993\times 10^5\ \text{bit/s}\ (\approx 199.35\ \text{kbps}).
+    \]
+    \item Highest usable scheme at $4$ dB: scheme-3 (threshold $\ge 4$ dB). Throughput $\approx 1.5$ bit/s/Hz.
+    \[
+    R\approx 1.5\cdot B=1.5\cdot 110000=1.65\times 10^5\ \text{bit/s}\ (165\ \text{kbps}).
+    \]
+    \item SNR drop from scheme-4 to scheme-3:
+    scheme-4 is usable at SNR $\ge 8$ dB. At exactly $8$ dB there is effectively no margin before switching, so
+    \[
+    \Delta \approx 0\ \text{dB}.
+    \]
+\end{enumerate}
+
+\subsubsection*{Question 6 --- Coverage Planning}
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Single-site:} place the base station at the highest/central location to improve line-of-sight or diffraction paths over the hill.
+    \item \textbf{Two-site (base + relay):} use a relay positioned on the far-side of the hill (or on a ridge) so the shadowed town receives a stronger hop.
+    \item \textbf{Compare:} two-site typically improves coverage and reliability but increases deployment cost and complexity.
+    \item \textbf{Most important propagation effects:} hill blockage/shadowing, diffraction, and free-space path loss (plus reflections/multipath near buildings).
+\end{enumerate}
+
+\end{document}
+
