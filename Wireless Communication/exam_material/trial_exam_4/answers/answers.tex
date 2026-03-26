@@ -1,0 +1,172 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\begin{document}
+
+\section*{Suggested Answers --- trial\_exam\_4}
+
+\subsection*{Section 1 --- Multiple Choice (Q1--Q20)}
+\begin{itemize}
+    \item Q1 B
+    \item Q2 A
+    \item Q3 A
+    \item Q4 A
+    \item Q5 A
+    \item Q6 A
+    \item Q7 B
+    \item Q8 B
+    \item Q9 C
+    \item Q10 A
+    \item Q11 A
+    \item Q12 C
+    \item Q13 C
+    \item Q14 A
+    \item Q15 B
+    \item Q16 B
+    \item Q17 B
+    \item Q18 B
+    \item Q19 A
+    \item Q20 A
+\end{itemize}
+
+\subsection*{Section 2 --- Short Questions (Q1--Q6)}
+\begin{enumerate}[label=\arabic*.]
+    \item Increasing $R_s$ requires larger signal bandwidth because symbols change faster in time; the main spectral support spreads, increasing required $B$.
+    \item For symbols transmitted over duration $T_s$, the symbol rate is
+    \[
+    R_s = 1/T_s.
+    \]
+    \item If each symbol carries $\log_2(M)$ bits and $M=8$, then $\log_2(8)=3$, so \textbf{3 bits/symbol}.
+    \item $\eta = R_b/B$; it measures how efficiently the system uses bandwidth (bits per second per Hz).
+    \item \textbf{Duplexing:} how uplink and downlink share time or frequency resources (e.g., TDM or FDM).
+    \item \textbf{Interference management difficulty example:} multiple users transmit simultaneously, so interference depends on unknown/rapidly varying users and their geometry (e.g., collisions/hidden terminals), making separation hard.
+\end{enumerate}
+
+\subsection*{Section 3 --- Long / Applied Questions}
+
+\subsubsection*{Question 1 --- Link Budget and Feasibility}
+Given: $f=850$ MHz, $P_t=18$ dBm, $G_t=2$ dBi, $G_r=0$ dBi, $d=2.5$ km, $N=-110$ dBm, $\gamma_{\min}=7$ dB.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Free-space path loss:}
+    \[
+    L_{\mathrm{FSPL}}=32.44+20\log_{10}(850)+20\log_{10}(2.5)\approx 98.99\ \mathrm{dB}.
+    \]
+    \item \textbf{Received power:}
+    \[
+    P_r=P_t+G_t+G_r-L_{\mathrm{FSPL}}=18+2+0-98.99\approx -78.99\ \mathrm{dBm}.
+    \]
+    \item \textbf{Minimum required received power:}
+    \[
+    P_{\min}=N+\gamma_{\min}=-110+7=-103\ \mathrm{dBm}.
+    \]
+    \item \textbf{Feasible?} yes, since $P_r\approx -78.99 > -103$ dBm.
+    \item (Optional margin) $\approx 24.01$ dB.
+    
+\end{enumerate}
+
+\subsubsection*{Question 2 --- Indoor Path Loss}
+Given: distance loss $72$ dB, two concrete walls $2\times 9$ dB, door $2$ dB, glass $4$ dB, $P_t=12$ dBm, $G_t=G_r=0$ dBi, sensitivity $-83$ dBm.
+
+\begin{enumerate}[label=\alph*.]
+    \item Total path loss:
+    \[
+    L_{\text{total}}=72+2\cdot 9+2+4=96\ \mathrm{dB}.
+    \]
+    \item Received power:
+    \[
+    P_r=P_t-L_{\text{total}}=12-96=-84\ \mathrm{dBm}.
+    \]
+    \item Link works? With sensitivity $-83$ dBm, $-84$ dBm is $1$ dB below sensitivity, so \textbf{no}.
+    \item Two improvements (examples): increase transmit power; use higher-gain antennas / better placement; reduce obstacles (or add relay); improve receiver sensitivity.
+\end{enumerate}
+
+\subsubsection*{Question 3 --- Frequency Reuse}
+Given reuse factor $N=5$.
+
+\begin{enumerate}[label=\alph*.]
+    \item Fraction of spectrum per cell:
+    \[
+    \frac{1}{5}=0.20=20\%.
+    \]
+    \item For $N=8$:
+    \[
+    \frac{1}{8}=0.125=12.5\%.
+    \]
+    \item Impact of $N$:
+    \begin{itemize}
+        \item Larger $N$ $\Rightarrow$ fewer co-channel neighbors and less co-channel interference.
+        \item Smaller $N$ $\Rightarrow$ more bandwidth per cell ($1/N$ larger), typically increasing capacity per cell, but with higher co-channel interference.
+    \end{itemize}
+    
+\end{enumerate}
+
+\subsubsection*{Question 4 --- Multi-hop Routing}
+Feasible links: $1\to 2,\ 1\to 3,\ 2\to 3,\ 2\to 4,\ 3\to 4,\ 1\to 4$.
+
+Energies: $E_{12}=1.8,\ E_{13}=3.2,\ E_{23}=1.1,\ E_{24}=2.2,\ E_{34}=2.0,\ E_{14}=6.4$.
+
+\begin{enumerate}[label=\alph*.]
+    \item All feasible routes from $1$ to $4$:
+    \begin{itemize}
+        \item Route A: $1\to 4$
+        \item Route B: $1\to 2\to 4$
+        \item Route C: $1\to 3\to 4$
+        \item Route D: $1\to 2\to 3\to 4$
+    \end{itemize}
+    \item Total energy per route:
+    \[
+    E_A=E_{14}=6.4
+    \]
+    \[
+    E_B=E_{12}+E_{24}=1.8+2.2=4.0
+    \]
+    \[
+    E_C=E_{13}+E_{34}=3.2+2.0=5.2
+    \]
+    \[
+    E_D=E_{12}+E_{23}+E_{34}=1.8+1.1+2.0=4.9
+    \]
+    \item Minimum-energy route: Route B ($1\to 2\to 4$) with $E_{\min}=4.0$.
+    \item Advantage: better coverage/feasibility over long distances. Disadvantage: more delay and overhead due to more hops.
+\end{enumerate}
+
+\subsubsection*{Question 5 --- Modulation and Throughput}
+Bandwidth: $B=120$ kHz $=1.20\times 10^5$ Hz.
+
+\begin{enumerate}[label=\alph*.]
+    \item Shannon capacity at SNR $=6$ dB:
+    \[
+    \mathrm{SNR}_{\text{lin}}=10^{6/10}\approx 3.981,\quad
+    C=B\log_2(1+\mathrm{SNR}_{\text{lin}})\approx 2.78\times 10^5\ \text{bit/s}
+    \]
+    \[
+    \Rightarrow\ C\approx 277.97\ \text{kbps}.
+    \]
+    \item Highest usable scheme at $6$ dB: scheme-3 (scheme-4 requires SNR $\ge 8$ dB). Throughput $\approx 1.5$ bit/s/Hz.
+    \[
+    R\approx 1.5\cdot B=1.5\cdot 120000=1.80\times 10^5\ \text{bit/s}\ (180\ \text{kbps}).
+    \]
+    \item SNR drop from scheme-3 to scheme-2: scheme-3 needs SNR $\ge 4$ dB, so
+    \[
+    \Delta \approx 7-4=3\ \text{dB}.
+    \]
+\end{enumerate}
+
+\subsubsection*{Question 6 --- Coverage Planning}
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Single-site:} place the base station at/near the hill crest or highest elevation to improve line-of-sight and diffraction over the ridge.
+    \item \textbf{Two-site (base + relay):} put the base at one town or on one side of the hill, and place the relay on the opposite side (or on a ridge) to provide a clearer relay hop to the shadowed town.
+    \item \textbf{Compare:} the two-site solution typically increases coverage and reliability, but costs more (extra site/backhaul, coordination, and maintenance).
+    \item \textbf{Most important effects:} shadowing/blockage by the hill, diffraction, free-space path loss, and multipath/reflections around buildings/terrain.
+\end{enumerate}
+
+\end{document}
+

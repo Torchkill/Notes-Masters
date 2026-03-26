@@ -1,0 +1,165 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\begin{document}
+
+\section*{Suggested Answers --- trial\_exam\_9}
+
+\subsection*{Section 1 --- Multiple Choice (Q1--Q20)}
+\begin{itemize}
+    \item Q1 B
+    \item Q2 A
+    \item Q3 C
+    \item Q4 A
+    \item Q5 A
+    \item Q6 A
+    \item Q7 B
+    \item Q8 B
+    \item Q9 C
+    \item Q10 A
+    \item Q11 A
+    \item Q12 C
+    \item Q13 C
+    \item Q14 A
+    \item Q15 B
+    \item Q16 B
+    \item Q17 B
+    \item Q18 B
+    \item Q19 A
+    \item Q20 A
+\end{itemize}
+
+\subsection*{Section 2 --- Short Questions (Q1--Q6)}
+\begin{enumerate}[label=\arabic*.]
+    \item If $R_s$ increases, the required bandwidth $B$ tends to increase (rule of thumb: higher symbol rate needs wider signal spectrum). Intuition: symbols change faster in time, so their frequency content spreads more.
+    \item Increasing $M$ and/or $R_s$ generally requires more SNR and/or more bandwidth to maintain reliability: higher-order modulation needs higher SNR, and higher $R_s$ typically needs higher bandwidth.
+    \item \textbf{Duplexing:} how uplink and downlink share resources (time or frequency separation) and whether transmission/reception can be simultaneous.
+    \item \textbf{Purpose of resource allocation:} distribute resources among users to maximize performance (throughput/QoS/fairness) while limiting interference.
+    \item \textbf{ISI:} intersymbol interference is symbol overlap at the receiver caused by multipath delays/channel memory; it is more likely when delay spread is significant relative to symbol duration.
+    
+\end{enumerate}
+
+\subsection*{Section 3 --- Long / Applied Questions}
+
+\subsubsection*{Question 1 --- Link Budget and Feasibility}
+Given: $f=880$ MHz, $P_t=16$ dBm, $G_t=2$ dBi, $G_r=2$ dBi, $d=1.0$ km, $N=-115$ dBm, $\gamma_{\min}=5$ dB.
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Free-space path loss:}
+    \[
+    L_{\mathrm{FSPL}}=32.44+20\log_{10}(880)+20\log_{10}(1.0)\approx 91.33\ \mathrm{dB}.
+    \]
+    \item \textbf{Received power:}
+    \[
+    P_r=P_t+G_t+G_r-L_{\mathrm{FSPL}}=16+2+2-91.33\approx -71.33\ \mathrm{dBm}.
+    \]
+    \item \textbf{Minimum required received power:}
+    \[
+    P_{\min}=N+\gamma_{\min}=-115+5=-110\ \mathrm{dBm}.
+    \]
+    \item \textbf{Feasible?} yes, since $P_r\approx -71.33 > -110$ dBm.
+    
+\end{enumerate}
+
+\subsubsection*{Question 2 --- Indoor Path Loss}
+Given: distance loss $73$ dB, concrete wall losses $10$ dB and $8$ dB, door $2$ dB, glass $3$ dB, $P_t=17$ dBm, $G_t=G_r=0$ dBi, sensitivity $-78$ dBm.
+
+\begin{enumerate}[label=\alph*.]
+    \item Total path loss:
+    \[
+    L_{\text{total}}=73+10+8+2+3=96\ \mathrm{dB}.
+    \]
+    \item Received power:
+    \[
+    P_r=P_t-L_{\text{total}}=17-96=-79\ \mathrm{dBm}.
+    \]
+    \item Link works? $-79$ dBm is $1$ dB below $-78$ dBm sensitivity, so \textbf{no}.
+    \item Two improvements (examples): increase transmit power; use higher-gain antennas/better placement; reduce obstacles (or add relay).
+\end{enumerate}
+
+\subsubsection*{Question 3 --- Frequency Reuse}
+Given reuse factor $N=3$.
+
+\begin{enumerate}[label=\alph*.]
+    \item Fraction of spectrum per cell:
+    \[
+    \frac{1}{3}\approx 0.333\ (33.3\%).
+    \]
+    \item For $N=5$:
+    \[
+    \frac{1}{5}=0.20\ (20\%).
+    \]
+    \item Impact of $N$:
+    \begin{itemize}
+        \item Larger $N$ reduces co-channel interference but gives less spectrum per cell.
+        \item Smaller $N$ increases spectrum per cell (potentially higher capacity) but increases co-channel interference.
+    \end{itemize}
+    
+\end{enumerate}
+
+\subsubsection*{Question 4 --- Multi-hop Routing}
+Feasible links: $1\to 2,\ 1\to 3,\ 2\to 3,\ 2\to 4,\ 3\to 4,\ 1\to 4$.
+
+Energies: $E_{12}=2.9,\ E_{13}=2.2,\ E_{23}=1.5,\ E_{24}=2.6,\ E_{34}=2.1,\ E_{14}=6.1$.
+
+\begin{enumerate}[label=\alph*.]
+    \item All feasible routes from node $1$ to node $4$:
+    \begin{itemize}
+        \item Route A: $1\to 4$
+        \item Route B: $1\to 2\to 4$
+        \item Route C: $1\to 3\to 4$
+        \item Route D: $1\to 2\to 3\to 4$
+    \end{itemize}
+    \item Total energy per route:
+    \[
+    E_A=E_{14}=6.1
+    \]
+    \[
+    E_B=E_{12}+E_{24}=2.9+2.6=5.5
+    \]
+    \[
+    E_C=E_{13}+E_{34}=2.2+2.1=4.3
+    \]
+    \[
+    E_D=E_{12}+E_{23}+E_{34}=2.9+1.5+2.1=6.5
+    \]
+    \item Minimum-energy route: Route C ($1\to 3\to 4$) with $E_{\min}=4.3$.
+    \item Advantage: improves feasibility/coverage by splitting a long link into shorter hops. Disadvantage: extra delay and overhead (more hops).
+\end{enumerate}
+
+\subsubsection*{Question 5 --- Modulation and Throughput}
+Bandwidth: $B=130$ kHz $=1.30\times 10^5$ Hz.
+
+\begin{enumerate}[label=\alph*.]
+    \item Shannon capacity at SNR $=16$ dB:
+    \[
+    C=B\log_2(1+\mathrm{SNR})\approx 6.956\times 10^5\ \text{bit/s}\ (\approx 695.61\ \text{kbps}).
+    \]
+    \item Highest usable scheme at $16$ dB: scheme-5 (threshold $\ge 13$ dB). Throughput $\approx 3.0$ bit/s/Hz.
+    \[
+    R\approx 3.0\cdot B=3.0\cdot 130000=3.90\times 10^5\ \text{bit/s}\ (390\ \text{kbps}).
+    \]
+    \item From scheme-5 at 18 dB to scheme-4: scheme-5 requires $\ge 13$ dB, so
+    \[
+    \Delta \approx 18-13=5\ \text{dB}.
+    \]
+\end{enumerate}
+
+\subsubsection*{Question 6 --- Coverage Planning}
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Single-site:} place the base station on/near the hill crest so diffraction helps reach both towns.
+    \item \textbf{Two-site (base + relay):} add a relay on the far side of the hill to cover the town that is shadowed from the base.
+    \item \textbf{Compare:} two-site typically improves coverage and reliability but increases cost (extra site/backhaul and coordination).
+    \item \textbf{Most important effects:} hill shadowing/blockage, diffraction, and distance-based free-space path loss (plus multipath).
+    
+\end{enumerate}
+
+\end{document}
+
