@@ -1,0 +1,72 @@
+\documentclass[a4paper, 11pt, titlepage]{article}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{gauss, amssymb}
+\usepackage{nicematrix}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage[toc,page]{appendix}
+\usepackage{svg}
+\usepackage{multirow}
+\usepackage[nottoc]{tocbibind}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{tabularx}
+
+
+\svgsetup{
+    inkscapepath=/usr/bin/, % adjust if needed
+}
+
+
+\lstdefinestyle{rlang}
+{
+  language=R,
+  basicstyle=\ttfamily,
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red},
+  showstringspaces=false,
+  columns=fullflexible,
+  literate={<-}{{$\leftarrow$}}1,
+  frame=single,
+}
+\lstdefinestyle{routput}
+{
+  frame=lines,
+}
+
+\title{Exam preparation\\5730.26 - Tráðleyst samskifti}
+\author{\\
+[\bigskipamount]\\\\
+\includegraphics[width=0.25\textwidth]{setur_logo_b-lb.png}
+}
+\date{Last updated: \today}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\pagenumbering{gobble}
+\tableofcontents
+\clearpage
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{sections/part1.tex}
+
+% Bibliography style (you can choose another style if needed)
+\bibliographystyle{plain}  % Common style
+% Reference the .bib file using the correct relative path
+\bibliography{bibliography}  % Going up one directory to access bibliography.bib
+
+\end{document}

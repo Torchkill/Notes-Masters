@@ -1,0 +1,120 @@
+\section{Equations}
+Forward and Inverse Transform, eq. \ref{eq:forward:inverse:1:transform} and eq. \ref{eq:forward:inverse:2:transform}.
+\begin{equation}
+  \label{eq:forward:inverse:1:transform}
+  X(f) = \int_{-\infty}^{\infty} x(t) \, e^{-j2\pi f t} \, dt
+\end{equation}
+
+\begin{equation}
+  \label{eq:forward:inverse:2:transform}
+  x(t) = \int_{-\infty}^{\infty} X(f) \, e^{j2\pi f t} \, df
+\end{equation}
+
+Frequency Shift Property, eq. \ref{eq:freq:shift}.
+\begin{equation}
+  \label{eq:freq:shift}
+  x(t) \, e^{j2\pi f_0 t} \quad \longleftrightarrow \quad X(f - f_0)
+\end{equation}
+
+Power, eq. \ref{eq:power}.
+\begin{equation}
+  \label{eq:power}
+ P = \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^{T} |x(t)|^2 \, dt
+\end{equation}
+
+Power in dBm, eq. \ref{eq:power:dbm}.
+\begin{equation}
+  \label{eq:power:dbm}
+  P_{\text{dBm}} = 10 \log_{10}\left( \frac{P}{1\,\text{mW}} \right)
+\end{equation}
+
+Power ratios (dB), eq. \ref{eq:power:ratio}.
+\begin{equation}
+  \label{eq:power:ratio}
+  G_{\text{dB}} = 10 \log_{10}\left( \frac{P_2}{P_1} \right)
+\end{equation}
+
+Absolute power (dBm), eq. \ref{eq:abs:power}.
+\begin{equation}
+  \label{eq:abs:power}
+  P_{\text{dBm}} = 10 \log_{10}\left( \frac{P}{1\,\text{mW}} \right)
+\end{equation}
+
+Link budget, eq. \ref{eq:link:budget}.
+\begin{equation}
+  \label{eq:link:budget}
+  P_{\text{rx}} = P_{\text{tx}} + G_{\text{tx}} + G_{\text{rx}} - L_{\text{path}} - L_{\text{other}}
+\end{equation}
+
+Additive White Gaussian Noise (AWGN), eq. \ref{eq:awgn}.
+\begin{equation}
+  \label{eq:awgn}
+  y(t) = x(t) + n(t)
+\end{equation}
+
+$x(t)$ is the transmitted signal, $n(t)$ is the additivie noise, $y(t)$ is the received signal.
+%TODO Sett inn mynd av AWGN figuri, pp28
+
+SNR, eq. \ref{eq:snr}.
+\begin{equation}
+  \label{eq:snr}
+  \text{SNR} = \frac{P_s}{P_n}
+\end{equation}
+
+SNR in decibels (dB), eq. \ref{eq:snr:db}.
+\begin{equation}
+  \label{eq:snr:db}
+  \text{SNR}_{\text{dB}} = 10 \log_{10}\left( \frac{P_s}{P_n} \right)
+\end{equation}
+
+Noise power spectral density, eq. \ref{eq:noise:power:spectral:density}.
+\begin{equation}
+  \label{eq:noise:power:spectral:density}
+  N_0 = k_B T
+\end{equation}
+
+Total noise power over Bandwidth B, eq. \ref{eq:total:noise:power:b}.
+\begin{equation}
+  \label{eq:total:noise:power:b}
+  P_n = k_B TB
+\end{equation}
+
+Noise floor (room temperature), eq. \ref{eq:noise:floor}.
+\begin{equation}
+  \label{eq:noise:floor}
+  P_n \approx -174 + 10log_{10}(B) dBm
+\end{equation}
+
+Channel Capacity (Shannon Limit), eq. \ref{eq:channel:capacity}.
+\begin{equation}
+  \label{eq:channel:capacity}
+  C = B log_2(1 + SNR)
+\end{equation}
+
+Message and carrier
+\begin{equation}
+  \label{eq:message}
+  \begin{split}
+  m(t): \text{ message signal}, \quad |m(t)| \leq 1\\
+  c(t) = A_c \cos(2\pi f_c t)
+  \end{split}
+\end{equation}
+
+Conventional AM signal:
+\begin{equation}
+  \label{eq:conv:am:signal}
+  s(t) = A_c \left[1 + k_a m(t)\right] \cos(2\pi f_c t)
+\end{equation}
+
+\section{Constants}
+\label{sec:Constants}
+The free space path loss $L_{FSPL}$ constant, see eq. \ref{eq:fspl}.
+\begin{equation}
+  \label{eq:fspl}
+  \begin{split}
+  L_{FSPL} = 20log_{10}(d) + 20log_{10}(f) + 20log_{10}(\frac{4\pi}{c})\\
+  L_{FSPL} = 20log_{10}(d) + 20log_{10}(f) -147.6
+  \end{split}
+\end{equation}
+
+% section Constants (end)
