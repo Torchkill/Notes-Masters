@@ -106,6 +106,82 @@ Conventional AM signal:
   s(t) = A_c \left[1 + k_a m(t)\right] \cos(2\pi f_c t)
 \end{equation}
 
+DSB-SC signal model:
+\begin{equation}
+  \label{eq:dsb:sc}
+  s(t) = c_t m(t)
+\end{equation}
+
+Required bandwidth (Single-Sideband Modulation (SSB)):
+\begin{equation}
+  \label{eq:bssb}
+  B_{SSB} = B
+\end{equation}
+
+General angle-modulated signal
+\begin{equation}
+  \label{eq:gen:angle:mod:signal}
+  s(t) = A_c \cos\left(2\pi f_c t + \phi(t)\right)
+\end{equation}
+
+Komin til slide ca. 43
+
+Bandwidth (Carson's Rule):
+\begin{equation}
+  \label{eq:carsons:rule}
+  B_{\text{FM}} \approx 2(\Delta f + B)
+\end{equation}
+
+Symbol duration:
+\begin{equation}
+  \label{eq:symbol:duration}
+  T_s
+\end{equation}
+
+\begin{equation}
+  \label{eq:ts}
+  T_s = \frac{1}{R_s}
+\end{equation}
+
+Symbol rate:
+\begin{equation}
+  \label{eq:rs}
+  R_s = \frac{1}{T_s}
+\end{equation}
+
+Bit rate:
+\begin{equation}
+  \label{eq:bit:rate}
+  R_b = R_s log_2(M)
+\end{equation}
+
+Rule of thumb:
+$$B \propto R_s$$
+
+Spectral efficiency:
+\begin{equation}
+  \label{eq:spectral:efficiency}
+  \eta = \frac{R_b}{B} \quad \text{(bits/s/Hz)}
+\end{equation}
+
+Cluster size:
+\begin{equation}
+  \label{eq:cluster:size}
+  N = i^2 + ij + j^2
+\end{equation}
+
+Møgulig cluster size listi?
+
+Reuse distance:
+\begin{equation}
+  \label{eq:reuse:distance}
+  \begin{split}
+  D=\sqrt{3N}R\\
+  D=R\sqrt{3N}
+  \end{split}
+\end{equation}
+
+
 \section{Constants}
 \label{sec:Constants}
 The free space path loss $L_{FSPL}$ constant, see eq. \ref{eq:fspl}.
