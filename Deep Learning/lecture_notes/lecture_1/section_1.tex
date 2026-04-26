@@ -1,0 +1,166 @@
+\section{Lecture 1: Foundations of Deep Learning}
+
+\subsection{Motivation and Application Areas}
+Deep learning is a family of machine learning methods used in many master-level
+applications:
+\begin{itemize}
+    \item Computer Vision
+    \item Natural Language Processing (NLP)
+    \item Speech and audio processing
+    \item Games and intelligent agents
+\end{itemize}
+
+The key idea is to learn a function from data rather than hand-crafting rules.
+
+\subsection{Supervised Learning Setup}
+In supervised learning, we observe a dataset
+\[
+\mathcal{D} = \{(\mathbf{x}_1, y_1), (\mathbf{x}_2, y_2), \dots, (\mathbf{x}_I, y_I)\},
+\]
+where $\mathbf{x}_i$ is an input and $y_i$ is the target label/value.
+
+We aim to learn a function
+\[
+f:\mathbf{x}\mapsto y.
+\]
+
+Examples:
+\begin{itemize}
+    \item Scalar input example: $x=$ height, $y=$ age category.
+    \item Medical imaging example:
+    \[
+    \mathbf{x} = \text{MRI image vector} = [200,310,\dots,0], \quad
+    y \in \{\text{Alzheimer: yes},\text{Alzheimer: no}\}.
+    \]
+\end{itemize}
+
+For each training example, the model prediction is
+\[
+\hat{y}_i = f(\mathbf{x}_i;\boldsymbol{\phi}),
+\]
+where $\boldsymbol{\phi}$ are model parameters.
+
+\subsection{Model Family and Linear Regression}
+We do not search over all possible functions; we choose a hypothesis/model family.
+A simple family is linear regression:
+\[
+f(x;\boldsymbol{\phi}) = \phi_0 + \phi_1 x.
+\]
+For classification, $f(\mathbf{x}_0;\boldsymbol{\phi})$ can be interpreted (after a
+suitable output transform) as the probability of a class, e.g., Alzheimer diagnosis.
+
+\subsection{Training Objective and Loss Function}
+To select the best parameters, we minimize a loss on the dataset.
+For squared error:
+\[
+L(\mathcal{D},\boldsymbol{\phi}) =
+\sum_{i=1}^{I}\left(f(\mathbf{x}_i;\boldsymbol{\phi}) - y_i\right)^2.
+\]
+This is the \emph{sum of squares} criterion.
+
+\subsection{Gradient-Based Optimization}
+Parameters are updated with gradient descent:
+\[
+\boldsymbol{\phi} \leftarrow \boldsymbol{\phi} - \alpha \nabla_{\boldsymbol{\phi}}L(\boldsymbol{\phi}),
+\]
+where $\alpha > 0$ is the learning rate.
+
+Directional derivative intuition:
+for a unit direction vector $\mathbf{v}$, the rate of change is
+\[
+\mathbf{v}^{\top}\nabla_{\boldsymbol{\phi}}L.
+\]
+If the angle $\theta$ between $\mathbf{v}$ and $\nabla L$ satisfies
+$\cos\theta=1$, change is maximally increasing; if $\cos\theta=-1$, change is
+maximally decreasing.
+
+\subsection{From Shallow Neural Networks to Piecewise Linear Models}
+A shallow neural network with one hidden layer and ReLU activations:
+\[
+h_j = a(z_j), \quad z_j = \theta_{j0}+\theta_{j1}x,\quad
+a(z)=\max(0,z).
+\]
+
+With two hidden units:
+\[
+f(x;\boldsymbol{\phi}) = \phi_0 + \phi_1 h_1 + \phi_2 h_2
+= \phi_0 + \phi_1 a(\theta_{10}+\theta_{11}x) + \phi_2 a(\theta_{20}+\theta_{21}x).
+\]
+
+One possible parameter set is
+\[
+\boldsymbol{\phi}=
+\{\phi_0,\phi_1,\phi_2,\theta_{10},\theta_{11},\theta_{20},\theta_{21}\}.
+\]
+
+Each hidden unit introduces a kink at $\theta_{j0}+\theta_{j1}x=0$.
+With $D$ hidden units in 1D input, the model can form up to $D+1$ linear regions.
+
+\newpage
+
+\subsection{Diagram: Accumulation of ReLU-Based Linear Pieces}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=0.95]
+    % Axes
+    \draw[->] (-0.2,0) -- (8.2,0) node[right] {$x$};
+    \draw[->] (0,-0.2) -- (0,4.6) node[above] {$f(x)$};
+
+    % Combined piecewise-linear function with 3 joints (4 linear regions)
+    \draw[very thick,red]
+        (0,0.6) -- (1.8,0.6) -- (3.4,1.3) -- (5.2,2.6) -- (7.6,3.0);
+
+    % Joint markers
+    \filldraw[black] (1.8,0.6) circle (1.5pt);
+    \filldraw[black] (3.4,1.3) circle (1.5pt);
+    \filldraw[black] (5.2,2.6) circle (1.5pt);
+
+    % Vertical guides for shifted breakpoints
+    \draw[dashed] (1.8,0) -- (1.8,0.75);
+    \draw[dashed] (3.4,0) -- (3.4,1.45);
+    \draw[dashed] (5.2,0) -- (5.2,2.75);
+
+    % Labels for shift locations
+    \node at (1.8,-0.25) {\scriptsize $s_1$};
+    \node at (3.4,-0.25) {\scriptsize $s_2$};
+    \node at (5.2,-0.25) {\scriptsize $s_3$};
+
+    % Region and model label
+    \node[red] at (5.8,3.45) {\scriptsize $f(x)=\phi_0+\sum_{j=1}^{3}\phi_j a(x-s_j)$};
+    \node at (6.6,0.45) {\scriptsize 4 linear regions};
+\end{tikzpicture}
+\caption{Combination of three shifted linear components producing three joints (kinks) in the final piecewise-linear function.}
+\end{figure}
+
+\subsection{Diagram: Input-Hidden-Output Architecture}
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+    x=1cm, y=1cm,
+    neuron/.style={circle, draw, minimum size=9mm},
+    >=Latex
+]
+    % Nodes
+    \node[neuron] (x1) at (0,0) {$x$};
+    \node[neuron] (h1) at (3,1.6) {$h_1$};
+    \node[neuron] (h2) at (3,0.0) {$h_2$};
+    \node[neuron] (h3) at (3,-1.6) {$h_3$};
+    \node[neuron] (y)  at (6,0.0) {$y$};
+
+    % Edges input -> hidden
+    \draw[->] (x1) -- (h1);
+    \draw[->] (x1) -- (h2);
+    \draw[->] (x1) -- (h3);
+
+    % Edges hidden -> output
+    \draw[->] (h1) -- (y);
+    \draw[->] (h2) -- (y);
+    \draw[->] (h3) -- (y);
+
+    % Labels
+    \node at (1.6,2.2) {\scriptsize $z_j=\theta_{j0}+\theta_{j1}x$};
+    \node at (1.6,-2.2) {\scriptsize $h_j=a(z_j)$};
+    \node at (4.7,-2.2) {\scriptsize $f(x)=\phi_0+\sum_{j=1}^{3}\phi_j h_j$};
+\end{tikzpicture}
+\caption{Shallow network with one input, three hidden ReLU units, and one output.}
+\end{figure}
